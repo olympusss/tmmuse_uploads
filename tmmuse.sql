@@ -16,17 +16,1507 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
 --
--- Data for Name: admin_type; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: admin; Type: TABLE; Schema: public; Owner: postgres
 --
 
-COPY public.admin_type (id, type, created_at, updated_at) FROM stdin;
-1	Admin	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
-2	Superadmin	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
-3	Moderator	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
-4	User	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
-5	Cinema	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
-\.
+CREATE TABLE public.admin (
+    id integer NOT NULL,
+    username character varying,
+    password character varying,
+    token character varying,
+    notif_token character varying,
+    type integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.admin OWNER TO postgres;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.admin_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.admin_id_seq OWNER TO postgres;
+
+--
+-- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.admin_id_seq OWNED BY public.admin.id;
+
+
+--
+-- Name: admin_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.admin_type (
+    id integer NOT NULL,
+    type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.admin_type OWNER TO postgres;
+
+--
+-- Name: admin_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.admin_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.admin_type_id_seq OWNER TO postgres;
+
+--
+-- Name: admin_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.admin_type_id_seq OWNED BY public.admin_type.id;
+
+
+--
+-- Name: ads; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ads (
+    id integer NOT NULL,
+    "nameTM" character varying,
+    "nameRU" character varying,
+    comment_of_admin character varying,
+    image character varying,
+    is_main boolean,
+    site_url character varying,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ads OWNER TO postgres;
+
+--
+-- Name: ads2profile_count; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ads2profile_count (
+    id integer NOT NULL,
+    user_id integer,
+    profile_id integer,
+    ads_id integer,
+    type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ads2profile_count OWNER TO postgres;
+
+--
+-- Name: ads2profile_count_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ads2profile_count_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ads2profile_count_id_seq OWNER TO postgres;
+
+--
+-- Name: ads2profile_count_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ads2profile_count_id_seq OWNED BY public.ads2profile_count.id;
+
+
+--
+-- Name: ads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ads_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ads_id_seq OWNER TO postgres;
+
+--
+-- Name: ads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ads_id_seq OWNED BY public.ads.id;
+
+
+--
+-- Name: ads_view; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ads_view (
+    id integer NOT NULL,
+    user_id integer,
+    profile_id integer,
+    ads_id integer,
+    type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ads_view OWNER TO postgres;
+
+--
+-- Name: ads_view_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ads_view_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ads_view_id_seq OWNER TO postgres;
+
+--
+-- Name: ads_view_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ads_view_id_seq OWNED BY public.ads_view.id;
+
+
+--
+-- Name: answered_messages; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.answered_messages (
+    id integer NOT NULL,
+    title character varying,
+    message character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.answered_messages OWNER TO postgres;
+
+--
+-- Name: answered_messages_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.answered_messages_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.answered_messages_id_seq OWNER TO postgres;
+
+--
+-- Name: answered_messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.answered_messages_id_seq OWNED BY public.answered_messages.id;
+
+
+--
+-- Name: answers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.answers (
+    id integer NOT NULL,
+    answered_msg_id integer,
+    inbox_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.answers OWNER TO postgres;
+
+--
+-- Name: answers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.answers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.answers_id_seq OWNER TO postgres;
+
+--
+-- Name: answers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.answers_id_seq OWNED BY public.answers.id;
+
+
+--
+-- Name: app_visitors; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.app_visitors (
+    id integer NOT NULL,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.app_visitors OWNER TO postgres;
+
+--
+-- Name: app_visitors_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.app_visitors_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.app_visitors_id_seq OWNER TO postgres;
+
+--
+-- Name: app_visitors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.app_visitors_id_seq OWNED BY public.app_visitors.id;
+
+
+--
+-- Name: banners; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.banners (
+    id integer NOT NULL,
+    image character varying,
+    link character varying,
+    "order" integer,
+    comment_of_admin character varying,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.banners OWNER TO postgres;
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.banners_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.banners_id_seq OWNER TO postgres;
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.banners_id_seq OWNED BY public.banners.id;
+
+
+--
+-- Name: card_users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.card_users (
+    id integer NOT NULL,
+    date_of_birth date,
+    expired date,
+    gender integer,
+    email character varying,
+    is_sms boolean,
+    status integer,
+    card_id character varying,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.card_users OWNER TO postgres;
+
+--
+-- Name: card_users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.card_users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.card_users_id_seq OWNER TO postgres;
+
+--
+-- Name: card_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.card_users_id_seq OWNED BY public.card_users.id;
+
+
+--
+-- Name: categories; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categories (
+    id integer NOT NULL,
+    name character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.categories OWNER TO postgres;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categories_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.categories_id_seq OWNER TO postgres;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
+
+
+--
+-- Name: certificates; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.certificates (
+    id integer NOT NULL,
+    amount double precision,
+    status integer,
+    profile_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.certificates OWNER TO postgres;
+
+--
+-- Name: certificates_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.certificates_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.certificates_id_seq OWNER TO postgres;
+
+--
+-- Name: certificates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.certificates_id_seq OWNED BY public.certificates.id;
+
+
+--
+-- Name: constants; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.constants (
+    id integer NOT NULL,
+    "titleTM" character varying,
+    "titleRU" character varying,
+    "contentTM" character varying,
+    "contentRU" character varying,
+    "contentTM_dark" character varying,
+    "contentRU_dark" character varying,
+    type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.constants OWNER TO postgres;
+
+--
+-- Name: constants_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.constants_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.constants_id_seq OWNER TO postgres;
+
+--
+-- Name: constants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.constants_id_seq OWNED BY public.constants.id;
+
+
+--
+-- Name: galleries; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.galleries (
+    id integer NOT NULL,
+    medium_image character varying,
+    large_image character varying,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.galleries OWNER TO postgres;
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.galleries_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.galleries_id_seq OWNER TO postgres;
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.galleries_id_seq OWNED BY public.galleries.id;
+
+
+--
+-- Name: images; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.images (
+    id integer NOT NULL,
+    small_image character varying,
+    large_image character varying,
+    "isVR" boolean,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.images OWNER TO postgres;
+
+--
+-- Name: images_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.images_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.images_id_seq OWNER TO postgres;
+
+--
+-- Name: images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.images_id_seq OWNED BY public.images.id;
+
+
+--
+-- Name: inbox; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.inbox (
+    id integer NOT NULL,
+    title character varying,
+    message character varying,
+    is_all boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.inbox OWNER TO postgres;
+
+--
+-- Name: inbox_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.inbox_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.inbox_id_seq OWNER TO postgres;
+
+--
+-- Name: inbox_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.inbox_id_seq OWNED BY public.inbox.id;
+
+
+--
+-- Name: interest_items; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.interest_items (
+    id integer NOT NULL,
+    "titleTM" character varying,
+    "titleRU" character varying,
+    interest_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.interest_items OWNER TO postgres;
+
+--
+-- Name: interest_items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.interest_items_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.interest_items_id_seq OWNER TO postgres;
+
+--
+-- Name: interest_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.interest_items_id_seq OWNED BY public.interest_items.id;
+
+
+--
+-- Name: interests; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.interests (
+    id integer NOT NULL,
+    "titleTM" character varying,
+    "titleRU" character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.interests OWNER TO postgres;
+
+--
+-- Name: interests_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.interests_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.interests_id_seq OWNER TO postgres;
+
+--
+-- Name: interests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.interests_id_seq OWNED BY public.interests.id;
+
+
+--
+-- Name: join_category_ads; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.join_category_ads (
+    id integer NOT NULL,
+    ads_id integer,
+    category_id integer
+);
+
+
+ALTER TABLE public.join_category_ads OWNER TO postgres;
+
+--
+-- Name: join_category_ads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.join_category_ads_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.join_category_ads_id_seq OWNER TO postgres;
+
+--
+-- Name: join_category_ads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.join_category_ads_id_seq OWNED BY public.join_category_ads.id;
+
+
+--
+-- Name: number_socket; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.number_socket (
+    id integer NOT NULL,
+    phone_number character varying,
+    code character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.number_socket OWNER TO postgres;
+
+--
+-- Name: number_socket_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.number_socket_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.number_socket_id_seq OWNER TO postgres;
+
+--
+-- Name: number_socket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.number_socket_id_seq OWNED BY public.number_socket.id;
+
+
+--
+-- Name: phone_numbers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.phone_numbers (
+    id integer NOT NULL,
+    phone_number character varying,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.phone_numbers OWNER TO postgres;
+
+--
+-- Name: phone_numbers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.phone_numbers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.phone_numbers_id_seq OWNER TO postgres;
+
+--
+-- Name: phone_numbers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.phone_numbers_id_seq OWNED BY public.phone_numbers.id;
+
+
+--
+-- Name: pop_up; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pop_up (
+    id integer NOT NULL,
+    comment_of_admin character varying,
+    image character varying,
+    site_url character varying,
+    "titleTM" character varying,
+    "titleRU" character varying,
+    "descriptionTM" character varying,
+    "descriptionRU" character varying,
+    profile_id integer,
+    posts_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.pop_up OWNER TO postgres;
+
+--
+-- Name: pop_up_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pop_up_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pop_up_id_seq OWNER TO postgres;
+
+--
+-- Name: pop_up_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pop_up_id_seq OWNED BY public.pop_up.id;
+
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.posts (
+    id integer NOT NULL,
+    "titleTM" character varying,
+    "titleRU" character varying,
+    "descriptionTM" character varying,
+    "descriptionRU" character varying,
+    comment_of_admin character varying,
+    status boolean,
+    image character varying,
+    promotion double precision,
+    view_count integer,
+    "like" integer,
+    dislike integer,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.posts OWNER TO postgres;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.posts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.posts_id_seq OWNER TO postgres;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
+
+
+--
+-- Name: profile_view; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.profile_view (
+    id integer NOT NULL,
+    user_id integer,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.profile_view OWNER TO postgres;
+
+--
+-- Name: profile_view_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.profile_view_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profile_view_id_seq OWNER TO postgres;
+
+--
+-- Name: profile_view_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.profile_view_id_seq OWNED BY public.profile_view.id;
+
+
+--
+-- Name: profiles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.profiles (
+    id integer NOT NULL,
+    "nameTM" character varying,
+    "nameRU" character varying,
+    "short_descTM" character varying,
+    "short_descRU" character varying,
+    "like" integer,
+    dislike integer,
+    instagram character varying,
+    site character varying,
+    location character varying,
+    address character varying,
+    is_cash boolean,
+    is_terminal boolean,
+    work_hours character varying,
+    delivery boolean,
+    "cousineTM" character varying,
+    "cousineRU" character varying,
+    average_check double precision,
+    is_active_card boolean,
+    tm_muse_card double precision,
+    is_certificate boolean,
+    "is_VIP" integer,
+    is_promo boolean,
+    "WiFi" boolean,
+    status integer,
+    category_id integer,
+    cinema_id integer,
+    view_count integer,
+    promo_count integer,
+    "descriptionTM" character varying,
+    "descriptionRU" character varying,
+    order_in_list integer,
+    free_time character varying,
+    required_promotion boolean,
+    own_promotion double precision,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.profiles OWNER TO postgres;
+
+--
+-- Name: profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.profiles_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profiles_id_seq OWNER TO postgres;
+
+--
+-- Name: profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
+
+
+--
+-- Name: promo_codes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.promo_codes (
+    id integer NOT NULL,
+    promo_code character varying,
+    status integer,
+    profile_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.promo_codes OWNER TO postgres;
+
+--
+-- Name: promo_codes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.promo_codes_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.promo_codes_id_seq OWNER TO postgres;
+
+--
+-- Name: promo_codes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.promo_codes_id_seq OWNED BY public.promo_codes.id;
+
+
+--
+-- Name: search_history; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.search_history (
+    id integer NOT NULL,
+    text character varying,
+    count integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.search_history OWNER TO postgres;
+
+--
+-- Name: search_history_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.search_history_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.search_history_id_seq OWNER TO postgres;
+
+--
+-- Name: search_history_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.search_history_id_seq OWNED BY public.search_history.id;
+
+
+--
+-- Name: send_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.send_user (
+    id integer NOT NULL,
+    is_read boolean,
+    user_id integer,
+    inbox_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.send_user OWNER TO postgres;
+
+--
+-- Name: send_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.send_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.send_user_id_seq OWNER TO postgres;
+
+--
+-- Name: send_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.send_user_id_seq OWNED BY public.send_user.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tags (
+    id integer NOT NULL,
+    "tagTM" character varying,
+    "tagRU" character varying,
+    category_id integer,
+    profile_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.tags OWNER TO postgres;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tags_id_seq OWNER TO postgres;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
+-- Name: ticket_bron; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ticket_bron (
+    id integer NOT NULL,
+    cinema_id integer,
+    profile_id integer,
+    user_id integer,
+    movie_date date,
+    movie_time time without time zone,
+    ticket_count integer,
+    ticket_price double precision,
+    ticket_discount double precision,
+    status integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ticket_bron OWNER TO postgres;
+
+--
+-- Name: ticket_bron_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ticket_bron_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ticket_bron_id_seq OWNER TO postgres;
+
+--
+-- Name: ticket_bron_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ticket_bron_id_seq OWNED BY public.ticket_bron.id;
+
+
+--
+-- Name: user_interests; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.user_interests (
+    id integer NOT NULL,
+    interest_item_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.user_interests OWNER TO postgres;
+
+--
+-- Name: user_interests_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.user_interests_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_interests_id_seq OWNER TO postgres;
+
+--
+-- Name: user_interests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.user_interests_id_seq OWNED BY public.user_interests.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    fullname character varying,
+    phone_number character varying,
+    token character varying,
+    notif_token character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: admin id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin ALTER COLUMN id SET DEFAULT nextval('public.admin_id_seq'::regclass);
+
+
+--
+-- Name: admin_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin_type ALTER COLUMN id SET DEFAULT nextval('public.admin_type_id_seq'::regclass);
+
+
+--
+-- Name: ads id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads ALTER COLUMN id SET DEFAULT nextval('public.ads_id_seq'::regclass);
+
+
+--
+-- Name: ads2profile_count id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads2profile_count ALTER COLUMN id SET DEFAULT nextval('public.ads2profile_count_id_seq'::regclass);
+
+
+--
+-- Name: ads_view id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads_view ALTER COLUMN id SET DEFAULT nextval('public.ads_view_id_seq'::regclass);
+
+
+--
+-- Name: answered_messages id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answered_messages ALTER COLUMN id SET DEFAULT nextval('public.answered_messages_id_seq'::regclass);
+
+
+--
+-- Name: answers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answers ALTER COLUMN id SET DEFAULT nextval('public.answers_id_seq'::regclass);
+
+
+--
+-- Name: app_visitors id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.app_visitors ALTER COLUMN id SET DEFAULT nextval('public.app_visitors_id_seq'::regclass);
+
+
+--
+-- Name: banners id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.banners ALTER COLUMN id SET DEFAULT nextval('public.banners_id_seq'::regclass);
+
+
+--
+-- Name: card_users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.card_users ALTER COLUMN id SET DEFAULT nextval('public.card_users_id_seq'::regclass);
+
+
+--
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
+
+
+--
+-- Name: certificates id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.certificates ALTER COLUMN id SET DEFAULT nextval('public.certificates_id_seq'::regclass);
+
+
+--
+-- Name: constants id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.constants ALTER COLUMN id SET DEFAULT nextval('public.constants_id_seq'::regclass);
+
+
+--
+-- Name: galleries id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.galleries ALTER COLUMN id SET DEFAULT nextval('public.galleries_id_seq'::regclass);
+
+
+--
+-- Name: images id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.images ALTER COLUMN id SET DEFAULT nextval('public.images_id_seq'::regclass);
+
+
+--
+-- Name: inbox id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.inbox ALTER COLUMN id SET DEFAULT nextval('public.inbox_id_seq'::regclass);
+
+
+--
+-- Name: interest_items id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.interest_items ALTER COLUMN id SET DEFAULT nextval('public.interest_items_id_seq'::regclass);
+
+
+--
+-- Name: interests id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.interests ALTER COLUMN id SET DEFAULT nextval('public.interests_id_seq'::regclass);
+
+
+--
+-- Name: join_category_ads id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.join_category_ads ALTER COLUMN id SET DEFAULT nextval('public.join_category_ads_id_seq'::regclass);
+
+
+--
+-- Name: number_socket id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.number_socket ALTER COLUMN id SET DEFAULT nextval('public.number_socket_id_seq'::regclass);
+
+
+--
+-- Name: phone_numbers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.phone_numbers ALTER COLUMN id SET DEFAULT nextval('public.phone_numbers_id_seq'::regclass);
+
+
+--
+-- Name: pop_up id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pop_up ALTER COLUMN id SET DEFAULT nextval('public.pop_up_id_seq'::regclass);
+
+
+--
+-- Name: posts id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
+
+
+--
+-- Name: profile_view id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile_view ALTER COLUMN id SET DEFAULT nextval('public.profile_view_id_seq'::regclass);
+
+
+--
+-- Name: profiles id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.profiles_id_seq'::regclass);
+
+
+--
+-- Name: promo_codes id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promo_codes ALTER COLUMN id SET DEFAULT nextval('public.promo_codes_id_seq'::regclass);
+
+
+--
+-- Name: search_history id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.search_history ALTER COLUMN id SET DEFAULT nextval('public.search_history_id_seq'::regclass);
+
+
+--
+-- Name: send_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.send_user ALTER COLUMN id SET DEFAULT nextval('public.send_user_id_seq'::regclass);
+
+
+--
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
+-- Name: ticket_bron id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_bron ALTER COLUMN id SET DEFAULT nextval('public.ticket_bron_id_seq'::regclass);
+
+
+--
+-- Name: user_interests id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_interests ALTER COLUMN id SET DEFAULT nextval('public.user_interests_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
@@ -41,178 +1531,15 @@ COPY public.admin (id, username, password, token, notif_token, type, created_at,
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: admin_type; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categories (id, name, created_at, updated_at) FROM stdin;
-1	Theatre	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-2	Movies	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-3	Interesting	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-4	Cafe and Restaurants	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-5	Shops	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-6	Beauty and Sport	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-7	News	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
-\.
-
-
---
--- Data for Name: profiles; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.profiles (id, "nameTM", "nameRU", "short_descTM", "short_descRU", "like", dislike, instagram, site, location, address, is_cash, is_terminal, work_hours, delivery, "cousineTM", "cousineRU", average_check, is_active_card, tm_muse_card, is_certificate, "is_VIP", is_promo, "WiFi", status, category_id, cinema_id, view_count, promo_count, "descriptionTM", "descriptionRU", order_in_list, free_time, required_promotion, own_promotion, created_at, updated_at) FROM stdin;
-0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	f	\N	f	\N	\N	\N	f	\N	f	\N	f	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2022-03-09 14:21:45.541368	2022-03-09 14:21:45.541415
-251	France Oil Parfume	France Oil Parfume			0	0	parfumer_tm			SM «Berkarar», SM «Aşgabad ýalkymy», SM «Altyn zaman», SM«Gulzemin»$ТРЦ «Беркарар», ТРЦ «Ашхабад Ялкымы», ТРЦ «Алтын Заман», ТРЦ «Гульземин»	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 10:25:09.649403	2022-04-12 10:25:09.649415
-217	Wok food	Wok food			0	0	wok_food_tm			diňe dostawka$только доставка	t	t	09:00-21:00	t	ýaponiýaňky	японская	150	f	0	f	0	f	f	1	4	0	57	0			0		f	0	2022-04-07 09:41:33.380964	2022-04-07 09:41:33.380989
-98	"Dynamics GYM for Ladies" Fitnes merkezi	Фитнес центр "Dynamics GYM for Ladies"			1	0	dinamika_sport_kluby			ýaşaýyş jaýy Gurtly, jaý 31 $жилой массив Гуртлы, дом 31	f	f	09:00-22:30	f			0	f	10	f	0	f	f	1	6	0	12	0			22		f	0	2022-03-24 10:14:10.535198	2022-03-24 10:14:10.535209
-119	Rahat	Rahat			0	0	rahat_brasserie			SM "Berkarar", 2 etaž$ТРЦ "Беркарар", 2 этаж	t	t	09:00-23:00	t	ewropeýanky	европейская	150	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-29 11:20:25.378026	2022-03-29 11:20:25.378046
-190	Şa kofe	Şa kofe			0	0	shacoffee			“Ylham” alleýa, SM “Berkarar” 3 gat$“Ylham” аллея, ТЦ “Berkarar” 3 этаж	t	t	08:00 – 23:00 	t	ewropeýanky	европейская	170	f	0	f	0	f	t	1	4	0	10	0			0		f	0	2022-04-05 12:36:20.050338	2022-04-05 12:36:20.050353
-180	Melhem	Melhem			0	0	melhem7017			Hudaýberdiyew köç. 4 kiçi etrapçasy$ул.Худайбердыева 4-й мкр 	t	t	10:00-22:00	t	mangal	мангал	150	f	10	f	0	f	t	1	4	0	14	0			0		f	0	2022-04-05 10:14:07.54628	2022-04-05 10:14:07.546293
-141	Geek Space	Geek Space			3	0	geekspace.dev	geelspace.dev			f	f	09:00-18:00	f			0	f	0	f	0	f	f	1	3	0	65	0			0		f	0	2022-04-04 07:40:19.990747	2022-04-04 07:40:19.990761
-259	Run street	Run street			0	0	run.street			SM"Berkarar", 2 gat, C31 B$ТРЦ Беркарар,  2 этаж, C31 B	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 11:28:10.467872	2022-04-12 11:28:10.467896
-248	le’ Pretty	le’ Pretty			0	0	lepretty_tm			SM "Berkarar",2 gat,C24$ТРЦ Беркарар, 2 этаж, С24	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 09:56:00.220196	2022-04-12 09:56:00.220209
-67	Coffee CHI	Coffee CHI			1	0	coffeechitm			Surikow köç., Baýramhan seýilgähi$ул. Сурикова, аллея Байрамхан	t	t	08:00-22:00	t	kofeýnýa	кофейня	80	f	10	f	1	f	f	1	4	0	17	0			1		f	0	2022-03-23 09:12:02.458332	2022-03-23 09:12:02.458345
-206	Soltan	Soltan			0	0	soltanrestoran_official			SM "Berkarar" 3 gat, D-17, D-2$ТРЦ Беркарар 3-й этаж D-17 и D-2	t	t	8:00-23:00	t	milli,türkiýaňky	национальная,турецкая	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-04-06 12:52:20.842378	2022-04-06 12:52:20.842395
-228	Distance	Distance	Aýal-gyzlaryň aýakgaplary -50% arzanladyş we 6 aý möhlet bilen Öňünden töleg ýok	Женская обувь со скидкой -50% и в Рассрочку на 6 Месяцев Без Предоплаты	0	0	distance.shoes			SM "Berkarar" 2 gat$ТРЦ "Berkarar" 2 этаж	f	f	09:00-22:00	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:21:14.483523	2022-04-08 07:21:14.483536
-219	Mavi	Mavi			0	0	mavi_turkmenistan			SM"Berkarar", 2 gat$ТРЦ "Беркарар", 2 этаж	t	t	10:00-22:00	t			0	f	0	f	0	f	f	1	5	0	3	0			0		f	50	2022-04-07 11:50:05.076623	2022-04-07 11:50:05.07664
-109	Melbourne Grill Cafe	Melbourne Grill Cafe			0	0	melbourne_grill.tm			SM "Berkarar", 3 etaž$ТРЦ Беркарар, 3 этаж	t	t	09:00-23:00	t	ewropaly	европейская	300	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-03-28 08:02:02.804243	2022-03-28 08:02:02.80426
-197	Saraý pub	Saraý pub			0	0	saraypub			SM "Aşgabadyň Ýalkymy", Görogly köç. 122 jaý$ТРЦ «Ашгабыдын Ялкымы», ул. Героглы, дом 122	t	t	09:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	24	0			0		f	0	2022-04-06 09:50:44.295201	2022-04-06 09:50:44.295216
-88	Sushi time	Sushi time			2	0	sushi_time___			diňe dostawka$только доставка	t	t	08:00-08:00	t	ýaponiýa	японская	150	f	10	f	0	f	f	1	4	0	23	0			12		f	0	2022-03-23 12:01:28.29194	2022-03-23 12:01:28.291957
-128	Erzurum	Erzurum			3	3	erzurum_restaurant/			Görögly köç,15$ул. Героглы 15	t	f	10:00-22:00	t	türkiýaňky	турецкая	150	f	0	f	0	f	f	1	4	0	30	0			0		f	0	2022-03-31 10:12:26.725578	2022-03-31 10:12:26.725592
-162	 Awangard/Caravella	Awangard/Caravella			0	0	awangard_caravella_fitness			köç. 1958, 78/1$ул. 1958, 78/1	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	6	0	6	0			0		f	0	2022-04-04 11:23:13.663877	2022-04-04 11:23:13.663894
-151	Päk nesil	Päk nesil			0	0	pak_nesil			köç. 72 ýaşly Andaliba, Türkmenbalyk söwda merkezi 3 gat; köç. 54 ýaşly Y.Durdiýew, "Ýüpek ýoly", 2 gat; köç. 25 ýaşly Ankara, Rysgal banky, 6-njy gat $ул. Андалиба, 72, ТЦ “Turkmenbalyk”, 3 этаж ул. Й.Дурдыев, 54, “Ýüpek ýoly”, 2 этаж ул. Анкара, 25, Rysgal банк, 6 этаж	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	3	0	11	0			0		f	0	2022-04-04 09:44:33.787288	2022-04-04 09:44:33.787301
-100	Cazador	Cazador			0	1	cazador_store			SM"Berkarar" 2 etaž (ç23a) $ТЦ ”Berkarar” 2 этаж(c23a)	f	f	11:00-22:00	f			0	f	10	f	0	f	f	1	5	0	12	0			24		f	0	2022-03-24 11:16:11.579556	2022-03-24 11:16:11.579575
-275	Андро и Сандро	Андро и Сандро	Spektakl 17/04 19: 00-da başlar.	Спектакль начинается 17/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	2	0			0		f	0	2022-04-15 09:53:50.032147	2022-04-15 09:53:50.032161
-135	Möjegim	Мой волк	2D   16+	2D   16+	3	0	berkarar_cinema	01/04/2022-03/04/2022(10:05,12:35,16:10,19:30)*		Berkarar cinema$Berkarar cinema	f	f		f			40	f	0	t	0	f	f	1	2	3	160	0	th	thtre	0		t	0	2022-04-01 11:51:54.344577	2022-04-01 11:51:54.344589
-211	Tigirli coffee	Tigirli coffee			0	0	tigirli_coffee			SM Gülistan,6$ТЦ Гулистан, 6 	t	t	08:00-20:00	t	kofeýnya	кофейня	100	f	0	f	0	f	f	1	4	0	11	0			0		f	0	2022-04-07 07:34:31.694947	2022-04-07 07:34:31.694961
-181	Mr Cook	Mr Cook			0	0	mr.cook_cafe			Magtymguly  köç.1 park$ул. Махтумкули 1 парк	t	t	09:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-04-05 10:42:41.370081	2022-04-05 10:42:41.370092
-80	  Рыбажарка	Rybajarka			0	0	rybajarka			"Şanly kerwen" binasy$"Şanly kerwen" здание(объездная))	t	t	11:00-22:00	t	deňiz önümleri restorany 	рыбный ресторан	150	f	15	f	1	f	f	1	4	0	2	0			4		f	0	2022-03-23 10:38:24.888712	2022-03-23 10:38:24.888725
-163	Jana	Jana			1	1	restaurant.jana			Parahat şaýoly 4/2, "Santa barbara" binasy $проспект Парахат 4/2, здание «Santa barbara»	t	t	10:00-23:00	t	milli,ewropeýaňky	национальная,европейская	150	f	0	f	0	f	f	1	4	0	11	0			0		f	0	2022-04-04 11:53:39.361521	2022-04-04 11:53:39.361538
-276	Böwenjik	Колобок	Spektakl 23/04 19:00-da başlar.	Спектакль начинается 23/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	6	0			0		f	0	2022-04-15 10:00:18.630102	2022-04-15 10:00:18.630114
-77	Pizza№1	Pizza№1			0	0	pizza.n_1			diňe dostawka$доставка только	t	t	10:00-21:30	t	fast-food	fast-food	150	f	15	f	1	f	f	1	4	0	15	0			2		f	0	2022-03-23 10:07:45.692856	2022-03-23 10:07:45.692871
-120	La Tartine	La Tartine			0	0	latartine_tm			SM "Berkarar", 3 etaž$ТРЦ "Беркарар", 3 этаж	t	t	10:00-22:00	t	pizzeriýa	пиццерия	150	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-03-29 11:26:04.630982	2022-03-29 11:26:04.630995
-249	LETIQUE 🍃 КОСМЕТИКА 🍃 АШХАБАД	LETIQUE 🍃 КОСМЕТИКА 🍃 АШХАБАД			0	0	letique.tm			diňe dostawka$только на доставку	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 09:59:40.206385	2022-04-12 09:59:40.206396
-207	Soltan	Soltan			0	0	soltanrestoran_official			Andalib köç.80B, 2-3 gat (Santa-Barbara)$ул. Андалиба 80Б, 2-3 этаж (Санта-Барбара мир-4)	t	t	09:00 – 23:00 	t	türkiýaňky,gruzinyňky, milli,ewropeýaňky	Турецкая, грузинская, национальная и европейская	200	f	0	f	0	f	t	1	4	0	11	0			0		f	0	2022-04-07 06:56:49.509838	2022-04-07 06:56:49.50985
-142	Gujurly nesil	Gujurly nesil			0	0	gujurlybilim_merkezi	gujurlynesil.edu.tm		Magtymguly şaýoly 73 jaý$ул.Махтумкули,73	f	f	09:00-18:00	f			0	f	0	f	0	f	f	1	3	0	3	0			0		f	0	2022-04-04 07:52:03.175901	2022-04-04 07:52:03.175915
-229	Дочки сыночки	Дочки сыночки			1	0				SM "Berkarar", 3 gat, D54$ТРЦ Беркарар, 3 этаж, D54	f	f	10:00- 22:30	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:30:11.024883	2022-04-08 07:30:11.024899
-101	Bambi	Bambi			2	2	bambitkm			"Berkarar" SM 1 gat B24, söwda merkezi. "ASHGABAT" 0 gat blok-C 12 mag.  $ТЦ ”Berkarar” 1 эт. В24,ТЦ. «АШХАБАД» 0 эт. блок-C 12 маг.	f	f	11:00-22:00	f			0	f	10	f	0	f	f	1	5	0	14	0			25		f	0	2022-03-24 11:44:34.310622	2022-03-24 11:44:34.310637
-129	Gurman loft	Gurman loft			3	3	gurman.loft.resto			Ostrowskiý köç.$ул. Островского	t	t	10:00-22:00	t	türkiýaňky	турецкая	150	f	0	f	0	f	f	1	4	0	13	0			0		f	0	2022-03-31 10:27:16.902373	2022-03-31 10:27:16.902385
-198	Saraýly house	Saraýly house			0	0	_sarayly_house/			Magtymguly köç. 72A$ул. Махтумкули, 72А	t	t	09:00–22:30	t	ewropeýaňky	европейская	150	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-04-06 09:59:17.117342	2022-04-06 09:59:17.117355
-152	Readistore	Readistore			0	0	readitstore			SEC "Aşgabat" 0 gat $ТРЦ "Ашхабад" 0 этаж	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 09:48:52.588628	2022-04-04 09:48:52.588641
-89	Altyn ada	Altyn ada			0	0	altynadapub			Parahat 1/1, Molodežnaýa köç, 48 jaý$Мир 1/1, ул.Молодежная, дом 48	t	t	10:00-22:00	t	ewropeýskaýa	европейская	200	f	10	f	0	f	t	1	4	0	17	0			13		f	0	2022-03-23 12:08:38.113625	2022-03-23 12:08:38.113642
-110	Mᴇʟʙᴏᴜʀɴᴇ Bᴜʀɢᴇʀ	Mᴇʟʙᴏᴜʀɴᴇ Bᴜʀɢᴇʀ			0	0	melbourne_burger.tm			Mahtumkuli köç/$ул. Махтумкули	t	t	09:00-23:00	t	ewropaly	европейская	300	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-03-28 08:05:25.825524	2022-03-28 08:05:25.82554
-218	Yaki Tori	Yaki Tori			4	1	yakitori_ashgabat			Parahat 5, "Harman" restoran$Парахат 5, ресторан «Harman»	t	t	12:00-22:00	t	ýaponiýaňky	японская	150	f	0	f	0	f	f	1	4	0	100	0			0		f	0	2022-04-07 09:57:21.804019	2022-04-07 09:57:21.804032
-191	Şa ýyldyz	Şa ýyldyz			0	0	shayyldyz_tmt			Türkmenbaşi ş.$ул. Туркменбаши, 40 А	t	t	08:00–23:00 	t	türekiýaňky,milli	турецкая,национальная	150	f	0	f	0	f	t	1	4	0	8	0			0		f	0	2022-04-05 12:46:18.438694	2022-04-05 12:46:18.438707
-99	Himiki arassalaýyş  "Mayam"	Химчистка "Mayam"			1	0	mayam.co	www.mayam.co		"Joşgun" söwda merkezi, 1-nji gat "Gek Bazar" söwda merkezi, Taslama köçesiniň 10-njy jaýy (M3 bazary) $ТЦ «Джошгун», 1 этаж ТЦ «Гек Базар», 10  Ул.Таслама(Маркет M3)	f	f	08:00-20:00	f			0	f	20	f	0	f	f	1	3	0	10	0			23		f	0	2022-03-24 10:31:08.673445	2022-03-24 10:31:08.673462
-114	Ginko platan	Ginko platan			0	0	ginko_platan			Bitarap/Oguzhan köç."Gül zaman"$ул.Битарап/Огузхан 140,  «Gül Zaman»	t	t	10:00-23:00	t	ewropaly	европейская	200	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-03-28 09:59:41.543834	2022-03-28 09:59:41.543851
-90	Alfredo coffee	Alfredo coffee			1	0	alfredocoffee_			Parahat 2/1, Ýunus Emre Biznes sentr$Мир 2/1, ул.Юнус-Эмре, международный БЦ	t	t	08:00-18:00	t	kofeýnýa	кофейня	70	f	15	f	0	f	f	1	4	0	15	0			14		f	0	2022-03-23 12:16:10.879393	2022-03-23 12:16:10.879406
-143	Hukuk we biznes	Hukuk we biznes			0	0	business_school.tm			Moskowskiý prospekti, 10 ýyl Abadançilik, jaý 151 $Московский проспект, ул.10 йыл Абаданчылык, дом 151	f	f	09:00-20:00	f			0	f	0	f	0	f	f	1	3	0	0	0			0		f	0	2022-04-04 08:06:16.905614	2022-04-04 08:06:16.905661
-111	Bazetti	Bazetti			0	0	bazetti_coffee			Moskowskiý  köç., Aýbölek jaý/$ул. Московского, дом Айболек	t	t	08:30-22:00	t	ewropaly	европейская	100	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-28 08:12:22.508549	2022-03-28 08:12:22.508564
-81	Chaplin	Chaplin			0	0	chaplin__cafe			Kemine-Shaumýana köç$ул.Кемине-Шаумяна	t	t	10:00-23:00	t	европейская	ewropeýskaýa	250	f	10	f	1	f	t	1	4	0	6	0			5		f	0	2022-03-23 10:51:04.914588	2022-03-23 10:51:04.914604
-130	Maraton	Maraton			1	0	maraton.shoes	www.brandshop.com.tm		Berkarar SDAM. 2 etaž$ТРЦ Беркарар, 2 этаж	f	f	09:00-22:00	f			0	f	0	f	1	f	f	1	5	0	20	0			0		f	30	2022-03-31 10:38:21.350469	2022-03-31 10:38:21.350481
-250	MB shoes	MB shoes			0	0	mb_shoestm			SM "Berkarar" 2 gat; "Nowruz haly" binasy, 2 gat$ТРЦ Беркарар, 2 этаж; здание «Новруз халы» 2 этаж	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-12 10:08:58.965292	2022-04-12 10:08:58.965305
-164	Leg lek	Leg lek			1	0	leglek_cafe			diňe dostawka$только доставка	t	t	11:30-21:30	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-04-04 12:16:42.478548	2022-04-04 12:16:42.478563
-220	U.S.Polo	U.S.Polo			0	0	polo_ashgabad			Magtymguly köç. SM "Univermag"$ул.Махтумкули, ТЦ "Универмаг"	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-07 12:08:51.710309	2022-04-07 12:08:51.710323
-253	Ramsey	Ramsey			0	0	ramsey_turkmenistan			SM "Berkarar" 1 gat$ТРЦ "Беркарар" 1 этаж	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	0	0			0		f	0	2022-04-12 10:47:08.868325	2022-04-12 10:47:08.868381
-230	ELLE	ELLE			0	0	elle_berkarar			SM"Berkarar "2 gat, C9$ТРЦ Беркарар, 2 этаж, С9	f	f	09:00-22:00	f			0	f	0	f	0	f	f	1	5	0	4	0			0		f	0	2022-04-08 07:36:04.470681	2022-04-08 07:36:04.470698
-192	Sada coffee	Sada coffee			0	0	sada_coffee_houses			 Parahat 3 (stoýanka);Gulshat wedding house$Мир3 стоянка;Gulshat wedding house	t	t	07:00 – 22:00 	t	kofeýnya	кофейня	100	f	0	f	0	f	t	1	4	0	9	0			0		f	0	2022-04-05 12:55:39.982842	2022-04-05 12:55:39.982857
-153	Super kids	Super kids			0	0	superkidstm			Parahat köç. $прсп. Парахат	f	f	10:00-18:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 09:53:48.270313	2022-04-04 09:53:48.270326
-208	Sushihouse	Sushihouse			1	0	sushihouse.tm			diňe dostawka$только доставка	t	t	11:00–23:00 	t	ýaponiýaňky	японская	150	f	0	f	1	f	f	1	4	0	13	0			14		f	0	2022-04-07 07:06:59.079924	2022-04-07 07:06:59.079941
-277	Восемь любящих женщин	Восемь любящих женщин	Spektakl 23/04 19: 00-da başlar.	Спектакль начинается 23/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	4	0			0		f	0	2022-04-15 10:05:33.90437	2022-04-15 10:05:33.904384
-122	Argentina steak house	Argentina steak house			0	0	argentina__steak_house			A.Niýazow köç, 84 jaý$ул. А. Ниязова 84	t	t	10:00-23:00	t	aziýaňky, ewropeýaňky	Азиатская, европейская	200	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-03-29 11:57:30.236842	2022-03-29 11:57:30.236855
-121	Altyn luw	Altyn luw			0	0	altynluw			Parahat köç, 78 jaý$ул. Мир 1, дом 78	t	t	10:00-22:00	t	aziýaňky, ewropeýaňky	Азиатская, европейская	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-29 11:50:24.459867	2022-03-29 11:50:24.459882
-102	Mannol tkm	Mannol tkm			0	0	mannolturkmen	www.mannol.tm		N. Gulaýew 1 köç. (BMW merkeziniň çäginde)$ул. Н.Гулаев 1 (Объездная, на территории BMW центра)	f	f	09:00-22:00	f			0	f	15	f	0	f	f	1	3	0	11	0			27		f	0	2022-03-24 12:00:47.463129	2022-03-24 12:00:47.463145
-78	Sezam	Sezam			0	0	sezam.tm.dostawka			Öwezberdi Kuliyewa 6 köç.$ул. Овезберды Кулиева	t	t	10:00-22:00	t	fast-food	fast-food	70	f	10	f	1	f	f	1	4	0	10	0			3		f	0	2022-03-23 10:20:22.4915	2022-03-23 10:20:22.491516
-199	Sawanna	Sawanna			0	0	sawanna_coffee			Aýtakow köç. "Gümmez gurluşyk" jaý$ул. Айтакова дом "Gùmmez Gurlyşyk"	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-04-06 10:12:16.537661	2022-04-06 10:12:16.537674
-159	Fitnes merkezi "Görogly fitness"	Фитнес центр "Görogly fitness"			0	0	goroglyfitness			SM Uniwermag 2 gat  $ТЦ. Универмаг, 2 этаж	f	f	08:00-22:30	f			0	f	0	f	0	f	f	1	6	0	18	0			0		f	0	2022-04-04 10:53:32.789236	2022-04-04 10:53:32.789256
-185	Obam	Obam			0	0	restoran_obam			G.Kuliýew köç. 89 "Rowaç ýoly"$ул. Г.Кулиева, здание 89, «Ровач Елы»	t	t	09:00-21:30	t	milli,ewropeýaňky	национальная,европейская	120	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-04-05 11:36:23.876993	2022-04-05 11:36:23.877004
-231	Emay cosmetics	Emay cosmetics			0	0	emaycosmetics.tm			diňe dostawka$только доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:46:36.033384	2022-04-08 07:46:36.033402
-183	Mukam	Mukam			0	0	mukamclub			Mahtumkuli köç. 1 park$ул.Махтумкули 1 парк	t	t	11:00-23:00	t	mangal	мангал	200	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-04-05 10:54:54.600419	2022-04-05 10:54:54.600433
-123	Bamboo restaurant	Bamboo restaurant			0	1	bambuk_resto.tm			Parahat 5, 74/2$Парахат 5, 74/2	t	t	10:00-23:00	t	aziýaňky, hytaýyňky	Азиатская, китайская	150	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-29 12:30:08.018228	2022-03-29 12:30:08.018244
-112	BURGERZ | STREET FOOD	BURGERZ | STREET FOOD			0	0	burgerzzone	www.delivery.belgi.com.tm/burgerzone/app		SM "Berkarar", 3 etaž$ТРЦ "Беркарар",3этаж	t	t	09:00-22:30	t	fast-food	fast-food	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-28 09:30:08.111208	2022-03-28 09:30:08.111221
-103	MiuMiu	MiuMiu			1	0	miumiu_love__			SM "Berkarar" 2, etaž, Optowka 2 etaž(218-B)$Т.Ц "Berkarar" ( 2 этаж ),Оптовый, 2 этаж ( 218-В ) 	f	f	10:00-22:00	f			0	f	15	f	0	f	f	1	5	0	26	0			26		f	0	2022-03-24 12:34:49.612422	2022-03-24 12:34:49.612438
-209	Sweet story	Sweet story			1	0	sweet_story_tm			diňe dostawka$только доставка	t	t	09:00–23:00 	t	tortlar,desertlar	торты,десерты	0	f	0	f	0	f	f	1	3	0	8	0			0		f	0	2022-04-07 07:19:04.549887	2022-04-07 07:19:04.549901
-213	Trattoria	Trattoria			0	0	restaurant.trattoria			SM "Berkarar", 3 gat$ТРЦ "Беркарар", 3 этаж	t	t	08:30-23:00	t	Italiýaňky,aziýaňky	итальянская,азиатская	250	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-07 08:48:20.498987	2022-04-07 08:48:20.498999
-154	Sweet memories	Sweet memories			0	0				diňe dostawka $только доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 10:01:30.139019	2022-04-04 10:01:30.139036
-252	Pijama lux	Pijama lux			0	0	pijamylux_tm			dostawka$доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 10:40:07.549135	2022-04-12 10:40:07.549148
-200	Şa lezzet	Şa lezzet			0	0	sha_lezzet			30 kiçi etr., “Syÿahat” otel$30 мкр, отель “Syÿahat”	t	t	10:00-23:00	t	ewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-06 10:22:49.337597	2022-04-06 10:22:49.33761
-278	Приключения Буратино	Приключения Буратино	Spektakl 24/04 13:00-da başlar.	Спектакль начинается 24/04 в 13:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	10	0			0		f	0	2022-04-15 10:15:50.488762	2022-04-15 10:15:50.488773
-221	Pierre Cardin	Pierre Cardin			1	0	polo_ashgabad			Magtymguly köç. SM "Univermag"$ул.Махтумкули, ТЦ "Универмаг"	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	5	0			0		f	0	2022-04-07 12:16:22.179703	2022-04-07 12:16:22.179714
-131	KIDS plaza	KIDS plaza			2	0	kids_plaza_tm	www.kidsplaza.tm		Berkarar SDAM. 2 etaž, c23b$ТРЦ Беркарар, 2 этаж, магазин c23b	f	f	10:00-22:30	f			0	f	0	f	1	f	f	1	5	0	20	0			0		f	0	2022-03-31 11:04:04.303128	2022-03-31 11:04:04.30314
-184	Novada	Novada			0	0	novada_steakhouse	https://novada.aqulas.me/		 Görögly köç 17$ул. Гороглы, 17	t	t	11:00-23:00	t	Steak-house	Steak-house	200	f	0	f	0	f	t	1	4	0	16	0			0		f	0	2022-04-05 11:03:22.740994	2022-04-05 11:03:22.741009
-179	MB Patisserie	MB Patisserie			0	0	mb.patisserie			SM "Berkarar" 2 gat$ТРЦ "Berkarar" 2 этаж	t	t	09:00-23:00	t	türkiýaňky,ewropeýaňky,milli	турецкая,европейская,национальная	150	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-05 09:57:06.229601	2022-04-05 09:57:06.229614
-92	Gözellik salony "LUX"	Салон красоты "LUX"			0	0	turkmenlux			Gurbannazar Ezizow köç.9 (Gül Bal)$ул.Гурбанназар Эзизов, 9 (Gül Bal)	f	f	09:00-22:00	f			0	f	20	f	0	f	f	1	6	0	9	0			15		f	0	2022-03-24 07:08:59.907184	2022-03-24 07:08:59.907199
-132	Beauty shop Korea	Beauty shop Korea			28	27	tm_beauty_shop_korea	www.bsktkm.com		Berkarar SDAM. 1 etaž$ТРЦ Беркарар, 1 этаж	f	f	10:00-22:30	f			0	f	0	f	0	f	f	1	5	0	35	0			0		f	20	2022-03-31 11:24:06.860983	2022-03-31 11:24:06.860997
-254	Wildcraft	Wildcraft			0	0	wildcrafttm			SM"Berkarar", 2 gat, C34a$ТРЦ "Беркарар" 2 этаж, С34а	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-12 10:50:59.08998	2022-04-12 10:50:59.089996
-269	Кинофильм "Человек-паук: Нет пути домой"	Кинофильм "Человек-паук: Нет пути домой"	Кинофильм   2021 ‧ Boýewik ‧ 2 sagat 30 minut	Кинофильм   2021 г. ‧ Боевик/Приключения ‧ 2 ч 30 мин	0	0	berkarar_cinema	14/04/2022-30/04/2022(10:35,13:15,17:50,20:30)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	32	0	Mysterio Örümçiniň şahsyýetini dünýä mälim edende, Piter Parkeriň durmuşy we abraýy howp astyndadyr. Situationagdaýy düzetmek üçin Piter kömek soramak üçin Stiwen Strange ýüzlenýär, ýöne tiz wagtdan has howply bolýar.	Жизнь и репутация Питера Паркера оказываются под угрозой, поскольку Мистерио раскрыл всему миру тайну личности Человека-паука. Пытаясь исправить ситуацию, Питер обращается за помощью к Стивену Стрэнджу, но вскоре всё становится намного опаснее.	0		f	0	2022-04-14 10:27:41.823654	2022-04-14 10:27:41.823668
-124	Berk pub	Berk pub			0	0	berk.gardenpub			Bomako köç, 1934$ул. Бомако, 1934 (базар 100 фонтанов)	t	t	10:00-23:00	t	BBQ	BBQ	150	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-03-29 12:36:19.904139	2022-03-29 12:36:19.904157
-222	Cacharel	Cacharel			0	0	polo_ashgabad			Atabaýewa köç.,24$ул. Атабаева, 24	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-07 12:23:24.235257	2022-04-07 12:23:24.235273
-113	Chatma Restaurant & Lounge	Chatma Restaurant & Lounge			0	0	chatma_official			Azadi köç. 1 park$ул. Азади, 1 парк	t	t	10:00-23:00	t	ewropaly	европейская	200	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-03-28 09:48:20.089197	2022-03-28 09:48:20.089209
-104	Awtoryň şokolady "Infinity" 	Авторский шоколад "Infinity"			0	0	chokolad_infinity_tm			diňe dostawka$только доставка	f	f	10:00-20:00	f			0	f	15	f	0	f	f	1	3	0	16	0			27		f	0	2022-03-24 12:46:28.005156	2022-03-24 12:46:28.005169
-155	Zehin ýoly	Zehin ýoly			0	0	zehinyoly			köç. Oguzhan, 7/1, Hezzet restoran binasy $ул. Огузхан, 7/1, здание Хеззет ресторана	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	3	0	10	0			0		f	0	2022-04-04 10:06:56.93217	2022-04-04 10:06:56.932187
-210	Terrace	Terrace			0	0	restaurant_terrace_ashgabat			Alişşera Nawoýi köç, SM "Altyn zaman"$ул. Алишера Навои, ТЦ. "Altyn Zaman"	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	14	0			0		f	0	2022-04-07 07:28:59.355544	2022-04-07 07:28:59.35556
-93	Gözellik studiýasy "Selbi"	Студия красоты "Selbi"			0	0	selbi_beauty_studiotm			Atamyrat Niýazow köç.,19$ул.Атамырата Ниязова(Чехова),19	f	f	10:00-22:00	f			0	f	10	f	0	f	f	1	6	0	11	0			16		f	0	2022-03-24 07:47:44.472281	2022-03-24 07:47:44.472292
-201	Şabaz	Şabaz			0	0	shabazcoffee			Parahat 2,FOK$Парахат 2, ФОК	t	t	07:00-23:00	t	kofeýnýa	кофейня	150	f	0	f	0	f	f	1	4	0	19	0			0		f	0	2022-04-06 11:00:57.926277	2022-04-06 11:00:57.926291
-83	Detox BOX	Detox BOX			0	0	detoxboxtm	www.detoxboxtm.com		diňe dostawka$только доставка	t	t	10:00-22:00	t	ПП	ПП	150	f	10	f	1	f	t	1	4	0	7	0			6		f	0	2022-03-23 10:58:25.023222	2022-03-23 10:58:25.023237
-94	Gözellik studiýasy "Gunya`s Sugar studio"	Бьюти студия "Gunya`s Sugar studio"			0	0	gunya_sugar_studio			Dzežinskiý köç.,(köne zoopark)$ул. Дзержинского (старый зоопарк)	f	f	09:00-20:00	f			0	f	10	f	0	f	f	1	6	0	7	0			17		f	0	2022-03-24 07:56:28.345745	2022-03-24 07:56:28.345758
-223	Altin Yildiz Classics	Altin Yildiz Classics			0	0	altinyildiz_classics.turkm			SM "Berkarar",2 gat,C-63 $ТРЦ Беркарар, 2 этаж, С63	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-07 12:37:36.56583	2022-04-07 12:37:36.565848
-288	Концерт \\n"Чарующих звуков красота"	Концерт \\n"Чарующих звуков красота"	Konsert 30-njy aprelde 18: 00-da bolar	Концерт пройдет 30 апреля в 18:00	1	0	tahir_atayev_string_orchestra			M. Kuliýewanyň adyndaky Türkmen milli konserwatoriýasy$Туркменская национальная консерватория им. М.Кулиевой	f	f		f			0	f	0	f	0	f	f	1	1	0	5	0	Konsert 30-njy aprelde sagat 18: 00-da M.Kuliýewanyň adyndaky TNK-nyň Uly zalynda bolar. Mugt giriş\nTahir Ataewiň orkestri\nDirijor, N. Halmammedowyň ady bilen geçirilen halkara bäsleşigiň ýeňijisi Baýmurad Gutlymyradow	Концерт пройдёт в Большом зале ТНК им.М.Кулиевой 30 апреля в 18:00. Вход свободный\nОркестр Тахира Атаева\nДирижер лауреат Международного конкурса им.Н.Халмаммедова,Баймурад Гутлымырадов	0		f	0	2022-04-19 10:30:51.364786	2022-04-19 10:30:51.364801
-105	HJ"Haytek"	HJ"Haytek"			0	0	hjhaytek	http://haytek.club/		Kuliýew köç., 96 jaý, "Peykam" binasy$ ул. Кулиева (Обьездная), дом 96, здание "Peykam"	f	f	09:00-18:00	f			0	f	10	f	0	f	f	1	3	0	21	0			28		f	0	2022-03-24 12:54:02.387544	2022-03-24 12:54:02.38756
-156	Gözellik salony "Agora"	Салон красоты "Agora"			0	0	agoraashgabat			Parahat 2/3, Yu. Emre köç.  jaý 7$Мир 2/3, ул.Ю. Эмре д. 7	f	f	09:00-20:00	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:33:30.884491	2022-04-04 10:33:30.884509
-84	Overbrinks	Overbrinks			0	0	overbrinkstm			BS "Oguzkent"$БЦ "Огузкент"	t	t	08:00-22:00	t	kofeýnýa	кофейня	150	f	20	f	1	f	t	1	4	0	5	0			7		f	0	2022-03-23 11:09:36.788649	2022-03-23 11:09:36.788664
-125	Berk pub	Berk pub			16	4	berk_gard_kupalka			Perwomaý köç. "Delfin" park$ул. Первомайского, парк "Дельфин"	t	t	10:00-22:30	t	BBQ	BBQ	150	f	0	f	0	f	f	1	4	0	16	0			0		f	0	2022-03-29 12:42:26.186041	2022-03-29 12:42:26.186058
-289	cvxbxcbv	xcvbxcv	xcvxcv	xzcvcxv	0	0					f	f		f			0	f	0	f	0	f	f	1	3	0	0	0			0		f	0	2022-04-24 13:31:30.387007	2022-04-24 13:31:30.38702
-115	Kopetdag pizza	Kopetdag pizza			0	0	kopetdag_pizzeria			A.Nawoýi köç."Altyn zaman", 2 etaž$ул. Алишера Навои, ТЦ Altyn zaman, 2 этаж	t	t	09:00-23:00	t	italiýaňky	итальянская	200	f	0	f	0	f	t	1	4	0	7	0			0		f	0	2022-03-28 10:10:04.593474	2022-03-28 10:10:04.593487
-148	Moonlight	Moonlight			0	0	moonlight_presents_tm			Diňe dostawka$только на доставку	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	3	0			0		f	0	2022-04-04 08:29:19.115349	2022-04-04 08:29:19.115362
-212	Fast food by Turkmenistan Limited	Fast food by Turkmenistan Limited			0	0	tmlimited_fastfood			dostawka$на доставку	t	t	09:00-22:00	t	fast-food	фаст-фуд	100	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-04-07 07:46:53.283002	2022-04-07 07:46:53.283015
-202	Şohle	Şohle			0	0				Görogly köç.6(WDNH)$ул. Героглы 6 (ВДНХ со стороны ул. Шевченко)	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-04-06 11:11:48.65815	2022-04-06 11:11:48.658163
-146	Studio ceramic	Studio ceramic			0	0	studio_ceramic_tm			Bagtyýarlyk sport toplumy (öňki köne haýwanat bagy)$Багтыярлык спорт комплекс (бывший старый зоопарк).	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	3	0	4	0			0		f	0	2022-04-04 08:16:20.527816	2022-04-04 08:16:20.527832
-186	Capital lounge bar	Capital lounge bar			0	0	capital_lounge__bar			Magtymguly köç. "Paýtagt"otel$ул.Махтумкули, отель "Paytagt"	t	t	09:00-22:00	t	mangal,ewropeýaňky	мангал,европейская	130	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-04-05 11:41:51.047336	2022-04-05 11:41:51.04735
-272	Дюймовочка	Дюймовочка	Spektakl 16/04  13:00-da başlar.	Спектакль начинается 16/04 в 13:00.	0	0	pushkin_1799_06_06			Magtynguly köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	4	0			0		f	0	2022-04-15 09:32:31.453885	2022-04-15 09:32:31.453899
-256	Zenana	Zenana			0	0	zenana.store			SM "Berkarar" 0 gat$ТРЦ "Беркарар" 0 этаж	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 11:11:41.117447	2022-04-12 11:11:41.117458
-134	Boutique line	Boutique line			0	0	boutique_line_turkmenistan/			SM Uniwermag, 2 etaž$ТЦ Универмаг, 2 этаж	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	5	0	8	0			0		f	0	2022-03-31 12:41:13.715937	2022-03-31 12:41:13.71595
-126	Black bar	Black bar			0	1	blackbar_official			Mahtumkuli köç. (köne Ashgabat otel)$ул. Махтумкули (бывш.Ашгабат отель))	t	t	11:00-23:00	t	ewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-03-29 12:54:06.0626	2022-03-29 12:54:06.062613
-106	A-coffee	A-coffee			0	0	acoffee.tm			Çehow köç., "Metbugat Çapary" bina$ул. Чехова, дом ( Metbugat Çapary )	t	t	08:30-23:00	t	kofehause	кофейня	100	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-03-25 12:34:11.293742	2022-03-25 12:34:11.293759
-280	Кинофильм  \\n"Смерть на Ниле"	Кинофильм \\n"Смерть на Ниле"	Кинофильм     2022 ‧ Detektiv / Jenaýat ‧ 2 sagat 7 minut	Кинофильм  2022 г. ‧ Детективный фильм/Криминал ‧ 2 ч 7 мин	0	0		18/04/2022-30/04/2022(12:45,14:25,20:45)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			50	f	0	f	0	f	f	1	2	3	13	0	Bu gezek dynç alyşyndan daşlaşdyrylan syrly ganhorlygy derňemek zerurlygy, Nil derýasynyň boýundaky kaşaň kruiz gämisinde Poirotdan öňe geçýär.	На этот раз необходимость расследовать загадочное убийство, отвлекаясь от собственного отдыха, настигает Пуаро на борту роскошного круизного парохода, следующего вдоль по Нилу.	0		f	0	2022-04-18 10:48:09.548128	2022-04-18 10:48:09.548141
-268	Кинофильм \\n"Лулу и Бриггс"	Кинофильм \\n"Лулу и Бриггс"	Кинофильм  2022 ý. Komediýa  ‧ 1 sag 41 min	Кинофильм   2022 г. ‧ Комедия/Роуд-муви ‧ 1 ч 41 мин  	0	0	berkarar_cinema	14/04/2022-30/04/2022(10:20,17:05,18:45,21:00)*\n		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	30	0	Marine Briggs, Lulu atly hyzmat itini Kaliforniýa eltmeli. Bu ýumuş gaty kyn bolýar. Theuwaş ummanyň kenaryndaky ýeňil syýahat, kimiň kime äkidilýändigi belli bolmadyk ýerde heläkçilige öwrülýär.	Морской пехотинец Бриггс должен доставить в Калифорнию служебную собаку по кличке Лулу. Задание оказывается с подвохом. Лайтовая поездка вдоль Тихоокеанского побережья превращается в адское путешествие, где непонятно, кто кого везёт.	0		f	0	2022-04-14 10:24:06.615737	2022-04-14 10:24:06.615752
-116	Караоке-Бар “Meshhur New York”	Караоке-Бар “Meshhur New York”			0	0	meshhur_newyork			SM "Berkarar",3  etaž$ТРЦ Беркарар, 3 этаж	t	t	10:00-23:00	t	ýewropeýanky	европейская	200	f	0	f	0	f	t	1	4	0	10	0			0		f	0	2022-03-28 10:55:10.384224	2022-03-28 10:55:10.384237
-224	Koton kids	Koton kids			0	0	koton_turkmenistan			SM "Berkarar", 2 gat$ТЦ "Беркарар", 2 этаж 	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-07 12:44:08.02304	2022-04-07 12:44:08.023052
-214	Umyt grill lounge	Umyt grill lounge			0	0	umytgrillounge			"Altyn asyr" SM (bäşaýak),7 gat$ТЦ «Алтын Асыр» (Пятиножка), 7 этаж 	t	t	11:00–23:00 	t	ýaponiýaňky,fast-food	японская,фаст-фуд	250	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-04-07 08:59:14.893718	2022-04-07 08:59:14.89374
-85	Ammar	Ammar			0	0	ammarcafetm			Şewçenko köç, "Çinar" dükan$ул. Шевченко "Чынар" магазин 	t	t	10:00-22:00	t	ewropeýskiý	европейская	150	f	10	f	0	f	t	1	4	0	15	0			8		f	0	2022-03-23 11:16:39.27224	2022-03-23 11:16:39.272254
-147	Konditoria	Konditoria			0	0	konditoria_tm			Diňe dostawka$только на доставку	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	2	0			0		f	0	2022-04-04 08:22:09.180403	2022-04-04 08:22:09.180419
-95	Gözellik salony "PersonaLAB"	Салон красоты "PersonaLAB"			0	0	personalabtm_turkmenistan			Alişera-Nawoýi köç.,"Altyn Zaman", 1 etaž$ул.Алишера-Навои, "Altyn Zaman", 1 этаж	f	f	09:00-20:00	f			0	f	20	f	0	f	f	1	6	0	7	0			18		f	0	2022-03-24 08:08:37.898882	2022-03-24 08:08:37.898896
-158	Gözellik studiýa "Emily beauty"	Салон красоты "Emily beauty"			0	0	_emily_beauty_			Türkmenbaşy köç., Olimpiýa myhmanhanasy  $ул.Туркменбаши, отель Olimpiya	f	f	10:00-18:00	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:47:40.186631	2022-04-04 10:47:40.186644
-203	Sim Sim	Sim Sim			0	0	simsim_ashgabat			Andalib köç.  50/1$ул.Андалиба, 50/1	t	t	11:00-23:00	t	Ortaýer deňzi	средиземноморская	250	f	0	f	0	f	f	1	4	0	6	0			0		f	0	2022-04-06 11:23:23.072987	2022-04-06 11:23:23.073002
-187	Pizza 88	Pizza 88			0	0	pizza88_tm			Parahat 4/2 köç.$Мир 4/2(Санта-Барбара)	t	t	09:00-23:00	t	türkiýaňky	турецкая	130	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-05 12:00:28.971564	2022-04-05 12:00:28.971577
-188	Plaza coffee	Plaza coffee			0	0	plazacoffee_tm			Görögly köç. "Turist" otel$ул. Гёроглы отель «Турист»	t	t	08:00-22:30	t	kofeýnýa	кофейня	100	f	0	f	0	f	t	1	4	0	6	0			0		f	0	2022-04-05 12:07:10.084945	2022-04-05 12:07:10.084957
-225	Lady`s room	Lady`s room			0	0	ladys_.room			A.Nawoýi köç, SM "Altyn Zaman" 3 gat$ул.А.Навои, ТЦ "Altyn Zaman" 3 этаж	f	f	11:00-19:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-07 12:52:59.658464	2022-04-07 12:52:59.658477
-160	Mahri permanent make-up	Mahri permanent make-up			0	0	mari.arti955			10 ýyl abadançylyk köç, 151 jaý Hasar $ул. 10 йыл Абаданчылык, 151 дом Hasar	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	6	0	2	0			0		f	0	2022-04-04 11:11:53.193238	2022-04-04 11:11:53.19325
-96	Fitnes klub "Kolizeý"	Фитнес клуб "Kolizeý"			0	0	kolizey.fit.club			Täjir köç.(DOSAAF), 1 jaý$ул.Таджир (проезд Досааф), д.1	f	f	08:00-22:30	f			0	f	10	f	0	f	f	1	6	0	5	0			20		f	0	2022-03-24 09:34:39.864175	2022-03-24 09:34:39.864187
-127	Pomodor	Pomodor			23	21	pomodor_o/			Görögly köç,19$ул.Героглы, 19	t	f	10:00-21:30	t	Pizza	pizza	150	f	15	f	1	f	f	1	4	0	65	0			26		f	0	2022-03-30 07:30:15.397931	2022-03-30 07:30:15.397944
-86	В кабаке "У Амули"	В кабаке "У Амули"			0	0	kabak.amuli			diňe dostawka$только доставка	t	t	12:00-22:00	t	BBQ	BBQ	200	f	15	f	0	f	f	1	4	0	5	0			9		f	0	2022-03-23 11:28:49.650636	2022-03-23 11:28:49.65065
-149	ms│studio	ms│studio			2	0	mirzoev.sergey			"Joşgun" söwda merkezi 1 gat $ТЦ «Джошгун»1 этаж	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	8	0			0		f	0	2022-04-04 09:20:19.233188	2022-04-04 09:20:19.233201
-117	Ýalta coffee	Ýalta coffee			0	0	yalta_coffee			Öwezberdy Kuliýew köç$ул. Овезберды Кулиева	t	t	08:00-21:00	t	kofe house	coffee house	70	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-28 11:11:56.144254	2022-03-28 11:11:56.144267
-107	Altyn çaýhana	Altyn çaýhana			0	0	altyncayhana			urbansoltan eje şaýoly, 168.$ул. Гурбансолтан эдже, 168	t	t	09:00-23:00	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-03-25 12:42:06.547112	2022-03-25 12:42:06.547125
-215	Üzüm	Üzüm			0	0	uzum_cafe			Mežlauka köç. 13$ул. Межлаука, 13	t	t	08:30–23:00 	t	ewropeýaňky,türkiýaňky,italiýaňky,aziýadyňky,fast-food	Европейская, турецкая, итальянская, азиатская, фаст-фуд	200	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-04-07 09:17:24.443777	2022-04-07 09:17:24.44379
-204	Smile sushi bar	Smile sushi bar			0	0	smile_sushi_baar			SM"Altyn asyr",7 $ТЦ «Алтын Асыр» (Пятиножка), 7 этаж	t	t	08:00-08:00	t	ýaponiýaňky	японская	170	f	0	f	0	f	f	1	4	0	8	0			0		f	0	2022-04-06 11:56:20.346105	2022-04-06 11:56:20.346118
-273	Ханума	Ханума	Spektakl 16/04 19: 00-da başlar.	Спектакль начинается 16/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	3	0			0		f	0	2022-04-15 09:45:33.82689	2022-04-15 09:45:33.826902
-267	"Berkarar" kinoteatry	Кинотеатр "Berkarar"			0	0	berkarar_cinema			SM "Berkarar", 3 gat$ТРЦ "Berkarar" 3 этаж	f	f	09:00-23:00	f			0	f	0	f	0	f	f	1	3	0	9	0			0		f	0	2022-04-14 10:03:21.070369	2022-04-14 10:03:21.070381
-87	Online food	Online food			0	0	onlinefood.tm			diňe dostawka$только доставка	t	t	10:00-22:00	t	ýaponiýa	японская	170	f	15	f	0	f	f	1	4	0	7	0			11		f	0	2022-03-23 11:54:00.256202	2022-03-23 11:54:00.256218
-150	Notebook service	Notebook service			0	0	notebook_merkezi			köç. Bomako, Älemgoşar bazary dükany 115 $ул. Бомако, базар «Älemgoşar» магазин 115	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	3	0	2	0			0		f	0	2022-04-04 09:25:45.483378	2022-04-04 09:25:45.483392
-189	Red coffee	Red coffee			0	0	redcoffeetm			"Bagtyýarlyk" SM, 0 gat$ТЦ «Багтыярлык» цокольный этаж	t	t	08:00-23:00	t	kofeýnya	кофейня	70	f	0	f	0	f	t	1	4	0	4	0			0		f	0	2022-04-05 12:19:06.777601	2022-04-05 12:19:06.777614
-274	Аладдин и волшебная лампа	Аладдин и волшебная лампа	Spektakl 17/04 13:00-da başlar.	Спектакль начинается 17/04 в 13:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	1	0			0		f	0	2022-04-15 09:49:56.985092	2022-04-15 09:49:56.985103
-118	Shabaz Pizzeria•Patisserie	Shabaz Pizzeria•Patisserie			0	0	shabazcoffee			Parahat 2$Парахат 2	t	t	07:00-23:00	t	kofehouse	kofehouse	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-29 11:05:15.601818	2022-03-29 11:05:15.601833
-108	Altyn dan	Altyn dan			0	0	altyn_dan_tm			diňe dostawka.$только доставка	t	t	10:00-22:00	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-03-25 12:57:23.599545	2022-03-25 12:57:23.599559
-205	Soltan Loft	Soltan Loft			0	0	soltan_loft_			2127 (G.Kulyýew) köç.jaý 72$(Г.Кулиев)2127, 72 дом	t	t	09:00-22:30	t	türkiýaňky	турецкая	180	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-06 12:10:39.957031	2022-04-06 12:10:39.957078
-161	"Awangard" gözellik salony	Салон красоты Awangard			0	0	awangard_salon			köç. 1958, 78/1$ул. 1958, 78/1	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	6	0	5	0			0		f	0	2022-04-04 11:17:05.915343	2022-04-04 11:17:05.915356
-216	Venice restoclub	Venice restoclub			0	0	venice_restoclub			Andalib/G.Kuliýew köç.$ул. Н. Андалиба / Г. Кулиева	t	t	11:00–23:00 	t	ýewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	18	0			0		f	0	2022-04-07 09:33:28.679497	2022-04-07 09:33:28.67951
-227	Disney	Disney			0	0				SM "Berkarar", 3 gat, D 52$ТЦ Беркарар, 3 этаж, D 52	t	t	10:00 – 22:30	t			150	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-08 07:00:18.541415	2022-04-08 07:00:18.541433
-97	"Dynamics GYM" Fitnes merkezi	Фитнес центр "Dynamics GYM"			1	0	dinamika_sport_kluby			ýaşaýyş jaýy Gurtly, jaý 21 $жилой массив Гуртлы, дом 21	f	f	09:00-22:30	f			0	f	10	f	0	f	f	1	6	0	4	0			21		f	0	2022-03-24 10:07:59.139319	2022-03-24 10:07:59.139336
-157	Fitnes klub "Amazonka"	Фитнес клуб "Amazonka"			0	0	amazonka_fitness_club			10 ýyllyk abadançylyk köç, Hasar öýi $ул. 10 Йыл Абаданчылик, дом Hasar	f	f	10:00 – 22:00 	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:38:32.062437	2022-04-04 10:38:32.06245
-247	Pit stop	Pit stop			0	0	pitstoptm			Hoja Ahmet Yasаwy (Griboyedowa)$Ходжа Ахмет Ясавы	t	t	10:00-22:00	t	ewropaňky	европейская	200	f	0	f	0	f	f	1	4	0	6	0			0		f	0	2022-04-12 09:03:20.379773	2022-04-12 09:03:20.379786
-226	Han et	Han et			3	1	han_et_steakhouse			Parahat4/, "Türkmenbalyk" binasy$Парахат 4/1, здание «Turkmenbalyk»	t	t	10:00-23:00	t	steak-house	steak-house	150	f	0	f	1	f	f	1	4	0	53	0			15		f	0	2022-04-08 06:49:55.83316	2022-04-08 06:49:55.833173
-270	Мультфильм "Я краснею"	Мультфильм "Я краснею"	Multfilm  2022 ‧ Çagalar üçin / Komediýa ‧ 1 sag 40 min	Мультфильм   2022 г. ‧ Детский/Комедия ‧ 1 ч 40 мин	0	0	berkarar_cinema/	14/04/2022-30/04/2022(10:50,12:30,15:55,19;05)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	164	0	Ynamly, 13 ýaşly Mei Li yhlasly we gulak asýan enäniň gyzy bolmak bilen ýetginjeklikdäki bulam-bujarlygy ýeňip geçmegiň arasynda ýyrtylýar. Gyzyklanmalarynda, gatnaşyklarynda we ýetginjekleriniň öz bedenindäki üýtgemelerinde eýýäm üýtgeşiklik bar ýaly, ýöne ýok - haçan-da bir alada galsa (hemişe ýetginjek bilen bolup geçýär), derrew ullakan gyzyl panda öwrülýär.	Уверенная в себе 13-летняя Мэй Ли разрывается между тем, чтобы оставаться прилежной и послушной маминой дочкой и справиться с хаосом подросткового возраста. И, казалось бы, перемен в её интересах, отношениях и подростковых изменений в собственном теле и так достаточно, но нет — всякий раз, когда она слишком волнуется (что с подростком случается практически всегда), она моментально превращается в гигантскую красную панду.	0		f	0	2022-04-14 10:31:14.219601	2022-04-14 10:31:14.219612
-279	Trening	Тренинг	"Häzirki zaman dünýäsinde karýerany döretmekde ýaşlaryň kynçylyklary"	"Трудности молодежи при построении карьеры в современном мире"	0	0	ish_nokady_			BM "Berkarar", 10 gat, J1 blok$БЦ «Беркарар», 10 этаж, блок J1.	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	1	0	8	0	Razy, her birimiz öz karýeramyzy gurmak ýa-da öz işimizi açmak üçin dürli meseleler bilen ýüzbe-ýüz boldukmy? Emma hiç kim bize bu meseleleri nädip çözmelidigini ýa-da ýüzbe-ýüz bolmajakdygyna göz ýetirmeýär.\n22-nji aprelde, esasanam 15-25 ýaş aralygyndaky ýaşlar üçin gurnaýan okuwymyzda bu mowzugy has jikme-jik öwrenmek isleýäris.\nBu mowzugy açmak üçin ýokary hünärli psihology çagyrdyk we indi bu hakda azajyk gürleşeris;\nAkýewa Nýazik, BMG we Türkmenistan hökümeti tarapyndan durmuşa geçirilýän “incerli derejede öz içine alyjy ýokary hilli sosial hyzmatlary ornaşdyrmak arkaly sosial gorag ulgamyny kämilleşdirmek” programmasynda sosial psiholog.\nOzal uniwersiteti gutardy - TDU. Makhtumkuli Psihologiýa hünäri. Nyazik-iň bu hünäri boýunça şahadatnamalary we baý tejribesi bar.\nOkuwda gaty gyzykly mowzukdan başga-da, gyzykly interaktiw oýun, gatnaşyk gurmak üçin oýunlar we özüňizi beýan etmek mümkinçiligini taparsyňyz.\n22-nji aprelde, 18: 30-da, Iš Nokady hyzmatdaş merkezinde.	Согласитесь каждый из нас сталкивался с различным родом проблем на пути построения своей карьеры или открытии собственного дела? Но никто не говорит нам о том, как же решить эти проблемы или сделать так, чтобы с ними не сталкиваться.\n22 апреля мы хотим более детально рассмотреть эту тему на тренинге, который мы организуем специально для молодых людей от 15 до 25 лет.\nМы пригласили высококвалифицированного психолога для раскрытия данной темы и сейчас немного расскажем о ней;\nАкыева Нязик - социальный психолог в программе «Совершенствование системы социальной защиты путем внедрения инклюзивных качественных социальных услуг на местном уровне», реализуемой ООН и Правительством Туркменистана.\nРанее окончила ВУЗ - ТГУ им. Махтумкули по специальности «Психолог». Также Нязик имеет сертификаты и большой опыт работы по данной специальности.\nПомимо очень интересной темы на тренинге вас ждёт увлекательный интерактив, игры на налаживание отношений и возможность проявить себя.\nМы ждём вас 22 апреля, в 18:30, в коворкинг-центре «Iš Nokady».	0		f	0	2022-04-15 11:28:06.505298	2022-04-15 11:28:06.50531
-281	Кинофильм \\nПроект «Адам»	Кинофильм \\nПроект «Адам»	Кинофильм  2022 ‧ Sci-Fi\\nDrama ‧ 1 sagat 46 minut	Кинофильм  2022 г. ‧ Научная фантастика\\nДрама ‧ 1 ч 46 мин	0	0		18/04/2022-30/04/2022(15:05,16:45)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			50	f	0	f	0	f	f	1	2	0	19	0	“Adam Taslamasy” Şon Lewiniň re directedissýorlyk eden we Jonatan Tropper, T. S. Nowlin, Jennifer Flakett we Mark Lewin tarapyndan ýazylan Amerikan ylmy fantastiki hereket komediýa filmidir. Aktrisalar: Raýan Reynolds, Mark Ruffalo, Jennifer Garner, Walker Skobell, Katrin Keener we Zoe Saldana	Проект „Адам“» — американский комедийный научно-фантастический боевик режиссёра Шона Леви и сценаристов Джонатана Троппера, Т. С. Наулина, Дженнифер Флэкетт и Марка Левина. В главных ролях: Райан Рейнольдс, Марк Руффало, Дженнифер Гарнер, Уолкер Скобелл, Кэтрин Кинер и Зои Салдана	0		f	0	2022-04-18 10:52:56.922963	2022-04-18 10:52:56.922978
+COPY public.admin_type (id, type, created_at, updated_at) FROM stdin;
+1	Admin	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
+2	Superadmin	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
+3	Moderator	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
+4	User	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
+5	Cinema	2022-03-09 14:21:45.937821	2022-03-09 14:21:45.937888
 \.
 
 
@@ -1090,14 +2417,6 @@ COPY public.ads_view (id, user_id, profile_id, ads_id, type, created_at, updated
 --
 
 COPY public.answered_messages (id, title, message, created_at, updated_at) FROM stdin;
-\.
-
-
---
--- Data for Name: inbox; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.inbox (id, title, message, is_all, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -8879,6 +10198,9 @@ COPY public.app_visitors (id, user_id, created_at, updated_at) FROM stdin;
 7790	\N	2022-04-26 08:06:48.04032	2022-04-26 08:06:48.040331
 7792	\N	2022-04-26 08:22:07.308272	2022-04-26 08:22:07.308283
 7798	\N	2022-04-26 11:15:04.646119	2022-04-26 11:15:04.646132
+7805	\N	2022-04-27 05:00:02.800977	2022-04-27 05:00:02.800989
+7807	\N	2022-04-27 05:00:23.405847	2022-04-27 05:00:23.405856
+7808	\N	2022-04-27 10:27:13.413918	2022-04-27 10:27:13.41393
 7760	\N	2022-04-22 13:46:28.72791	2022-04-22 13:46:28.72792
 7794	\N	2022-04-26 08:30:48.638542	2022-04-26 08:30:48.638553
 7761	\N	2022-04-22 13:50:10.035469	2022-04-22 13:50:10.03548
@@ -8900,6 +10222,8 @@ COPY public.app_visitors (id, user_id, created_at, updated_at) FROM stdin;
 7795	\N	2022-04-26 08:40:34.54988	2022-04-26 08:40:34.54989
 7799	\N	2022-04-26 11:15:44.574188	2022-04-26 11:15:44.574198
 7801	\N	2022-04-26 11:15:50.594255	2022-04-26 11:15:50.594265
+7803	\N	2022-04-27 04:58:51.457877	2022-04-27 04:58:51.457889
+7806	\N	2022-04-27 05:00:21.672548	2022-04-27 05:00:21.672565
 7763	\N	2022-04-22 13:55:53.599845	2022-04-22 13:55:53.599855
 7769	\N	2022-04-23 14:04:17.01976	2022-04-23 14:04:17.019771
 7774	\N	2022-04-24 06:22:32.654665	2022-04-24 06:22:32.654675
@@ -8913,8 +10237,10 @@ COPY public.app_visitors (id, user_id, created_at, updated_at) FROM stdin;
 7770	\N	2022-04-23 14:04:52.292824	2022-04-23 14:04:52.292837
 7779	\N	2022-04-25 09:17:25.606991	2022-04-25 09:17:25.607003
 7782	\N	2022-04-26 06:23:38.298507	2022-04-26 06:23:38.29852
+7802	\N	2022-04-26 12:46:37.274129	2022-04-26 12:46:37.274141
 7786	\N	2022-04-26 07:44:34.326086	2022-04-26 07:44:34.326097
 7797	\N	2022-04-26 08:48:59.473785	2022-04-26 08:48:59.473798
+7804	\N	2022-04-27 04:59:57.293877	2022-04-27 04:59:57.293888
 \.
 
 
@@ -8928,106 +10254,6 @@ COPY public.banners (id, image, link, "order", comment_of_admin, profile_id, cre
 25	/uploads/banners/e8cd15fa-7cd2-4eb1-b8d3-b97d87affc13.jpg		2	19/04	85	2022-03-31 11:29:39.590605	2022-03-31 11:29:39.590619
 28	/uploads/banners/2ab8a53b-975e-47ca-940b-1d4167ba8e76.jpg		0	19/04	83	2022-04-19 11:02:33.813716	2022-04-19 11:02:33.81373
 29	/uploads/banners/6972d8f0-673a-4d08-a9a4-9a1c92138e06.jpg		4	19/04	221	2022-04-19 11:04:39.145355	2022-04-19 11:04:39.145369
-\.
-
-
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.users (id, fullname, phone_number, token, notif_token, created_at, updated_at) FROM stdin;
-0	\N	\N	\N	\N	2022-03-09 14:21:45.503817	2022-03-09 14:21:45.504031
-1	Shageldi Alyyev	+99362737222	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIEFseXlldiIsInBob25lX251bWJlciI6Iis5OTM2MjczNzIyMiJ9.A6M5A--z5QzGJRaEYf4E7sp61JC_nXq3h6hJzcf7d9Q	\N	2022-03-11 15:38:23.364858	2022-03-11 15:38:23.365065
-2	fhf	656565	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImZoZiIsInBob25lX251bWJlciI6IjY1NjU2NSJ9.MUeSWR-oshTkiEaS8D68G8XeS9QtQ9UJC4CxfcPshP8	\N	2022-03-12 14:35:45.367909	2022-03-12 14:35:45.368115
-3	Gayypow Halil	+993535353	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNTM1MzUzIn0.tQ1bV8VVnN_xx2_Ix3560hHZd9OvHztiVNiUXg4GXzI	\N	2022-03-13 16:27:40.788963	2022-03-13 16:27:40.789169
-4	wewewew	23142423	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Indld2V3ZXciLCJwaG9uZV9udW1iZXIiOiIyMzE0MjQyMyJ9.wcp5aodq3UCs51QfgSYJiimas3q90r2SQW4QPNeWCLA	\N	2022-03-14 12:35:30.663556	2022-03-14 12:35:30.663756
-5	Gayypow Halil	+98435790	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTg0MzU3OTAifQ.oUg6zMlZxfnBEpzCS3e9pKyC9zhgqzHN4_NHHxmGZx8	\N	2022-03-14 12:31:23.925224	2022-03-14 12:31:23.925425
-6	sdfsdfsdsd	sdfdsfsdf	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InNkZnNkZnNkc2QiLCJwaG9uZV9udW1iZXIiOiJzZGZkc2ZzZGYifQ.ZLkkZ3U5oNQ0Ld00Q3deJv_I6Y_iJFTOt6L_jsQDCuo	\N	2022-03-14 12:25:32.20573	2022-03-14 12:25:32.205931
-7	ttttttttttttttt	8888888888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InR0dHR0dHR0dHR0dHR0dCIsInBob25lX251bWJlciI6Ijg4ODg4ODg4ODgifQ.nrtAICs0UrnuJiRKqYAHTvZ5W-zGRlYjxmAnYKlyihE	\N	2022-03-14 13:15:58.049693	2022-03-14 13:15:58.049894
-8	Gayypow Halil	+99363636363	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM2MzYzNjMifQ.qYiyEgf4Yn4rmgNgPC9ML5pRzmJpMlptwuF3xjkGcVE	\N	2022-03-14 15:00:12.856133	2022-03-14 15:00:12.868436
-9	Jemal	+43556547	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkplbWFsIiwicGhvbmVfbnVtYmVyIjoiKzQzNTU2NTQ3In0.CQFuDUrzzDSSv8VRMtSovOvBFJIds5o0m80keTeFxOc	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
-10	qweeee	32432	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InF3ZWVlZSIsInBob25lX251bWJlciI6IjMyNDMyIn0.1UUaF9bUxlkVdHbGDijnPtLk851V9tVA5PLe7Dh4VDM	\N	2022-03-14 15:00:13.210638	2022-03-14 15:00:13.210864
-11	Shageldi Alyyew	+9935354353	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIEFseXlldyIsInBob25lX251bWJlciI6Iis5OTM1MzU0MzUzIn0.alLxh1-rIIUumnW1kskjgI1Y0Zr9AfPL2HmXBI4PQAI	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
-12	qwqwqwq	232323	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InF3cXdxd3EiLCJwaG9uZV9udW1iZXIiOiIyMzIzMjMifQ.E-9HDsAV8NmwaVaSgwJ0e9G4GeQFNu9L2YTZTxduTfg	\N	2022-03-14 15:00:13.134865	2022-03-14 15:00:13.135099
-13	Gayypow Halil	+856476	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrODU2NDc2In0.bb1tyxFw0uGnRtpjG8Y4CTVTRSMhhJE4qIgrSWXKH3M	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
-14	Shagen	34534545	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbiIsInBob25lX251bWJlciI6IjM0NTM0NTQ1In0.WW21SZZgVeE3LejRVJeLVlSSidopOAC1rZ6FNtC_ZdU	\N	2022-03-14 15:00:13.210638	2022-03-14 15:00:13.210864
-15	Sssss	45432543253245323542	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNzc3NzIiwicGhvbmVfbnVtYmVyIjoiNDU0MzI1NDMyNTMyNDUzMjM1NDIifQ.AsXRYKYwGR7GLQLDGbIFy72gQBvuQEJYxHArvyXkxMM	\N	2022-03-16 14:54:23.868942	2022-03-16 14:54:23.869146
-16	string	string	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InN0cmluZyIsInBob25lX251bWJlciI6InN0cmluZyJ9.yxq9lMMJBZbueXJECscc1qYEN7Nsqy_4r8Aa062R0OA	\N	2022-03-17 11:44:08.353938	2022-03-17 11:44:08.353952
-17	Jemalaa	232322	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkplbWFsYWEiLCJwaG9uZV9udW1iZXIiOiIyMzIzMjIifQ.EJqytSnlGGzoPqLICeEnnYx5kcca-hq3RqxmDHz3YPg	\N	2022-03-18 12:27:37.371966	2022-03-18 12:27:37.371979
-18	Pena Muhhametberdiyew	+99365434343	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlBlbmEgTXVoaGFtZXRiZXJkaXlldyIsInBob25lX251bWJlciI6Iis5OTM2NTQzNDM0MyJ9.aTny8k4lomE775wuXPtWqJPXtAQARLT0X_e32Jfhioc	\N	2022-03-18 12:29:49.261034	2022-03-18 12:29:49.261046
-19	Full name	123214	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMzIxNCJ9.x4Ss7FAcFRX8fKK0GJUbv-XwIcRSSPpjQmBGPj9O4oo	\N	2022-03-21 11:53:00.01758	2022-03-21 11:53:00.017593
-20	Full name	1234	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMzQifQ.aKWw3pZTmhCTBkisJOa2MbbaGTE67xaRMedbt053wvE	\N	2022-03-21 11:53:19.797966	2022-03-21 11:53:19.79798
-21	Full name	21`343	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxYDM0MyJ9.NYZkBjEMUNU4l9wdkPVKXJl3b81yZ4VzUHLewrECJlQ	\N	2022-03-21 11:53:41.386786	2022-03-21 11:53:41.386797
-22	Full name	21345	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxMzQ1In0.QRds6iysX_fbs0FGdBQQaRP7bIpXIoNjVCEZo6bjV6U	\N	2022-03-21 11:54:42.6384	2022-03-21 11:54:42.638411
-23	Full name	1`2`12	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjFgMmAxMiJ9.gc7J6NOKLBVtiD9pVZ7kfpU_RXb1RhLjpsraj5TXpYA	\N	2022-03-21 11:55:21.600012	2022-03-21 11:55:21.600023
-24	Full name	12`w3	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyYHczIn0.iAmiCDdn1po1yeQVEPIe6i38K8T1DL5wIHl5MgdOvrU	\N	2022-03-21 11:55:40.971176	2022-03-21 11:55:40.971188
-25	Full name	123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMyJ9.W2X4Q-bym-iAx_HS84GXlHQtVshpYSENM55Pu5Yh6S0	\N	2022-03-21 11:56:03.562798	2022-03-21 11:56:03.56281
-26	Full name	235435	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIzNTQzNSJ9.6tkZ3PHhNfQl0jPu8-1-_2wNWDHPRF8bAfw5iPkGgzo	\N	2022-03-21 11:56:23.131721	2022-03-21 11:56:23.131731
-27	Full name	2134	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxMzQifQ.MqfhvxCf369gaoBw7i-iqnMFoEF_hPDBgYl4a7NFp9o	\N	2022-03-21 11:56:40.429394	2022-03-21 11:56:40.429405
-28	Full name	34r5	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjM0cjUifQ.9oo9ZpfAeMhyP-RGbZ6mqyLHx5sk0X7UkTV8Gz8KSKQ	\N	2022-03-21 11:56:58.673076	2022-03-21 11:56:58.673088
-29	Full name	5678	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjU2NzgifQ.pXwEyIeUMb7ldtZrzmbt7d-qDjcnmjw76KHcI9oZ1so	\N	2022-03-21 11:57:21.423971	2022-03-21 11:57:21.423988
-30	Full name	2342	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIzNDIifQ.1Sebq0V5SlJBnTlAQbEdEAS2YptO8IC8xTul6Bpq0SE	\N	2022-03-21 11:57:40.910267	2022-03-21 11:57:40.910278
-31	654654	645654654	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IjY1NDY1NCIsInBob25lX251bWJlciI6IjY0NTY1NDY1NCJ9.mBfNhfGvgn-qztZWK7CW8bf_T_RBXP1lnlF17MoYNdI	\N	2022-03-21 14:22:26.554197	2022-03-21 14:22:26.554224
-32	sadsadf	4356435	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InNhZHNhZGYiLCJwaG9uZV9udW1iZXIiOiI0MzU2NDM1In0.67Jc237VEbuc6MFYZ8rEA07dydcci0djWEOX3TGo-ms	\N	2022-03-23 14:52:16.928187	2022-03-23 14:52:16.928204
-33	Gayypow Halil	+99363430338	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM0MzAzMzgifQ.qm0cPpUQi2HFvW0M2cLTwkqsKsAziIYbOdwl2fdnEx4	\N	2022-03-23 14:55:44.277181	2022-03-23 14:55:44.277201
-34	Alyýew Şageldi	6758856756	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFseVx1MDBmZGV3IFx1MDE1ZWFnZWxkaSIsInBob25lX251bWJlciI6IjY3NTg4NTY3NTYifQ.2_hwrWf94tpZvksxGr9pL0OI5fPeBFqS8KzknWqfWnA	\N	2022-03-23 14:56:30.243404	2022-03-23 14:56:30.243415
-35	dcs	2332	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRjcyIsInBob25lX251bWJlciI6IjIzMzIifQ.Dw_pKzmf7qkhEePU9J9Ac6P3uzNYKp_DUMuk9Kq_lUk	\N	2022-03-23 14:56:56.843502	2022-03-23 14:56:56.843519
-36	dfghdfsg	234324	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRmZ2hkZnNnIiwicGhvbmVfbnVtYmVyIjoiMjM0MzI0In0._nj_sIkXKdjoqXa1GzmjXyWCgvVh8klknGui-q7TlUo	\N	2022-03-23 15:00:08.914839	2022-03-23 15:00:08.914857
-37	dsfgdsfgds	5464654	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRzZmdkc2ZnZHMiLCJwaG9uZV9udW1iZXIiOiI1NDY0NjU0In0.Nz7AX6HHXeGUcuPcW5BUKzLtQk3x4z47N3L6wye8vUQ	\N	2022-03-23 15:00:39.609279	2022-03-23 15:00:39.609291
-38	Shageldi Men	+99361298782	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIE1lbiIsInBob25lX251bWJlciI6Iis5OTM2MTI5ODc4MiJ9.Cf7uhjaB4y_JDIuIqA_ULgyouw6pr7xUk8bH0kc01a8	\N	2022-03-25 13:04:10.424143	2022-03-25 13:04:10.424156
-39	Kiyko Konstantin	+99362469333	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IktpeWtvIEtvbnN0YW50aW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI0NjkzMzMifQ.A3mOg2ENj8b2grqDMqeocInLFwGfbfcAaskGXkwG_hI	\N	2022-03-29 09:23:14.209269	2022-03-29 09:23:14.209289
-40	Batyrshina Yekaterina	+99365874838	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJhdHlyc2hpbmEgWWVrYXRlcmluYSIsInBob25lX251bWJlciI6Iis5OTM2NTg3NDgzOCJ9.M0w0ROmrTTXz2ozQz3IPJ99BfNCq0Lqit5cQL4O4K3Y	\N	2022-03-29 09:26:54.822726	2022-03-29 09:26:54.822737
-41	Alina Akopyan	+99363261221	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFsaW5hIEFrb3B5YW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMyNjEyMjEifQ.cz1AnPc58RiYX61Yxzt79M7uNJrEBxuSzT8jvJuFSI0	\N	2022-03-29 09:28:46.532127	2022-03-29 09:28:46.532141
-42	Mamedov Dmitriy	+99365555062	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik1hbWVkb3YgRG1pdHJpeSIsInBob25lX251bWJlciI6Iis5OTM2NTU1NTA2MiJ9.8204NJKwkgO_NAVHNl2_2fgeK4RKRBBo1ZuzgVErGRs	\N	2022-03-29 09:33:40.424439	2022-03-29 09:33:40.424453
-43	Ovezmuradova Olga	+99364636006 	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik92ZXptdXJhZG92YSBPbGdhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY0NjM2MDA2XHUwMGEwIn0.S-g-2HD0thad7pdLWDCyLrAU1y4db6o1FquIh07Uvrw	\N	2022-03-29 09:35:03.069322	2022-03-29 09:35:03.069333
-44	Tajiyeva Asya	+99362019888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRhaml5ZXZhIEFzeWEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjIwMTk4ODgifQ.CYXG0hbvgxyRPqlX5xPA0-2i0x4c_93PFbVkNcvXLFM	\N	2022-03-29 09:36:18.509181	2022-03-29 09:36:18.509193
-45	Akbotayeva Jahan	+99362578899	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFrYm90YXlldmEgSmFoYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI1Nzg4OTkifQ.O_hHj8y0JHUgr6AjjPxfzSMOuCMZUpteNaVDVCuBIj8	\N	2022-03-29 09:37:53.665063	2022-03-29 09:37:53.665074
-46	Nurmuhammedova Aygul	+99364011254	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik51cm11aGFtbWVkb3ZhIEF5Z3VsIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY0MDExMjU0In0.qn2-mj_OvRlnGjrbXX37JlyMZ7ODbIVumMF_V9GMQpU	\N	2022-03-29 09:39:01.832158	2022-03-29 09:39:01.83217
-47	Ayrapetova Varvara	+99365644429	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkF5cmFwZXRvdmEgVmFydmFyYSIsInBob25lX251bWJlciI6Iis5OTM2NTY0NDQyOSJ9.gNjRMBQMhqjtkvum2e3viEKNz0oLR0GmE_2OCcrB0Oo	\N	2022-03-29 09:41:03.360394	2022-03-29 09:41:03.360409
-48	Ashirov  Saher	+99361527205   +99364078946	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFzaGlyb3YgIFNhaGVyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxNTI3MjA1ICAgKzk5MzY0MDc4OTQ2In0.eYe0c8uJTM5ETlPW6HEl5AgHTDAngTEbPFfjsQ4d--s	\N	2022-03-29 09:41:57.679753	2022-03-29 09:41:57.679765
-49	Sudakov Viktor	+99362598918	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1ZGFrb3YgVmlrdG9yIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYyNTk4OTE4In0.ttDn-LVLW789w4_0WKJPl8FomzXwtw2EFlff3ZVLbbA	\N	2022-03-29 09:43:25.678078	2022-03-29 09:43:25.678092
-50	Sudakova Anna 	+99365829171	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1ZGFrb3ZhIEFubmEgIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODI5MTcxIn0.iau2Kx0_OEsioSsfvu4rboxZKM_vbhDbqAszmYGdmFo	\N	2022-03-29 09:44:32.940641	2022-03-29 09:44:32.940658
-51	Chapau Dana	99364608687	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkNoYXBhdSBEYW5hIiwicGhvbmVfbnVtYmVyIjoiOTkzNjQ2MDg2ODcifQ.j1lwmaB0FvtZBBrlTPCiPmvjDv3ZeZgK1TjxKDg4fTU	\N	2022-03-29 09:45:54.383645	2022-03-29 09:45:54.383658
-52	Amanmuradov Bayrammurad	+99365806296	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFtYW5tdXJhZG92IEJheXJhbW11cmFkIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODA2Mjk2In0.9TM3fdJKBKHThyFD0d9ABRxNYycGhntxF-Dusn_Girw	\N	2022-03-29 09:54:09.331831	2022-03-29 09:54:09.331844
-53	Babakulyyeva Tamara	+99365693669	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJhYmFrdWx5eWV2YSBUYW1hcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU2OTM2NjkifQ.PStIFPJDUiMIS2c7IidldhDoBrN9g66WrNVvmLL4OMY	\N	2022-03-29 09:55:37.565554	2022-03-29 09:55:37.565568
-54	Bulatov Viktor	+99365025867	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJ1bGF0b3YgVmlrdG9yIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1MDI1ODY3In0.xWL2tayHerG4h2IdkcBTUPgK9_ao7_Fj4SO33CnUues	\N	2022-03-29 09:56:59.546488	2022-03-29 09:56:59.546501
-55	Bulatova Irina 	+99362999412	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJ1bGF0b3ZhIElyaW5hICIsInBob25lX251bWJlciI6Iis5OTM2Mjk5OTQxMiJ9.otmG3rxHvcNiWCcx9IH1PFNsAEHv0BY1LieFRsBcKbk	\N	2022-03-29 09:58:08.954844	2022-03-29 09:58:08.954859
-56	Erkayeva Aleksandra	+99365829610	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkVya2F5ZXZhIEFsZWtzYW5kcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4Mjk2MTAifQ.iUZHmN3a_2YhQgH09EztZq3Bn8GUK1BYLP1nwoTgONc	\N	2022-03-29 10:00:04.278779	2022-03-29 10:00:04.278792
-57	Almazova Jeren 	+993 61 181016	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFsbWF6b3ZhIEplcmVuICIsInBob25lX251bWJlciI6Iis5OTMgNjEgMTgxMDE2In0.u7akWxp1NeeKNwjBt5Dd3PmjB5iAf_QcKuCs7UG098o	\N	2022-03-29 10:01:28.184904	2022-03-29 10:01:28.184917
-58	Cherkezov Murad 	+99364967919	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkNoZXJrZXpvdiBNdXJhZCAiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQ5Njc5MTkifQ.v-92kD_6ly1dJrUHh2PpPiycOOJcEsrKLn8ssnwsiV0	\N	2022-03-29 10:02:57.409154	2022-03-29 10:02:57.409165
-59	Astankulov Maksat	+99365817287	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFzdGFua3Vsb3YgTWFrc2F0IiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODE3Mjg3In0.Tu32oFR8pj3w-uPVzlem52c07Oczy-Z9nzcxgKooyJM	\N	2022-03-29 10:04:07.514171	2022-03-29 10:04:07.514185
-60	Hudaygulyyeva Jemala	+99365092036	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikh1ZGF5Z3VseXlldmEgSmVtYWxhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1MDkyMDM2In0.XgmbsH4EkdCwwzuBO8-5mnO7mn8qXLK8vjiiXyJqrJw	\N	2022-03-29 10:05:28.648579	2022-03-29 10:05:28.648592
-61	Halaburdina Alisa	+99365816048	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkhhbGFidXJkaW5hIEFsaXNhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODE2MDQ4In0.JbpLGp4VTnZMIm5UvsZSbsuk28YW2xoO2FlDPtGKZ_o	\N	2022-03-29 10:06:27.930356	2022-03-29 10:06:27.930369
-62	Vavilov Nikolay	+99364006048	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlZhdmlsb3YgTmlrb2xheSIsInBob25lX251bWJlciI6Iis5OTM2NDAwNjA0OCJ9.1sKFe0-QoZVgwJ6BqTKgctY2STLaI6UgzyGdeA8REJM	\N	2022-03-29 10:07:41.224733	2022-03-29 10:07:41.224745
-63	Solovyov Semyon	+99364415433	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNvbG92eW92IFNlbXlvbiIsInBob25lX251bWJlciI6Iis5OTM2NDQxNTQzMyJ9.gwMYCMlltVLchMYYYrxmWvJGeLnV78o7CVjBMLe40_k	\N	2022-03-29 10:08:30.180476	2022-03-29 10:08:30.180489
-64	Povarova Yekaterina	+99364933888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlBvdmFyb3ZhIFlla2F0ZXJpbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQ5MzM4ODgifQ.2JgYksfH5VeJj-x7U3HkrYKlTrhubPrd8oUnoyFWCcQ	\N	2022-03-29 10:09:27.138495	2022-03-29 10:09:27.138512
-65	Japarova Ayjahan	+993 65 687070	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkphcGFyb3ZhIEF5amFoYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzIDY1IDY4NzA3MCJ9.RXPbZ9aK8a2thFxbE3ifB1KhX1qhgkvnqqM7O0gBKgY	\N	2022-03-29 10:10:47.572597	2022-03-29 10:10:47.572609
-66	Kekilliyewa Aylar	+99361333737	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Iktla2lsbGl5ZXdhIEF5bGFyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMzMzNzM3In0.LlXio36PzsKj1cj1V3VOVohRA89zoad5XWnGHMKOchY	\N	2022-03-29 10:12:07.535148	2022-03-29 10:12:07.535166
-67	Andronova Marina	+99365814977	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFuZHJvbm92YSBNYXJpbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4MTQ5NzcifQ.NR79uQZ9ZV6Q3dvhQ13s34C6QqmdlVlly-q0vSSXJI0	\N	2022-03-29 10:13:57.393809	2022-03-29 10:13:57.393823
-68	Lollekov Maksat	+993 65 687741	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkxvbGxla292IE1ha3NhdCIsInBob25lX251bWJlciI6Iis5OTMgNjUgNjg3NzQxIn0.VLu1WuUIAbZKUOGE4VO9LOH5Gj60LOp4QuWAC0Qbyp4	\N	2022-03-29 10:15:15.143537	2022-03-29 10:15:15.143549
-69	Saparlyyeva Aynabat	+99365860440	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNhcGFybHl5ZXZhIEF5bmFiYXQiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4NjA0NDAifQ.uUTKO71dSDDz2QgZy0L2EXMgwd9RveWqLdmGEkG6O70	\N	2022-03-29 10:16:49.619122	2022-03-29 10:16:49.619135
-70	Suhanova Gulzada	+99361525274	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1aGFub3ZhIEd1bHphZGEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjE1MjUyNzQifQ.Qsxu2gdA0i_Ecl_z-0KNdxAQ-TJxA-naGiL8i11Drik	\N	2022-03-29 10:17:52.103329	2022-03-29 10:17:52.103345
-71	Klycheva Bibijan	+99362142131	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IktseWNoZXZhIEJpYmlqYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjIxNDIxMzEifQ.a2oMJIC1qiy_0jjQGlAQRwi7tn7eDAip2h8_MlLldzI	\N	2022-03-29 10:20:48.099782	2022-03-29 10:20:48.0998
-72	Abdullayev Tahir	+99363183640	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFiZHVsbGF5ZXYgVGFoaXIiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMxODM2NDAifQ.emKpnmUlAhPQreXo4ggAkp-crwVwd_Jng3IIfp2D-Xw	\N	2022-03-29 10:21:51.220046	2022-03-29 10:21:51.220058
-73	Saparova Liliana	+99364079841	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNhcGFyb3ZhIExpbGlhbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQwNzk4NDEifQ.Uh4Bj4e9nU04G7RgKzrb6KIC7bP6XLyyvUsAxPJJEOU	\N	2022-03-29 10:23:15.510131	2022-03-29 10:23:15.510143
-82	Gukasov David	+99365057086	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikd1a2Fzb3YgRGF2aWQiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjUwNTcwODYifQ.ms1HluujwwaJYxPt4HpXlzTTOCKzIa4YJs_Aqj1zDxU	\N	2022-03-29 10:47:47.86795	2022-03-29 10:47:47.867962
-74	Dadekova Guljemile	+99361920827	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkRhZGVrb3ZhIEd1bGplbWlsZSIsInBob25lX251bWJlciI6Iis5OTM2MTkyMDgyNyJ9.TvmTeLDoS9rb8b7WbmVQi4X4M3HW_nUS-CS4WLhakws	\N	2022-03-29 10:24:20.120643	2022-03-29 10:24:20.120659
-77	Annageldiyeva Gowher	+99365724349	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFubmFnZWxkaXlldmEgR293aGVyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1NzI0MzQ5In0.L0IddOerE9EXpLaOrJH-EBaCaWnvK71qUZSrofmV_e0	\N	2022-03-29 10:39:39.528855	2022-03-29 10:39:39.528871
-75	Jumayeva Jeren	+99361913826	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikp1bWF5ZXZhIEplcmVuIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxOTEzODI2In0.DlhwN1PIrnsqRsf0sHgplq4jzwISEXYLwlqujniH5Yk	\N	2022-03-29 10:31:59.21985	2022-03-29 10:31:59.219865
-76	Durdyyev Atageldi	+99362812882	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkR1cmR5eWV2IEF0YWdlbGRpIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYyODEyODgyIn0.FDIiOfDYWhkfNqO3djzVejuZMcD-YPy42n1gItl5l3A	\N	2022-03-29 10:38:12.791541	2022-03-29 10:38:12.791559
-78	Gokova Medina 	+99361399186	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikdva292YSBNZWRpbmEgIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMzk5MTg2In0.kPchv3aArp0AJHDjS_AQA5PXfZHbldcgRMTx3woWW_I	\N	2022-03-29 10:41:28.75387	2022-03-29 10:41:28.753887
-85	Kerimova Merjen	+99365861950	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Iktlcmltb3ZhIE1lcmplbiIsInBob25lX251bWJlciI6Iis5OTM2NTg2MTk1MCJ9.2Mh5O4b6-RaJ2mmkaSjQYADQ5D0iMXoR6UXYLbNMdkI	\N	2022-03-29 10:50:52.874574	2022-03-29 10:50:52.874586
-79	Garamuradova Jeren	+99365681807	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdhcmFtdXJhZG92YSBKZXJlbiIsInBob25lX251bWJlciI6Iis5OTM2NTY4MTgwNyJ9.cW-CQFbUOVo2nyAYzvUNFDU2fIvoOb30vV8OtL3wev4	\N	2022-03-29 10:44:19.77789	2022-03-29 10:44:19.777902
-80	Rustamova Elmira	+99363125558	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlJ1c3RhbW92YSBFbG1pcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMxMjU1NTgifQ.qYxGlfx0-B0LNt6oV4hSDamYGhORcy6HMEHlK7Y4lnI	\N	2022-03-29 10:45:41.327434	2022-03-29 10:45:41.327445
-81	Tokaryeva Veronika 	+993 63 998837	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRva2FyeWV2YSBWZXJvbmlrYSAiLCJwaG9uZV9udW1iZXIiOiIrOTkzIDYzIDk5ODgzNyJ9.bPoI4l48GDyL10iguqYOgiUHzj_51iRtqlZE0OFcQpI	\N	2022-03-29 10:46:56.068855	2022-03-29 10:46:56.068867
-83	Gurbanova Guncha	+99362669824	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikd1cmJhbm92YSBHdW5jaGEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI2Njk4MjQifQ.SdX51IpQieYgYXVJRluiNv15bzvELISTs3wErqBlMOA	\N	2022-03-29 10:48:45.710648	2022-03-29 10:48:45.710665
-84	Shamayev Aleksandr	+99364025488	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYW1heWV2IEFsZWtzYW5kciIsInBob25lX251bWJlciI6Iis5OTM2NDAyNTQ4OCJ9.mbn4AyI_1zlMYbvcPwWBII7-TycjS1JNXhEvg4aS-WY	\N	2022-03-29 10:49:47.121621	2022-03-29 10:49:47.121632
-86	Durdyyeva Bahar	+993 64 315736	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkR1cmR5eWV2YSBCYWhhciIsInBob25lX251bWJlciI6Iis5OTMgNjQgMzE1NzM2In0.a5xDc7r9LzFJFM_6LN6kg3hQ0TzuCo9X10KoHBdoOWI	\N	2022-03-29 10:52:23.709046	2022-03-29 10:52:23.70906
-87	Akjayev Dovran	+99361115511	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFramF5ZXYgRG92cmFuIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMTE1NTExIn0.wYC1uFkvupDkTYnOxjWq6CTcx1BHQ-7mrjiQQrlZ_uk	\N	2022-03-29 10:53:18.053994	2022-03-29 10:53:18.054005
-88	Ermolayev Vladimir	+99365023581	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkVybW9sYXlldiBWbGFkaW1pciIsInBob25lX251bWJlciI6Iis5OTM2NTAyMzU4MSJ9.w2nnd44flG0AsHR6BgIdfSAe18d38zO1Kh1oR5AboWA	\N	2022-03-29 10:54:19.456815	2022-03-29 10:54:19.456826
-89	Tekayeva Ayjemal	+993 61 788315	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRla2F5ZXZhIEF5amVtYWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzIDYxIDc4ODMxNSJ9.qrDuOETtyBImG6gxAXkwPH_dY3uzykGlIstkQmno9ts	\N	2022-03-29 10:55:45.171968	2022-03-29 10:55:45.171979
-90	Арслан Расулов	+99363971731	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ilx1MDQxMFx1MDQ0MFx1MDQ0MVx1MDQzYlx1MDQzMFx1MDQzZCBcdTA0MjBcdTA0MzBcdTA0NDFcdTA0NDNcdTA0M2JcdTA0M2VcdTA0MzIiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM5NzE3MzEifQ.lVonpUvBEIMna9O60-5tAXlsN3baVgs37uZ5D0BZb-w	\N	2022-03-31 13:00:09.56195	2022-03-31 13:00:09.56196
-91	Bayram	+99365698450	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJheXJhbSIsInBob25lX251bWJlciI6Iis5OTM2NTY5ODQ1MCJ9.1AkYs7AvOA9gXm65dAVk2YhMLb15YwCBx57y3DYaITg	\N	2022-03-31 13:17:19.928514	2022-03-31 13:17:19.928526
 \.
 
 
@@ -9088,6 +10314,21 @@ COPY public.card_users (id, date_of_birth, expired, gender, email, is_sms, statu
 83	1969-03-30	2022-10-31	1		t	1	0504 20 0904	88	2022-03-29 10:54:19.477378	2022-03-29 10:54:19.477389
 84	1998-03-03	2022-10-31	2		t	1	0504 20 0903	89	2022-03-29 10:55:45.204088	2022-03-29 10:55:45.204097
 89	1988-03-06	\N	2	HudaykuliyevaJemala@gmail.com	t	0	5977107287	60	2022-04-05 09:43:50.271229	2022-04-05 09:43:50.271244
+\.
+
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.categories (id, name, created_at, updated_at) FROM stdin;
+1	Theatre	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+2	Movies	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+3	Interesting	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+4	Cafe and Restaurants	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+5	Shops	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+6	Beauty and Sport	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
+7	News	2022-03-09 14:21:45.679319	2022-03-09 14:21:45.679375
 \.
 
 
@@ -10529,14 +11770,10 @@ COPY public.images (id, small_image, large_image, "isVR", profile_id, created_at
 
 
 --
--- Data for Name: interests; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: inbox; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.interests (id, "titleTM", "titleRU", created_at, updated_at) FROM stdin;
-25	Iýmit	Еда	2022-04-12 12:22:34.181442	2022-04-12 12:22:34.181457
-26	Kino	Кино	2022-04-12 12:24:40.368842	2022-04-12 12:24:40.368854
-28	Eşik	Одежда	2022-04-12 12:27:36.931084	2022-04-12 12:27:36.931095
-27	Gözellik	Красота	2022-04-12 12:26:30.407954	2022-04-12 12:26:30.40797
+COPY public.inbox (id, title, message, is_all, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -10568,6 +11805,18 @@ COPY public.interest_items (id, "titleTM", "titleRU", interest_id, created_at, u
 148	 kosmetika	косметика	27	2022-04-21 09:31:41.301907	2022-04-21 09:31:41.301916
 149	 şahsy ideg	уход за собой	27	2022-04-21 09:31:41.312565	2022-04-21 09:31:41.312583
 150	 sport	спорт	27	2022-04-21 09:31:41.323769	2022-04-21 09:31:41.323777
+\.
+
+
+--
+-- Data for Name: interests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.interests (id, "titleTM", "titleRU", created_at, updated_at) FROM stdin;
+25	Iýmit	Еда	2022-04-12 12:22:34.181442	2022-04-12 12:22:34.181457
+26	Kino	Кино	2022-04-12 12:24:40.368842	2022-04-12 12:24:40.368854
+28	Eşik	Одежда	2022-04-12 12:27:36.931084	2022-04-12 12:27:36.931095
+27	Gözellik	Красота	2022-04-12 12:26:30.407954	2022-04-12 12:26:30.40797
 \.
 
 
@@ -10899,6 +12148,15 @@ COPY public.phone_numbers (id, phone_number, profile_id, created_at, updated_at)
 
 
 --
+-- Data for Name: pop_up; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pop_up (id, comment_of_admin, image, site_url, "titleTM", "titleRU", "descriptionTM", "descriptionRU", profile_id, posts_id, created_at, updated_at) FROM stdin;
+3	Popup	/uploads/popup/1cb9759c-a126-407d-b79f-e5108544f412.jpg		Ygtybarly sanly çözgütler	Эффективные цифровые решения	“Geek Space” 2020-nji ýylyň başynda, Türkmenistanda MKT ulgamyny ösdürmek maksady bilen döredildi. Şu günki günde, MKT ulgamy dünýäde tiz depginde ösýär.	«Geek Space» была основана в начале 2020 года в целях содействия развитию ИКТ сектора в Туркменистане. Сегодня, ИКТ в мире развивается быстрыми темпами.	141	\N	2022-03-23 12:29:38.773263	2022-03-23 12:29:38.773275
+\.
+
+
+--
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -10911,15 +12169,6 @@ COPY public.posts (id, "titleTM", "titleRU", "descriptionTM", "descriptionRU", c
 5	pomodor	pomodor	Italian spec pizza	Italian spec pizza	31.03	t	/uploads/posts/c9037a91-d914-41a6-8d83-b1469cdfe2f9.jpg	15	97	\N	\N	127	2022-04-01 06:00:44.461604	2022-04-19 11:08:43.197972
 8	Şireli burgerleri söýýänler üçin mahabat 🍔🤤	Акция для любителей сочных бургеров 🍔🤤	Islendik iki burger zakaz ediň we bir litr kola mugt get alyň🥤🍔🍔\n\nBurger bilen birlikde salat we fransuz gowurmalary (ýa-da saýlamak üçin ammar) comes gelýär🍟🥗	Закажи два любых бургера и получи литровую колу бесплатно 🥤🍔🍔\n\nВместе с бургером идет салатик и картошка фри (или аммар на выбор)🍟🥗	05,04	t	/uploads/posts/ccc995a8-6a0a-43d9-83d5-59ab31ad8888.jpg	10	86	\N	\N	85	2022-04-05 07:43:01.02552	2022-04-19 10:41:05.272692
 4	𝗠𝗶𝘀𝘀𝗵𝗮 Gün şöhlelerinden goraýan ýüz krem ​​𝗦𝗮𝗳𝗲 𝗕𝗹𝗼𝗰𝗸 𝗥𝗫 cream cream cream 𝟱𝟬𝗺𝗹 	𝗠𝗶𝘀𝘀𝗵𝗮 солнцезащитный крем для лица 𝗦𝗮𝗳𝗲 𝗕𝗹𝗼𝗰𝗸 𝗥𝗫 𝗛𝘆𝗮𝗹𝘂𝗿𝗼𝗻 𝗦𝗼𝗼𝘁𝗵𝗶𝗻𝗴 𝗦𝘂𝗻 𝗦𝗣𝗙𝟱𝟬 𝟱𝟬𝗺𝗹	Missha Howpsuz Blok RX Hyaluron köşeşdiriji Gün SPF50 + PA ++++ derini täzelemek we UV şöhlelerinden we beýleki daşarky howplardan goramak üçin alty sany gialuron turşusyny öz içine alýar!\nAslynda, bu ýeňil formula ajaýyp öwüşgin berýär we gahar-gazap döretmezden ýa-da gözýaş dökmezden, ýyrtyklary ýumşadýar. Mundan başga-da, derini köşeşdirýär we infragyzyl şöhleleri ýa-da tozan bölejiklerini goşmak bilen birnäçe daşarky howplardan goraýar.\nSeresaplylyk bilen saýlanan maddalaryň arasynda ýüzüň gün şöhlesiniň az böleginde deriniň gowşak dokumalaryny güýçlendirmek bilen tanalýan Ceramide NP bar. Başgaça aýdylanda, epidermisiň tebigy gorag päsgelçiligini güýçlendirip, zyýanly erkin radikallaryň aralaşmagynyň öňüni alýar.\nDermatolog tarapyndan tassyklanan bu wariant, rif üçin amatly we oksibenzondan we oktinoksatdan azatdyr.\n4 görnüş\nTom 50 ml\nBahasy 800 manat 	Missha Safe Block RX Hyaluron Soothing Sun SPF50+PA++++ содержит комплекс из шести гиалуроновых кислот для освежения кожи и защиты от ультрафиолетовых лучей, а также других внешних угроз!\nНа самом деле, эта легкая формула обеспечивает прекрасное осветление, а также разглаживает морщины, не вызывая раздражения и не вызывая слез. Кроме того, он успокаивает кожу, а также защищает ее от ряда внешних угроз, включая инфракрасные лучи или мелкие частицы пыли.\nСреди тщательно отобранных ингредиентов небольшая часть солнцезащитного крема для лица содержит Ceramide NP, известный тем, что укрепляет уязвимые ткани кожи. Другими словами, он способствует укреплению естественного защитного барьера эпидермиса, препятствуя проникновению вредных свободных радикалов.\nОдобренный дерматологами, этот вариант также подходит для рифов и не содержит оксибензона и октиноксата.\n4 вида\nОбъем 50 мл\nЦена 800 манат	31.03	t	/uploads/posts/b4f94af0-5882-4778-83ad-24ed255621b8.jpg	0	106	\N	\N	132	2022-03-31 11:26:57.151534	2022-04-19 10:41:55.173259
-\.
-
-
---
--- Data for Name: pop_up; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.pop_up (id, comment_of_admin, image, site_url, "titleTM", "titleRU", "descriptionTM", "descriptionRU", profile_id, posts_id, created_at, updated_at) FROM stdin;
-3	Popup	/uploads/popup/1cb9759c-a126-407d-b79f-e5108544f412.jpg		Ygtybarly sanly çözgütler	Эффективные цифровые решения	“Geek Space” 2020-nji ýylyň başynda, Türkmenistanda MKT ulgamyny ösdürmek maksady bilen döredildi. Şu günki günde, MKT ulgamy dünýäde tiz depginde ösýär.	«Geek Space» была основана в начале 2020 года в целях содействия развитию ИКТ сектора в Туркменистане. Сегодня, ИКТ в мире развивается быстрыми темпами.	141	\N	2022-03-23 12:29:38.773263	2022-03-23 12:29:38.773275
 \.
 
 
@@ -13393,6 +14642,167 @@ COPY public.profile_view (id, user_id, profile_id, created_at, updated_at) FROM 
 
 
 --
+-- Data for Name: profiles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.profiles (id, "nameTM", "nameRU", "short_descTM", "short_descRU", "like", dislike, instagram, site, location, address, is_cash, is_terminal, work_hours, delivery, "cousineTM", "cousineRU", average_check, is_active_card, tm_muse_card, is_certificate, "is_VIP", is_promo, "WiFi", status, category_id, cinema_id, view_count, promo_count, "descriptionTM", "descriptionRU", order_in_list, free_time, required_promotion, own_promotion, created_at, updated_at) FROM stdin;
+0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	f	\N	f	\N	\N	\N	f	\N	f	\N	f	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2022-03-09 14:21:45.541368	2022-03-09 14:21:45.541415
+251	France Oil Parfume	France Oil Parfume			0	0	parfumer_tm			SM «Berkarar», SM «Aşgabad ýalkymy», SM «Altyn zaman», SM«Gulzemin»$ТРЦ «Беркарар», ТРЦ «Ашхабад Ялкымы», ТРЦ «Алтын Заман», ТРЦ «Гульземин»	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 10:25:09.649403	2022-04-12 10:25:09.649415
+217	Wok food	Wok food			0	0	wok_food_tm			diňe dostawka$только доставка	t	t	09:00-21:00	t	ýaponiýaňky	японская	150	f	0	f	0	f	f	1	4	0	57	0			0		f	0	2022-04-07 09:41:33.380964	2022-04-07 09:41:33.380989
+98	"Dynamics GYM for Ladies" Fitnes merkezi	Фитнес центр "Dynamics GYM for Ladies"			1	0	dinamika_sport_kluby			ýaşaýyş jaýy Gurtly, jaý 31 $жилой массив Гуртлы, дом 31	f	f	09:00-22:30	f			0	f	10	f	0	f	f	1	6	0	12	0			22		f	0	2022-03-24 10:14:10.535198	2022-03-24 10:14:10.535209
+119	Rahat	Rahat			0	0	rahat_brasserie			SM "Berkarar", 2 etaž$ТРЦ "Беркарар", 2 этаж	t	t	09:00-23:00	t	ewropeýanky	европейская	150	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-29 11:20:25.378026	2022-03-29 11:20:25.378046
+190	Şa kofe	Şa kofe			0	0	shacoffee			“Ylham” alleýa, SM “Berkarar” 3 gat$“Ylham” аллея, ТЦ “Berkarar” 3 этаж	t	t	08:00 – 23:00 	t	ewropeýanky	европейская	170	f	0	f	0	f	t	1	4	0	10	0			0		f	0	2022-04-05 12:36:20.050338	2022-04-05 12:36:20.050353
+180	Melhem	Melhem			0	0	melhem7017			Hudaýberdiyew köç. 4 kiçi etrapçasy$ул.Худайбердыева 4-й мкр 	t	t	10:00-22:00	t	mangal	мангал	150	f	10	f	0	f	t	1	4	0	14	0			0		f	0	2022-04-05 10:14:07.54628	2022-04-05 10:14:07.546293
+141	Geek Space	Geek Space			3	0	geekspace.dev	geelspace.dev			f	f	09:00-18:00	f			0	f	0	f	0	f	f	1	3	0	65	0			0		f	0	2022-04-04 07:40:19.990747	2022-04-04 07:40:19.990761
+259	Run street	Run street			0	0	run.street			SM"Berkarar", 2 gat, C31 B$ТРЦ Беркарар,  2 этаж, C31 B	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 11:28:10.467872	2022-04-12 11:28:10.467896
+248	le’ Pretty	le’ Pretty			0	0	lepretty_tm			SM "Berkarar",2 gat,C24$ТРЦ Беркарар, 2 этаж, С24	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 09:56:00.220196	2022-04-12 09:56:00.220209
+67	Coffee CHI	Coffee CHI			1	0	coffeechitm			Surikow köç., Baýramhan seýilgähi$ул. Сурикова, аллея Байрамхан	t	t	08:00-22:00	t	kofeýnýa	кофейня	80	f	10	f	1	f	f	1	4	0	17	0			1		f	0	2022-03-23 09:12:02.458332	2022-03-23 09:12:02.458345
+206	Soltan	Soltan			0	0	soltanrestoran_official			SM "Berkarar" 3 gat, D-17, D-2$ТРЦ Беркарар 3-й этаж D-17 и D-2	t	t	8:00-23:00	t	milli,türkiýaňky	национальная,турецкая	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-04-06 12:52:20.842378	2022-04-06 12:52:20.842395
+228	Distance	Distance	Aýal-gyzlaryň aýakgaplary -50% arzanladyş we 6 aý möhlet bilen Öňünden töleg ýok	Женская обувь со скидкой -50% и в Рассрочку на 6 Месяцев Без Предоплаты	0	0	distance.shoes			SM "Berkarar" 2 gat$ТРЦ "Berkarar" 2 этаж	f	f	09:00-22:00	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:21:14.483523	2022-04-08 07:21:14.483536
+219	Mavi	Mavi			0	0	mavi_turkmenistan			SM"Berkarar", 2 gat$ТРЦ "Беркарар", 2 этаж	t	t	10:00-22:00	t			0	f	0	f	0	f	f	1	5	0	3	0			0		f	50	2022-04-07 11:50:05.076623	2022-04-07 11:50:05.07664
+109	Melbourne Grill Cafe	Melbourne Grill Cafe			0	0	melbourne_grill.tm			SM "Berkarar", 3 etaž$ТРЦ Беркарар, 3 этаж	t	t	09:00-23:00	t	ewropaly	европейская	300	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-03-28 08:02:02.804243	2022-03-28 08:02:02.80426
+197	Saraý pub	Saraý pub			0	0	saraypub			SM "Aşgabadyň Ýalkymy", Görogly köç. 122 jaý$ТРЦ «Ашгабыдын Ялкымы», ул. Героглы, дом 122	t	t	09:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	24	0			0		f	0	2022-04-06 09:50:44.295201	2022-04-06 09:50:44.295216
+88	Sushi time	Sushi time			2	0	sushi_time___			diňe dostawka$только доставка	t	t	08:00-08:00	t	ýaponiýa	японская	150	f	10	f	0	f	f	1	4	0	23	0			12		f	0	2022-03-23 12:01:28.29194	2022-03-23 12:01:28.291957
+128	Erzurum	Erzurum			3	3	erzurum_restaurant/			Görögly köç,15$ул. Героглы 15	t	f	10:00-22:00	t	türkiýaňky	турецкая	150	f	0	f	0	f	f	1	4	0	30	0			0		f	0	2022-03-31 10:12:26.725578	2022-03-31 10:12:26.725592
+162	 Awangard/Caravella	Awangard/Caravella			0	0	awangard_caravella_fitness			köç. 1958, 78/1$ул. 1958, 78/1	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	6	0	6	0			0		f	0	2022-04-04 11:23:13.663877	2022-04-04 11:23:13.663894
+151	Päk nesil	Päk nesil			0	0	pak_nesil			köç. 72 ýaşly Andaliba, Türkmenbalyk söwda merkezi 3 gat; köç. 54 ýaşly Y.Durdiýew, "Ýüpek ýoly", 2 gat; köç. 25 ýaşly Ankara, Rysgal banky, 6-njy gat $ул. Андалиба, 72, ТЦ “Turkmenbalyk”, 3 этаж ул. Й.Дурдыев, 54, “Ýüpek ýoly”, 2 этаж ул. Анкара, 25, Rysgal банк, 6 этаж	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	3	0	11	0			0		f	0	2022-04-04 09:44:33.787288	2022-04-04 09:44:33.787301
+100	Cazador	Cazador			0	1	cazador_store			SM"Berkarar" 2 etaž (ç23a) $ТЦ ”Berkarar” 2 этаж(c23a)	f	f	11:00-22:00	f			0	f	10	f	0	f	f	1	5	0	12	0			24		f	0	2022-03-24 11:16:11.579556	2022-03-24 11:16:11.579575
+275	Андро и Сандро	Андро и Сандро	Spektakl 17/04 19: 00-da başlar.	Спектакль начинается 17/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	2	0			0		f	0	2022-04-15 09:53:50.032147	2022-04-15 09:53:50.032161
+135	Möjegim	Мой волк	2D   16+	2D   16+	3	0	berkarar_cinema	01/04/2022-03/04/2022(10:05,12:35,16:10,19:30)*		Berkarar cinema$Berkarar cinema	f	f		f			40	f	0	t	0	f	f	1	2	3	160	0	th	thtre	0		t	0	2022-04-01 11:51:54.344577	2022-04-01 11:51:54.344589
+211	Tigirli coffee	Tigirli coffee			0	0	tigirli_coffee			SM Gülistan,6$ТЦ Гулистан, 6 	t	t	08:00-20:00	t	kofeýnya	кофейня	100	f	0	f	0	f	f	1	4	0	11	0			0		f	0	2022-04-07 07:34:31.694947	2022-04-07 07:34:31.694961
+181	Mr Cook	Mr Cook			0	0	mr.cook_cafe			Magtymguly  köç.1 park$ул. Махтумкули 1 парк	t	t	09:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-04-05 10:42:41.370081	2022-04-05 10:42:41.370092
+80	  Рыбажарка	Rybajarka			0	0	rybajarka			"Şanly kerwen" binasy$"Şanly kerwen" здание(объездная))	t	t	11:00-22:00	t	deňiz önümleri restorany 	рыбный ресторан	150	f	15	f	1	f	f	1	4	0	2	0			4		f	0	2022-03-23 10:38:24.888712	2022-03-23 10:38:24.888725
+163	Jana	Jana			1	1	restaurant.jana			Parahat şaýoly 4/2, "Santa barbara" binasy $проспект Парахат 4/2, здание «Santa barbara»	t	t	10:00-23:00	t	milli,ewropeýaňky	национальная,европейская	150	f	0	f	0	f	f	1	4	0	11	0			0		f	0	2022-04-04 11:53:39.361521	2022-04-04 11:53:39.361538
+276	Böwenjik	Колобок	Spektakl 23/04 19:00-da başlar.	Спектакль начинается 23/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	6	0			0		f	0	2022-04-15 10:00:18.630102	2022-04-15 10:00:18.630114
+77	Pizza№1	Pizza№1			0	0	pizza.n_1			diňe dostawka$доставка только	t	t	10:00-21:30	t	fast-food	fast-food	150	f	15	f	1	f	f	1	4	0	15	0			2		f	0	2022-03-23 10:07:45.692856	2022-03-23 10:07:45.692871
+120	La Tartine	La Tartine			0	0	latartine_tm			SM "Berkarar", 3 etaž$ТРЦ "Беркарар", 3 этаж	t	t	10:00-22:00	t	pizzeriýa	пиццерия	150	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-03-29 11:26:04.630982	2022-03-29 11:26:04.630995
+249	LETIQUE 🍃 КОСМЕТИКА 🍃 АШХАБАД	LETIQUE 🍃 КОСМЕТИКА 🍃 АШХАБАД			0	0	letique.tm			diňe dostawka$только на доставку	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-12 09:59:40.206385	2022-04-12 09:59:40.206396
+207	Soltan	Soltan			0	0	soltanrestoran_official			Andalib köç.80B, 2-3 gat (Santa-Barbara)$ул. Андалиба 80Б, 2-3 этаж (Санта-Барбара мир-4)	t	t	09:00 – 23:00 	t	türkiýaňky,gruzinyňky, milli,ewropeýaňky	Турецкая, грузинская, национальная и европейская	200	f	0	f	0	f	t	1	4	0	11	0			0		f	0	2022-04-07 06:56:49.509838	2022-04-07 06:56:49.50985
+142	Gujurly nesil	Gujurly nesil			0	0	gujurlybilim_merkezi	gujurlynesil.edu.tm		Magtymguly şaýoly 73 jaý$ул.Махтумкули,73	f	f	09:00-18:00	f			0	f	0	f	0	f	f	1	3	0	3	0			0		f	0	2022-04-04 07:52:03.175901	2022-04-04 07:52:03.175915
+229	Дочки сыночки	Дочки сыночки			1	0				SM "Berkarar", 3 gat, D54$ТРЦ Беркарар, 3 этаж, D54	f	f	10:00- 22:30	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:30:11.024883	2022-04-08 07:30:11.024899
+101	Bambi	Bambi			2	2	bambitkm			"Berkarar" SM 1 gat B24, söwda merkezi. "ASHGABAT" 0 gat blok-C 12 mag.  $ТЦ ”Berkarar” 1 эт. В24,ТЦ. «АШХАБАД» 0 эт. блок-C 12 маг.	f	f	11:00-22:00	f			0	f	10	f	0	f	f	1	5	0	14	0			25		f	0	2022-03-24 11:44:34.310622	2022-03-24 11:44:34.310637
+129	Gurman loft	Gurman loft			3	3	gurman.loft.resto			Ostrowskiý köç.$ул. Островского	t	t	10:00-22:00	t	türkiýaňky	турецкая	150	f	0	f	0	f	f	1	4	0	13	0			0		f	0	2022-03-31 10:27:16.902373	2022-03-31 10:27:16.902385
+198	Saraýly house	Saraýly house			0	0	_sarayly_house/			Magtymguly köç. 72A$ул. Махтумкули, 72А	t	t	09:00–22:30	t	ewropeýaňky	европейская	150	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-04-06 09:59:17.117342	2022-04-06 09:59:17.117355
+152	Readistore	Readistore			0	0	readitstore			SEC "Aşgabat" 0 gat $ТРЦ "Ашхабад" 0 этаж	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 09:48:52.588628	2022-04-04 09:48:52.588641
+89	Altyn ada	Altyn ada			0	0	altynadapub			Parahat 1/1, Molodežnaýa köç, 48 jaý$Мир 1/1, ул.Молодежная, дом 48	t	t	10:00-22:00	t	ewropeýskaýa	европейская	200	f	10	f	0	f	t	1	4	0	17	0			13		f	0	2022-03-23 12:08:38.113625	2022-03-23 12:08:38.113642
+110	Mᴇʟʙᴏᴜʀɴᴇ Bᴜʀɢᴇʀ	Mᴇʟʙᴏᴜʀɴᴇ Bᴜʀɢᴇʀ			0	0	melbourne_burger.tm			Mahtumkuli köç/$ул. Махтумкули	t	t	09:00-23:00	t	ewropaly	европейская	300	f	0	f	0	f	f	1	4	0	0	0			0		f	0	2022-03-28 08:05:25.825524	2022-03-28 08:05:25.82554
+218	Yaki Tori	Yaki Tori			4	1	yakitori_ashgabat			Parahat 5, "Harman" restoran$Парахат 5, ресторан «Harman»	t	t	12:00-22:00	t	ýaponiýaňky	японская	150	f	0	f	0	f	f	1	4	0	100	0			0		f	0	2022-04-07 09:57:21.804019	2022-04-07 09:57:21.804032
+191	Şa ýyldyz	Şa ýyldyz			0	0	shayyldyz_tmt			Türkmenbaşi ş.$ул. Туркменбаши, 40 А	t	t	08:00–23:00 	t	türekiýaňky,milli	турецкая,национальная	150	f	0	f	0	f	t	1	4	0	8	0			0		f	0	2022-04-05 12:46:18.438694	2022-04-05 12:46:18.438707
+99	Himiki arassalaýyş  "Mayam"	Химчистка "Mayam"			1	0	mayam.co	www.mayam.co		"Joşgun" söwda merkezi, 1-nji gat "Gek Bazar" söwda merkezi, Taslama köçesiniň 10-njy jaýy (M3 bazary) $ТЦ «Джошгун», 1 этаж ТЦ «Гек Базар», 10  Ул.Таслама(Маркет M3)	f	f	08:00-20:00	f			0	f	20	f	0	f	f	1	3	0	10	0			23		f	0	2022-03-24 10:31:08.673445	2022-03-24 10:31:08.673462
+114	Ginko platan	Ginko platan			0	0	ginko_platan			Bitarap/Oguzhan köç."Gül zaman"$ул.Битарап/Огузхан 140,  «Gül Zaman»	t	t	10:00-23:00	t	ewropaly	европейская	200	f	0	f	0	f	t	1	4	0	1	0			0		f	0	2022-03-28 09:59:41.543834	2022-03-28 09:59:41.543851
+90	Alfredo coffee	Alfredo coffee			1	0	alfredocoffee_			Parahat 2/1, Ýunus Emre Biznes sentr$Мир 2/1, ул.Юнус-Эмре, международный БЦ	t	t	08:00-18:00	t	kofeýnýa	кофейня	70	f	15	f	0	f	f	1	4	0	15	0			14		f	0	2022-03-23 12:16:10.879393	2022-03-23 12:16:10.879406
+143	Hukuk we biznes	Hukuk we biznes			0	0	business_school.tm			Moskowskiý prospekti, 10 ýyl Abadançilik, jaý 151 $Московский проспект, ул.10 йыл Абаданчылык, дом 151	f	f	09:00-20:00	f			0	f	0	f	0	f	f	1	3	0	0	0			0		f	0	2022-04-04 08:06:16.905614	2022-04-04 08:06:16.905661
+111	Bazetti	Bazetti			0	0	bazetti_coffee			Moskowskiý  köç., Aýbölek jaý/$ул. Московского, дом Айболек	t	t	08:30-22:00	t	ewropaly	европейская	100	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-28 08:12:22.508549	2022-03-28 08:12:22.508564
+81	Chaplin	Chaplin			0	0	chaplin__cafe			Kemine-Shaumýana köç$ул.Кемине-Шаумяна	t	t	10:00-23:00	t	европейская	ewropeýskaýa	250	f	10	f	1	f	t	1	4	0	6	0			5		f	0	2022-03-23 10:51:04.914588	2022-03-23 10:51:04.914604
+130	Maraton	Maraton			1	0	maraton.shoes	www.brandshop.com.tm		Berkarar SDAM. 2 etaž$ТРЦ Беркарар, 2 этаж	f	f	09:00-22:00	f			0	f	0	f	1	f	f	1	5	0	20	0			0		f	30	2022-03-31 10:38:21.350469	2022-03-31 10:38:21.350481
+250	MB shoes	MB shoes			0	0	mb_shoestm			SM "Berkarar" 2 gat; "Nowruz haly" binasy, 2 gat$ТРЦ Беркарар, 2 этаж; здание «Новруз халы» 2 этаж	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-12 10:08:58.965292	2022-04-12 10:08:58.965305
+164	Leg lek	Leg lek			1	0	leglek_cafe			diňe dostawka$только доставка	t	t	11:30-21:30	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-04-04 12:16:42.478548	2022-04-04 12:16:42.478563
+220	U.S.Polo	U.S.Polo			0	0	polo_ashgabad			Magtymguly köç. SM "Univermag"$ул.Махтумкули, ТЦ "Универмаг"	f	f	10:00-21:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-07 12:08:51.710309	2022-04-07 12:08:51.710323
+253	Ramsey	Ramsey			0	0	ramsey_turkmenistan			SM "Berkarar" 1 gat$ТРЦ "Беркарар" 1 этаж	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	0	0			0		f	0	2022-04-12 10:47:08.868325	2022-04-12 10:47:08.868381
+230	ELLE	ELLE			0	0	elle_berkarar			SM"Berkarar "2 gat, C9$ТРЦ Беркарар, 2 этаж, С9	f	f	09:00-22:00	f			0	f	0	f	0	f	f	1	5	0	4	0			0		f	0	2022-04-08 07:36:04.470681	2022-04-08 07:36:04.470698
+192	Sada coffee	Sada coffee			0	0	sada_coffee_houses			 Parahat 3 (stoýanka);Gulshat wedding house$Мир3 стоянка;Gulshat wedding house	t	t	07:00 – 22:00 	t	kofeýnya	кофейня	100	f	0	f	0	f	t	1	4	0	9	0			0		f	0	2022-04-05 12:55:39.982842	2022-04-05 12:55:39.982857
+153	Super kids	Super kids			0	0	superkidstm			Parahat köç. $прсп. Парахат	f	f	10:00-18:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 09:53:48.270313	2022-04-04 09:53:48.270326
+208	Sushihouse	Sushihouse			1	0	sushihouse.tm			diňe dostawka$только доставка	t	t	11:00–23:00 	t	ýaponiýaňky	японская	150	f	0	f	1	f	f	1	4	0	13	0			14		f	0	2022-04-07 07:06:59.079924	2022-04-07 07:06:59.079941
+277	Восемь любящих женщин	Восемь любящих женщин	Spektakl 23/04 19: 00-da başlar.	Спектакль начинается 23/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	4	0			0		f	0	2022-04-15 10:05:33.90437	2022-04-15 10:05:33.904384
+122	Argentina steak house	Argentina steak house			0	0	argentina__steak_house			A.Niýazow köç, 84 jaý$ул. А. Ниязова 84	t	t	10:00-23:00	t	aziýaňky, ewropeýaňky	Азиатская, европейская	200	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-03-29 11:57:30.236842	2022-03-29 11:57:30.236855
+121	Altyn luw	Altyn luw			0	0	altynluw			Parahat köç, 78 jaý$ул. Мир 1, дом 78	t	t	10:00-22:00	t	aziýaňky, ewropeýaňky	Азиатская, европейская	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-29 11:50:24.459867	2022-03-29 11:50:24.459882
+102	Mannol tkm	Mannol tkm			0	0	mannolturkmen	www.mannol.tm		N. Gulaýew 1 köç. (BMW merkeziniň çäginde)$ул. Н.Гулаев 1 (Объездная, на территории BMW центра)	f	f	09:00-22:00	f			0	f	15	f	0	f	f	1	3	0	11	0			27		f	0	2022-03-24 12:00:47.463129	2022-03-24 12:00:47.463145
+78	Sezam	Sezam			0	0	sezam.tm.dostawka			Öwezberdi Kuliyewa 6 köç.$ул. Овезберды Кулиева	t	t	10:00-22:00	t	fast-food	fast-food	70	f	10	f	1	f	f	1	4	0	10	0			3		f	0	2022-03-23 10:20:22.4915	2022-03-23 10:20:22.491516
+199	Sawanna	Sawanna			0	0	sawanna_coffee			Aýtakow köç. "Gümmez gurluşyk" jaý$ул. Айтакова дом "Gùmmez Gurlyşyk"	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-04-06 10:12:16.537661	2022-04-06 10:12:16.537674
+159	Fitnes merkezi "Görogly fitness"	Фитнес центр "Görogly fitness"			0	0	goroglyfitness			SM Uniwermag 2 gat  $ТЦ. Универмаг, 2 этаж	f	f	08:00-22:30	f			0	f	0	f	0	f	f	1	6	0	18	0			0		f	0	2022-04-04 10:53:32.789236	2022-04-04 10:53:32.789256
+185	Obam	Obam			0	0	restoran_obam			G.Kuliýew köç. 89 "Rowaç ýoly"$ул. Г.Кулиева, здание 89, «Ровач Елы»	t	t	09:00-21:30	t	milli,ewropeýaňky	национальная,европейская	120	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-04-05 11:36:23.876993	2022-04-05 11:36:23.877004
+231	Emay cosmetics	Emay cosmetics			0	0	emaycosmetics.tm			diňe dostawka$только доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	6	0			0		f	0	2022-04-08 07:46:36.033384	2022-04-08 07:46:36.033402
+183	Mukam	Mukam			0	0	mukamclub			Mahtumkuli köç. 1 park$ул.Махтумкули 1 парк	t	t	11:00-23:00	t	mangal	мангал	200	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-04-05 10:54:54.600419	2022-04-05 10:54:54.600433
+123	Bamboo restaurant	Bamboo restaurant			0	1	bambuk_resto.tm			Parahat 5, 74/2$Парахат 5, 74/2	t	t	10:00-23:00	t	aziýaňky, hytaýyňky	Азиатская, китайская	150	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-29 12:30:08.018228	2022-03-29 12:30:08.018244
+112	BURGERZ | STREET FOOD	BURGERZ | STREET FOOD			0	0	burgerzzone	www.delivery.belgi.com.tm/burgerzone/app		SM "Berkarar", 3 etaž$ТРЦ "Беркарар",3этаж	t	t	09:00-22:30	t	fast-food	fast-food	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-28 09:30:08.111208	2022-03-28 09:30:08.111221
+103	MiuMiu	MiuMiu			1	0	miumiu_love__			SM "Berkarar" 2, etaž, Optowka 2 etaž(218-B)$Т.Ц "Berkarar" ( 2 этаж ),Оптовый, 2 этаж ( 218-В ) 	f	f	10:00-22:00	f			0	f	15	f	0	f	f	1	5	0	26	0			26		f	0	2022-03-24 12:34:49.612422	2022-03-24 12:34:49.612438
+209	Sweet story	Sweet story			1	0	sweet_story_tm			diňe dostawka$только доставка	t	t	09:00–23:00 	t	tortlar,desertlar	торты,десерты	0	f	0	f	0	f	f	1	3	0	8	0			0		f	0	2022-04-07 07:19:04.549887	2022-04-07 07:19:04.549901
+213	Trattoria	Trattoria			0	0	restaurant.trattoria			SM "Berkarar", 3 gat$ТРЦ "Беркарар", 3 этаж	t	t	08:30-23:00	t	Italiýaňky,aziýaňky	итальянская,азиатская	250	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-07 08:48:20.498987	2022-04-07 08:48:20.498999
+154	Sweet memories	Sweet memories			0	0				diňe dostawka $только доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	3	0	5	0			0		f	0	2022-04-04 10:01:30.139019	2022-04-04 10:01:30.139036
+252	Pijama lux	Pijama lux			0	0	pijamylux_tm			dostawka$доставка	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 10:40:07.549135	2022-04-12 10:40:07.549148
+200	Şa lezzet	Şa lezzet			0	0	sha_lezzet			30 kiçi etr., “Syÿahat” otel$30 мкр, отель “Syÿahat”	t	t	10:00-23:00	t	ewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-06 10:22:49.337597	2022-04-06 10:22:49.33761
+278	Приключения Буратино	Приключения Буратино	Spektakl 24/04 13:00-da başlar.	Спектакль начинается 24/04 в 13:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	10	0			0		f	0	2022-04-15 10:15:50.488762	2022-04-15 10:15:50.488773
+221	Pierre Cardin	Pierre Cardin			1	0	polo_ashgabad			Magtymguly köç. SM "Univermag"$ул.Махтумкули, ТЦ "Универмаг"	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	5	0			0		f	0	2022-04-07 12:16:22.179703	2022-04-07 12:16:22.179714
+131	KIDS plaza	KIDS plaza			2	0	kids_plaza_tm	www.kidsplaza.tm		Berkarar SDAM. 2 etaž, c23b$ТРЦ Беркарар, 2 этаж, магазин c23b	f	f	10:00-22:30	f			0	f	0	f	1	f	f	1	5	0	20	0			0		f	0	2022-03-31 11:04:04.303128	2022-03-31 11:04:04.30314
+184	Novada	Novada			0	0	novada_steakhouse	https://novada.aqulas.me/		 Görögly köç 17$ул. Гороглы, 17	t	t	11:00-23:00	t	Steak-house	Steak-house	200	f	0	f	0	f	t	1	4	0	16	0			0		f	0	2022-04-05 11:03:22.740994	2022-04-05 11:03:22.741009
+179	MB Patisserie	MB Patisserie			0	0	mb.patisserie			SM "Berkarar" 2 gat$ТРЦ "Berkarar" 2 этаж	t	t	09:00-23:00	t	türkiýaňky,ewropeýaňky,milli	турецкая,европейская,национальная	150	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-05 09:57:06.229601	2022-04-05 09:57:06.229614
+92	Gözellik salony "LUX"	Салон красоты "LUX"			0	0	turkmenlux			Gurbannazar Ezizow köç.9 (Gül Bal)$ул.Гурбанназар Эзизов, 9 (Gül Bal)	f	f	09:00-22:00	f			0	f	20	f	0	f	f	1	6	0	9	0			15		f	0	2022-03-24 07:08:59.907184	2022-03-24 07:08:59.907199
+132	Beauty shop Korea	Beauty shop Korea			28	27	tm_beauty_shop_korea	www.bsktkm.com		Berkarar SDAM. 1 etaž$ТРЦ Беркарар, 1 этаж	f	f	10:00-22:30	f			0	f	0	f	0	f	f	1	5	0	35	0			0		f	20	2022-03-31 11:24:06.860983	2022-03-31 11:24:06.860997
+254	Wildcraft	Wildcraft			0	0	wildcrafttm			SM"Berkarar", 2 gat, C34a$ТРЦ "Беркарар" 2 этаж, С34а	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-12 10:50:59.08998	2022-04-12 10:50:59.089996
+269	Кинофильм "Человек-паук: Нет пути домой"	Кинофильм "Человек-паук: Нет пути домой"	Кинофильм   2021 ‧ Boýewik ‧ 2 sagat 30 minut	Кинофильм   2021 г. ‧ Боевик/Приключения ‧ 2 ч 30 мин	0	0	berkarar_cinema	14/04/2022-30/04/2022(10:35,13:15,17:50,20:30)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	32	0	Mysterio Örümçiniň şahsyýetini dünýä mälim edende, Piter Parkeriň durmuşy we abraýy howp astyndadyr. Situationagdaýy düzetmek üçin Piter kömek soramak üçin Stiwen Strange ýüzlenýär, ýöne tiz wagtdan has howply bolýar.	Жизнь и репутация Питера Паркера оказываются под угрозой, поскольку Мистерио раскрыл всему миру тайну личности Человека-паука. Пытаясь исправить ситуацию, Питер обращается за помощью к Стивену Стрэнджу, но вскоре всё становится намного опаснее.	0		f	0	2022-04-14 10:27:41.823654	2022-04-14 10:27:41.823668
+124	Berk pub	Berk pub			0	0	berk.gardenpub			Bomako köç, 1934$ул. Бомако, 1934 (базар 100 фонтанов)	t	t	10:00-23:00	t	BBQ	BBQ	150	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-03-29 12:36:19.904139	2022-03-29 12:36:19.904157
+222	Cacharel	Cacharel			0	0	polo_ashgabad			Atabaýewa köç.,24$ул. Атабаева, 24	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-07 12:23:24.235257	2022-04-07 12:23:24.235273
+113	Chatma Restaurant & Lounge	Chatma Restaurant & Lounge			0	0	chatma_official			Azadi köç. 1 park$ул. Азади, 1 парк	t	t	10:00-23:00	t	ewropaly	европейская	200	f	0	f	0	f	t	1	4	0	0	0			0		f	0	2022-03-28 09:48:20.089197	2022-03-28 09:48:20.089209
+104	Awtoryň şokolady "Infinity" 	Авторский шоколад "Infinity"			0	0	chokolad_infinity_tm			diňe dostawka$только доставка	f	f	10:00-20:00	f			0	f	15	f	0	f	f	1	3	0	16	0			27		f	0	2022-03-24 12:46:28.005156	2022-03-24 12:46:28.005169
+155	Zehin ýoly	Zehin ýoly			0	0	zehinyoly			köç. Oguzhan, 7/1, Hezzet restoran binasy $ул. Огузхан, 7/1, здание Хеззет ресторана	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	3	0	10	0			0		f	0	2022-04-04 10:06:56.93217	2022-04-04 10:06:56.932187
+210	Terrace	Terrace			0	0	restaurant_terrace_ashgabat			Alişşera Nawoýi köç, SM "Altyn zaman"$ул. Алишера Навои, ТЦ. "Altyn Zaman"	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	14	0			0		f	0	2022-04-07 07:28:59.355544	2022-04-07 07:28:59.35556
+93	Gözellik studiýasy "Selbi"	Студия красоты "Selbi"			0	0	selbi_beauty_studiotm			Atamyrat Niýazow köç.,19$ул.Атамырата Ниязова(Чехова),19	f	f	10:00-22:00	f			0	f	10	f	0	f	f	1	6	0	11	0			16		f	0	2022-03-24 07:47:44.472281	2022-03-24 07:47:44.472292
+201	Şabaz	Şabaz			0	0	shabazcoffee			Parahat 2,FOK$Парахат 2, ФОК	t	t	07:00-23:00	t	kofeýnýa	кофейня	150	f	0	f	0	f	f	1	4	0	19	0			0		f	0	2022-04-06 11:00:57.926277	2022-04-06 11:00:57.926291
+83	Detox BOX	Detox BOX			0	0	detoxboxtm	www.detoxboxtm.com		diňe dostawka$только доставка	t	t	10:00-22:00	t	ПП	ПП	150	f	10	f	1	f	t	1	4	0	7	0			6		f	0	2022-03-23 10:58:25.023222	2022-03-23 10:58:25.023237
+94	Gözellik studiýasy "Gunya`s Sugar studio"	Бьюти студия "Gunya`s Sugar studio"			0	0	gunya_sugar_studio			Dzežinskiý köç.,(köne zoopark)$ул. Дзержинского (старый зоопарк)	f	f	09:00-20:00	f			0	f	10	f	0	f	f	1	6	0	7	0			17		f	0	2022-03-24 07:56:28.345745	2022-03-24 07:56:28.345758
+223	Altin Yildiz Classics	Altin Yildiz Classics			0	0	altinyildiz_classics.turkm			SM "Berkarar",2 gat,C-63 $ТРЦ Беркарар, 2 этаж, С63	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	2	0			0		f	0	2022-04-07 12:37:36.56583	2022-04-07 12:37:36.565848
+288	Концерт \\n"Чарующих звуков красота"	Концерт \\n"Чарующих звуков красота"	Konsert 30-njy aprelde 18: 00-da bolar	Концерт пройдет 30 апреля в 18:00	1	0	tahir_atayev_string_orchestra			M. Kuliýewanyň adyndaky Türkmen milli konserwatoriýasy$Туркменская национальная консерватория им. М.Кулиевой	f	f		f			0	f	0	f	0	f	f	1	1	0	5	0	Konsert 30-njy aprelde sagat 18: 00-da M.Kuliýewanyň adyndaky TNK-nyň Uly zalynda bolar. Mugt giriş\nTahir Ataewiň orkestri\nDirijor, N. Halmammedowyň ady bilen geçirilen halkara bäsleşigiň ýeňijisi Baýmurad Gutlymyradow	Концерт пройдёт в Большом зале ТНК им.М.Кулиевой 30 апреля в 18:00. Вход свободный\nОркестр Тахира Атаева\nДирижер лауреат Международного конкурса им.Н.Халмаммедова,Баймурад Гутлымырадов	0		f	0	2022-04-19 10:30:51.364786	2022-04-19 10:30:51.364801
+105	HJ"Haytek"	HJ"Haytek"			0	0	hjhaytek	http://haytek.club/		Kuliýew köç., 96 jaý, "Peykam" binasy$ ул. Кулиева (Обьездная), дом 96, здание "Peykam"	f	f	09:00-18:00	f			0	f	10	f	0	f	f	1	3	0	21	0			28		f	0	2022-03-24 12:54:02.387544	2022-03-24 12:54:02.38756
+156	Gözellik salony "Agora"	Салон красоты "Agora"			0	0	agoraashgabat			Parahat 2/3, Yu. Emre köç.  jaý 7$Мир 2/3, ул.Ю. Эмре д. 7	f	f	09:00-20:00	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:33:30.884491	2022-04-04 10:33:30.884509
+84	Overbrinks	Overbrinks			0	0	overbrinkstm			BS "Oguzkent"$БЦ "Огузкент"	t	t	08:00-22:00	t	kofeýnýa	кофейня	150	f	20	f	1	f	t	1	4	0	5	0			7		f	0	2022-03-23 11:09:36.788649	2022-03-23 11:09:36.788664
+125	Berk pub	Berk pub			16	4	berk_gard_kupalka			Perwomaý köç. "Delfin" park$ул. Первомайского, парк "Дельфин"	t	t	10:00-22:30	t	BBQ	BBQ	150	f	0	f	0	f	f	1	4	0	16	0			0		f	0	2022-03-29 12:42:26.186041	2022-03-29 12:42:26.186058
+289	cvxbxcbv	xcvbxcv	xcvxcv	xzcvcxv	0	0					f	f		f			0	f	0	f	0	f	f	1	3	0	0	0			0		f	0	2022-04-24 13:31:30.387007	2022-04-24 13:31:30.38702
+115	Kopetdag pizza	Kopetdag pizza			0	0	kopetdag_pizzeria			A.Nawoýi köç."Altyn zaman", 2 etaž$ул. Алишера Навои, ТЦ Altyn zaman, 2 этаж	t	t	09:00-23:00	t	italiýaňky	итальянская	200	f	0	f	0	f	t	1	4	0	7	0			0		f	0	2022-03-28 10:10:04.593474	2022-03-28 10:10:04.593487
+148	Moonlight	Moonlight			0	0	moonlight_presents_tm			Diňe dostawka$только на доставку	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	3	0			0		f	0	2022-04-04 08:29:19.115349	2022-04-04 08:29:19.115362
+212	Fast food by Turkmenistan Limited	Fast food by Turkmenistan Limited			0	0	tmlimited_fastfood			dostawka$на доставку	t	t	09:00-22:00	t	fast-food	фаст-фуд	100	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-04-07 07:46:53.283002	2022-04-07 07:46:53.283015
+202	Şohle	Şohle			0	0				Görogly köç.6(WDNH)$ул. Героглы 6 (ВДНХ со стороны ул. Шевченко)	t	t	10:00-23:00	t	ewropeýaňky	европейская	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-04-06 11:11:48.65815	2022-04-06 11:11:48.658163
+146	Studio ceramic	Studio ceramic			0	0	studio_ceramic_tm			Bagtyýarlyk sport toplumy (öňki köne haýwanat bagy)$Багтыярлык спорт комплекс (бывший старый зоопарк).	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	3	0	4	0			0		f	0	2022-04-04 08:16:20.527816	2022-04-04 08:16:20.527832
+186	Capital lounge bar	Capital lounge bar			0	0	capital_lounge__bar			Magtymguly köç. "Paýtagt"otel$ул.Махтумкули, отель "Paytagt"	t	t	09:00-22:00	t	mangal,ewropeýaňky	мангал,европейская	130	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-04-05 11:41:51.047336	2022-04-05 11:41:51.04735
+272	Дюймовочка	Дюймовочка	Spektakl 16/04  13:00-da başlar.	Спектакль начинается 16/04 в 13:00.	0	0	pushkin_1799_06_06			Magtynguly köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	4	0			0		f	0	2022-04-15 09:32:31.453885	2022-04-15 09:32:31.453899
+256	Zenana	Zenana			0	0	zenana.store			SM "Berkarar" 0 gat$ТРЦ "Беркарар" 0 этаж	f	f	11:00-22:00	f			0	f	0	f	0	f	f	1	5	0	3	0			0		f	0	2022-04-12 11:11:41.117447	2022-04-12 11:11:41.117458
+134	Boutique line	Boutique line			0	0	boutique_line_turkmenistan/			SM Uniwermag, 2 etaž$ТЦ Универмаг, 2 этаж	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	5	0	8	0			0		f	0	2022-03-31 12:41:13.715937	2022-03-31 12:41:13.71595
+126	Black bar	Black bar			0	1	blackbar_official			Mahtumkuli köç. (köne Ashgabat otel)$ул. Махтумкули (бывш.Ашгабат отель))	t	t	11:00-23:00	t	ewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	7	0			0		f	0	2022-03-29 12:54:06.0626	2022-03-29 12:54:06.062613
+106	A-coffee	A-coffee			0	0	acoffee.tm			Çehow köç., "Metbugat Çapary" bina$ул. Чехова, дом ( Metbugat Çapary )	t	t	08:30-23:00	t	kofehause	кофейня	100	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-03-25 12:34:11.293742	2022-03-25 12:34:11.293759
+280	Кинофильм  \\n"Смерть на Ниле"	Кинофильм \\n"Смерть на Ниле"	Кинофильм     2022 ‧ Detektiv / Jenaýat ‧ 2 sagat 7 minut	Кинофильм  2022 г. ‧ Детективный фильм/Криминал ‧ 2 ч 7 мин	0	0		18/04/2022-30/04/2022(12:45,14:25,20:45)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			50	f	0	f	0	f	f	1	2	3	13	0	Bu gezek dynç alyşyndan daşlaşdyrylan syrly ganhorlygy derňemek zerurlygy, Nil derýasynyň boýundaky kaşaň kruiz gämisinde Poirotdan öňe geçýär.	На этот раз необходимость расследовать загадочное убийство, отвлекаясь от собственного отдыха, настигает Пуаро на борту роскошного круизного парохода, следующего вдоль по Нилу.	0		f	0	2022-04-18 10:48:09.548128	2022-04-18 10:48:09.548141
+268	Кинофильм \\n"Лулу и Бриггс"	Кинофильм \\n"Лулу и Бриггс"	Кинофильм  2022 ý. Komediýa  ‧ 1 sag 41 min	Кинофильм   2022 г. ‧ Комедия/Роуд-муви ‧ 1 ч 41 мин  	0	0	berkarar_cinema	14/04/2022-30/04/2022(10:20,17:05,18:45,21:00)*\n		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	30	0	Marine Briggs, Lulu atly hyzmat itini Kaliforniýa eltmeli. Bu ýumuş gaty kyn bolýar. Theuwaş ummanyň kenaryndaky ýeňil syýahat, kimiň kime äkidilýändigi belli bolmadyk ýerde heläkçilige öwrülýär.	Морской пехотинец Бриггс должен доставить в Калифорнию служебную собаку по кличке Лулу. Задание оказывается с подвохом. Лайтовая поездка вдоль Тихоокеанского побережья превращается в адское путешествие, где непонятно, кто кого везёт.	0		f	0	2022-04-14 10:24:06.615737	2022-04-14 10:24:06.615752
+116	Караоке-Бар “Meshhur New York”	Караоке-Бар “Meshhur New York”			0	0	meshhur_newyork			SM "Berkarar",3  etaž$ТРЦ Беркарар, 3 этаж	t	t	10:00-23:00	t	ýewropeýanky	европейская	200	f	0	f	0	f	t	1	4	0	10	0			0		f	0	2022-03-28 10:55:10.384224	2022-03-28 10:55:10.384237
+224	Koton kids	Koton kids			0	0	koton_turkmenistan			SM "Berkarar", 2 gat$ТЦ "Беркарар", 2 этаж 	f	f	10:00-22:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-07 12:44:08.02304	2022-04-07 12:44:08.023052
+214	Umyt grill lounge	Umyt grill lounge			0	0	umytgrillounge			"Altyn asyr" SM (bäşaýak),7 gat$ТЦ «Алтын Асыр» (Пятиножка), 7 этаж 	t	t	11:00–23:00 	t	ýaponiýaňky,fast-food	японская,фаст-фуд	250	f	0	f	0	f	f	1	4	0	10	0			0		f	0	2022-04-07 08:59:14.893718	2022-04-07 08:59:14.89374
+85	Ammar	Ammar			0	0	ammarcafetm			Şewçenko köç, "Çinar" dükan$ул. Шевченко "Чынар" магазин 	t	t	10:00-22:00	t	ewropeýskiý	европейская	150	f	10	f	0	f	t	1	4	0	15	0			8		f	0	2022-03-23 11:16:39.27224	2022-03-23 11:16:39.272254
+147	Konditoria	Konditoria			0	0	konditoria_tm			Diňe dostawka$только на доставку	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	2	0			0		f	0	2022-04-04 08:22:09.180403	2022-04-04 08:22:09.180419
+95	Gözellik salony "PersonaLAB"	Салон красоты "PersonaLAB"			0	0	personalabtm_turkmenistan			Alişera-Nawoýi köç.,"Altyn Zaman", 1 etaž$ул.Алишера-Навои, "Altyn Zaman", 1 этаж	f	f	09:00-20:00	f			0	f	20	f	0	f	f	1	6	0	7	0			18		f	0	2022-03-24 08:08:37.898882	2022-03-24 08:08:37.898896
+158	Gözellik studiýa "Emily beauty"	Салон красоты "Emily beauty"			0	0	_emily_beauty_			Türkmenbaşy köç., Olimpiýa myhmanhanasy  $ул.Туркменбаши, отель Olimpiya	f	f	10:00-18:00	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:47:40.186631	2022-04-04 10:47:40.186644
+203	Sim Sim	Sim Sim			0	0	simsim_ashgabat			Andalib köç.  50/1$ул.Андалиба, 50/1	t	t	11:00-23:00	t	Ortaýer deňzi	средиземноморская	250	f	0	f	0	f	f	1	4	0	6	0			0		f	0	2022-04-06 11:23:23.072987	2022-04-06 11:23:23.073002
+187	Pizza 88	Pizza 88			0	0	pizza88_tm			Parahat 4/2 köç.$Мир 4/2(Санта-Барбара)	t	t	09:00-23:00	t	türkiýaňky	турецкая	130	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-05 12:00:28.971564	2022-04-05 12:00:28.971577
+188	Plaza coffee	Plaza coffee			0	0	plazacoffee_tm			Görögly köç. "Turist" otel$ул. Гёроглы отель «Турист»	t	t	08:00-22:30	t	kofeýnýa	кофейня	100	f	0	f	0	f	t	1	4	0	6	0			0		f	0	2022-04-05 12:07:10.084945	2022-04-05 12:07:10.084957
+225	Lady`s room	Lady`s room			0	0	ladys_.room			A.Nawoýi köç, SM "Altyn Zaman" 3 gat$ул.А.Навои, ТЦ "Altyn Zaman" 3 этаж	f	f	11:00-19:00	f			0	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-07 12:52:59.658464	2022-04-07 12:52:59.658477
+160	Mahri permanent make-up	Mahri permanent make-up			0	0	mari.arti955			10 ýyl abadançylyk köç, 151 jaý Hasar $ул. 10 йыл Абаданчылык, 151 дом Hasar	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	6	0	2	0			0		f	0	2022-04-04 11:11:53.193238	2022-04-04 11:11:53.19325
+96	Fitnes klub "Kolizeý"	Фитнес клуб "Kolizeý"			0	0	kolizey.fit.club			Täjir köç.(DOSAAF), 1 jaý$ул.Таджир (проезд Досааф), д.1	f	f	08:00-22:30	f			0	f	10	f	0	f	f	1	6	0	5	0			20		f	0	2022-03-24 09:34:39.864175	2022-03-24 09:34:39.864187
+127	Pomodor	Pomodor			23	21	pomodor_o/			Görögly köç,19$ул.Героглы, 19	t	f	10:00-21:30	t	Pizza	pizza	150	f	15	f	1	f	f	1	4	0	65	0			26		f	0	2022-03-30 07:30:15.397931	2022-03-30 07:30:15.397944
+86	В кабаке "У Амули"	В кабаке "У Амули"			0	0	kabak.amuli			diňe dostawka$только доставка	t	t	12:00-22:00	t	BBQ	BBQ	200	f	15	f	0	f	f	1	4	0	5	0			9		f	0	2022-03-23 11:28:49.650636	2022-03-23 11:28:49.65065
+149	ms│studio	ms│studio			2	0	mirzoev.sergey			"Joşgun" söwda merkezi 1 gat $ТЦ «Джошгун»1 этаж	f	f	10:00-20:00	f			0	f	0	f	0	f	f	1	3	0	8	0			0		f	0	2022-04-04 09:20:19.233188	2022-04-04 09:20:19.233201
+117	Ýalta coffee	Ýalta coffee			0	0	yalta_coffee			Öwezberdy Kuliýew köç$ул. Овезберды Кулиева	t	t	08:00-21:00	t	kofe house	coffee house	70	f	0	f	0	f	t	1	4	0	3	0			0		f	0	2022-03-28 11:11:56.144254	2022-03-28 11:11:56.144267
+107	Altyn çaýhana	Altyn çaýhana			0	0	altyncayhana			urbansoltan eje şaýoly, 168.$ул. Гурбансолтан эдже, 168	t	t	09:00-23:00	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	1	0			0		f	0	2022-03-25 12:42:06.547112	2022-03-25 12:42:06.547125
+215	Üzüm	Üzüm			0	0	uzum_cafe			Mežlauka köç. 13$ул. Межлаука, 13	t	t	08:30–23:00 	t	ewropeýaňky,türkiýaňky,italiýaňky,aziýadyňky,fast-food	Европейская, турецкая, итальянская, азиатская, фаст-фуд	200	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-04-07 09:17:24.443777	2022-04-07 09:17:24.44379
+204	Smile sushi bar	Smile sushi bar			0	0	smile_sushi_baar			SM"Altyn asyr",7 $ТЦ «Алтын Асыр» (Пятиножка), 7 этаж	t	t	08:00-08:00	t	ýaponiýaňky	японская	170	f	0	f	0	f	f	1	4	0	8	0			0		f	0	2022-04-06 11:56:20.346105	2022-04-06 11:56:20.346118
+273	Ханума	Ханума	Spektakl 16/04 19: 00-da başlar.	Спектакль начинается 16/04 в 19:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	3	0			0		f	0	2022-04-15 09:45:33.82689	2022-04-15 09:45:33.826902
+267	"Berkarar" kinoteatry	Кинотеатр "Berkarar"			0	0	berkarar_cinema			SM "Berkarar", 3 gat$ТРЦ "Berkarar" 3 этаж	f	f	09:00-23:00	f			0	f	0	f	0	f	f	1	3	0	9	0			0		f	0	2022-04-14 10:03:21.070369	2022-04-14 10:03:21.070381
+87	Online food	Online food			0	0	onlinefood.tm			diňe dostawka$только доставка	t	t	10:00-22:00	t	ýaponiýa	японская	170	f	15	f	0	f	f	1	4	0	7	0			11		f	0	2022-03-23 11:54:00.256202	2022-03-23 11:54:00.256218
+150	Notebook service	Notebook service			0	0	notebook_merkezi			köç. Bomako, Älemgoşar bazary dükany 115 $ул. Бомако, базар «Älemgoşar» магазин 115	f	f	10:00-19:00	f			0	f	0	f	0	f	f	1	3	0	2	0			0		f	0	2022-04-04 09:25:45.483378	2022-04-04 09:25:45.483392
+189	Red coffee	Red coffee			0	0	redcoffeetm			"Bagtyýarlyk" SM, 0 gat$ТЦ «Багтыярлык» цокольный этаж	t	t	08:00-23:00	t	kofeýnya	кофейня	70	f	0	f	0	f	t	1	4	0	4	0			0		f	0	2022-04-05 12:19:06.777601	2022-04-05 12:19:06.777614
+274	Аладдин и волшебная лампа	Аладдин и волшебная лампа	Spektakl 17/04 13:00-da başlar.	Спектакль начинается 17/04 в 13:00.	0	0	pushkin_1799_06_06			Mahtumkuli köç.,142$ул.Махтумкули, 142	f	f		f			0	f	0	f	0	f	f	1	1	0	1	0			0		f	0	2022-04-15 09:49:56.985092	2022-04-15 09:49:56.985103
+118	Shabaz Pizzeria•Patisserie	Shabaz Pizzeria•Patisserie			0	0	shabazcoffee			Parahat 2$Парахат 2	t	t	07:00-23:00	t	kofehouse	kofehouse	150	f	0	f	0	f	t	1	4	0	2	0			0		f	0	2022-03-29 11:05:15.601818	2022-03-29 11:05:15.601833
+108	Altyn dan	Altyn dan			0	0	altyn_dan_tm			diňe dostawka.$только доставка	t	t	10:00-22:00	t	fast-food	fast-food	150	f	0	f	0	f	f	1	4	0	5	0			0		f	0	2022-03-25 12:57:23.599545	2022-03-25 12:57:23.599559
+205	Soltan Loft	Soltan Loft			0	0	soltan_loft_			2127 (G.Kulyýew) köç.jaý 72$(Г.Кулиев)2127, 72 дом	t	t	09:00-22:30	t	türkiýaňky	турецкая	180	f	0	f	0	f	f	1	4	0	4	0			0		f	0	2022-04-06 12:10:39.957031	2022-04-06 12:10:39.957078
+161	"Awangard" gözellik salony	Салон красоты Awangard			0	0	awangard_salon			köç. 1958, 78/1$ул. 1958, 78/1	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	6	0	5	0			0		f	0	2022-04-04 11:17:05.915343	2022-04-04 11:17:05.915356
+216	Venice restoclub	Venice restoclub			0	0	venice_restoclub			Andalib/G.Kuliýew köç.$ул. Н. Андалиба / Г. Кулиева	t	t	11:00–23:00 	t	ýewropeýaňky	европейская	200	f	0	f	0	f	f	1	4	0	18	0			0		f	0	2022-04-07 09:33:28.679497	2022-04-07 09:33:28.67951
+227	Disney	Disney			0	0				SM "Berkarar", 3 gat, D 52$ТЦ Беркарар, 3 этаж, D 52	t	t	10:00 – 22:30	t			150	f	0	f	0	f	f	1	5	0	1	0			0		f	0	2022-04-08 07:00:18.541415	2022-04-08 07:00:18.541433
+97	"Dynamics GYM" Fitnes merkezi	Фитнес центр "Dynamics GYM"			1	0	dinamika_sport_kluby			ýaşaýyş jaýy Gurtly, jaý 21 $жилой массив Гуртлы, дом 21	f	f	09:00-22:30	f			0	f	10	f	0	f	f	1	6	0	4	0			21		f	0	2022-03-24 10:07:59.139319	2022-03-24 10:07:59.139336
+157	Fitnes klub "Amazonka"	Фитнес клуб "Amazonka"			0	0	amazonka_fitness_club			10 ýyllyk abadançylyk köç, Hasar öýi $ул. 10 Йыл Абаданчылик, дом Hasar	f	f	10:00 – 22:00 	f			0	f	0	f	0	f	f	1	6	0	3	0			0		f	0	2022-04-04 10:38:32.062437	2022-04-04 10:38:32.06245
+247	Pit stop	Pit stop			0	0	pitstoptm			Hoja Ahmet Yasаwy (Griboyedowa)$Ходжа Ахмет Ясавы	t	t	10:00-22:00	t	ewropaňky	европейская	200	f	0	f	0	f	f	1	4	0	6	0			0		f	0	2022-04-12 09:03:20.379773	2022-04-12 09:03:20.379786
+226	Han et	Han et			3	1	han_et_steakhouse			Parahat4/, "Türkmenbalyk" binasy$Парахат 4/1, здание «Turkmenbalyk»	t	t	10:00-23:00	t	steak-house	steak-house	150	f	0	f	1	f	f	1	4	0	53	0			15		f	0	2022-04-08 06:49:55.83316	2022-04-08 06:49:55.833173
+270	Мультфильм "Я краснею"	Мультфильм "Я краснею"	Multfilm  2022 ‧ Çagalar üçin / Komediýa ‧ 1 sag 40 min	Мультфильм   2022 г. ‧ Детский/Комедия ‧ 1 ч 40 мин	0	0	berkarar_cinema/	14/04/2022-30/04/2022(10:50,12:30,15:55,19;05)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			40	f	0	f	0	f	f	1	2	0	164	0	Ynamly, 13 ýaşly Mei Li yhlasly we gulak asýan enäniň gyzy bolmak bilen ýetginjeklikdäki bulam-bujarlygy ýeňip geçmegiň arasynda ýyrtylýar. Gyzyklanmalarynda, gatnaşyklarynda we ýetginjekleriniň öz bedenindäki üýtgemelerinde eýýäm üýtgeşiklik bar ýaly, ýöne ýok - haçan-da bir alada galsa (hemişe ýetginjek bilen bolup geçýär), derrew ullakan gyzyl panda öwrülýär.	Уверенная в себе 13-летняя Мэй Ли разрывается между тем, чтобы оставаться прилежной и послушной маминой дочкой и справиться с хаосом подросткового возраста. И, казалось бы, перемен в её интересах, отношениях и подростковых изменений в собственном теле и так достаточно, но нет — всякий раз, когда она слишком волнуется (что с подростком случается практически всегда), она моментально превращается в гигантскую красную панду.	0		f	0	2022-04-14 10:31:14.219601	2022-04-14 10:31:14.219612
+279	Trening	Тренинг	"Häzirki zaman dünýäsinde karýerany döretmekde ýaşlaryň kynçylyklary"	"Трудности молодежи при построении карьеры в современном мире"	0	0	ish_nokady_			BM "Berkarar", 10 gat, J1 blok$БЦ «Беркарар», 10 этаж, блок J1.	f	f	09:00-21:00	f			0	f	0	f	0	f	f	1	1	0	8	0	Razy, her birimiz öz karýeramyzy gurmak ýa-da öz işimizi açmak üçin dürli meseleler bilen ýüzbe-ýüz boldukmy? Emma hiç kim bize bu meseleleri nädip çözmelidigini ýa-da ýüzbe-ýüz bolmajakdygyna göz ýetirmeýär.\n22-nji aprelde, esasanam 15-25 ýaş aralygyndaky ýaşlar üçin gurnaýan okuwymyzda bu mowzugy has jikme-jik öwrenmek isleýäris.\nBu mowzugy açmak üçin ýokary hünärli psihology çagyrdyk we indi bu hakda azajyk gürleşeris;\nAkýewa Nýazik, BMG we Türkmenistan hökümeti tarapyndan durmuşa geçirilýän “incerli derejede öz içine alyjy ýokary hilli sosial hyzmatlary ornaşdyrmak arkaly sosial gorag ulgamyny kämilleşdirmek” programmasynda sosial psiholog.\nOzal uniwersiteti gutardy - TDU. Makhtumkuli Psihologiýa hünäri. Nyazik-iň bu hünäri boýunça şahadatnamalary we baý tejribesi bar.\nOkuwda gaty gyzykly mowzukdan başga-da, gyzykly interaktiw oýun, gatnaşyk gurmak üçin oýunlar we özüňizi beýan etmek mümkinçiligini taparsyňyz.\n22-nji aprelde, 18: 30-da, Iš Nokady hyzmatdaş merkezinde.	Согласитесь каждый из нас сталкивался с различным родом проблем на пути построения своей карьеры или открытии собственного дела? Но никто не говорит нам о том, как же решить эти проблемы или сделать так, чтобы с ними не сталкиваться.\n22 апреля мы хотим более детально рассмотреть эту тему на тренинге, который мы организуем специально для молодых людей от 15 до 25 лет.\nМы пригласили высококвалифицированного психолога для раскрытия данной темы и сейчас немного расскажем о ней;\nАкыева Нязик - социальный психолог в программе «Совершенствование системы социальной защиты путем внедрения инклюзивных качественных социальных услуг на местном уровне», реализуемой ООН и Правительством Туркменистана.\nРанее окончила ВУЗ - ТГУ им. Махтумкули по специальности «Психолог». Также Нязик имеет сертификаты и большой опыт работы по данной специальности.\nПомимо очень интересной темы на тренинге вас ждёт увлекательный интерактив, игры на налаживание отношений и возможность проявить себя.\nМы ждём вас 22 апреля, в 18:30, в коворкинг-центре «Iš Nokady».	0		f	0	2022-04-15 11:28:06.505298	2022-04-15 11:28:06.50531
+281	Кинофильм \\nПроект «Адам»	Кинофильм \\nПроект «Адам»	Кинофильм  2022 ‧ Sci-Fi\\nDrama ‧ 1 sagat 46 minut	Кинофильм  2022 г. ‧ Научная фантастика\\nДрама ‧ 1 ч 46 мин	0	0		18/04/2022-30/04/2022(15:05,16:45)*		SM "Berkarar" 3 gat, "Berkararcinema"$ТРЦ "Berkarar" 3 этаж, "Berkararcinema"	f	f		f			50	f	0	f	0	f	f	1	2	0	19	0	“Adam Taslamasy” Şon Lewiniň re directedissýorlyk eden we Jonatan Tropper, T. S. Nowlin, Jennifer Flakett we Mark Lewin tarapyndan ýazylan Amerikan ylmy fantastiki hereket komediýa filmidir. Aktrisalar: Raýan Reynolds, Mark Ruffalo, Jennifer Garner, Walker Skobell, Katrin Keener we Zoe Saldana	Проект „Адам“» — американский комедийный научно-фантастический боевик режиссёра Шона Леви и сценаристов Джонатана Троппера, Т. С. Наулина, Дженнифер Флэкетт и Марка Левина. В главных ролях: Райан Рейнольдс, Марк Руффало, Дженнифер Гарнер, Уолкер Скобелл, Кэтрин Кинер и Зои Салдана	0		f	0	2022-04-18 10:52:56.922963	2022-04-18 10:52:56.922978
+\.
+
+
+--
 -- Data for Name: promo_codes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -13983,6 +15393,106 @@ COPY public.user_interests (id, interest_item_id, user_id, created_at, updated_a
 
 
 --
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, fullname, phone_number, token, notif_token, created_at, updated_at) FROM stdin;
+0	\N	\N	\N	\N	2022-03-09 14:21:45.503817	2022-03-09 14:21:45.504031
+1	Shageldi Alyyev	+99362737222	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIEFseXlldiIsInBob25lX251bWJlciI6Iis5OTM2MjczNzIyMiJ9.A6M5A--z5QzGJRaEYf4E7sp61JC_nXq3h6hJzcf7d9Q	\N	2022-03-11 15:38:23.364858	2022-03-11 15:38:23.365065
+2	fhf	656565	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImZoZiIsInBob25lX251bWJlciI6IjY1NjU2NSJ9.MUeSWR-oshTkiEaS8D68G8XeS9QtQ9UJC4CxfcPshP8	\N	2022-03-12 14:35:45.367909	2022-03-12 14:35:45.368115
+3	Gayypow Halil	+993535353	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNTM1MzUzIn0.tQ1bV8VVnN_xx2_Ix3560hHZd9OvHztiVNiUXg4GXzI	\N	2022-03-13 16:27:40.788963	2022-03-13 16:27:40.789169
+4	wewewew	23142423	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Indld2V3ZXciLCJwaG9uZV9udW1iZXIiOiIyMzE0MjQyMyJ9.wcp5aodq3UCs51QfgSYJiimas3q90r2SQW4QPNeWCLA	\N	2022-03-14 12:35:30.663556	2022-03-14 12:35:30.663756
+5	Gayypow Halil	+98435790	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTg0MzU3OTAifQ.oUg6zMlZxfnBEpzCS3e9pKyC9zhgqzHN4_NHHxmGZx8	\N	2022-03-14 12:31:23.925224	2022-03-14 12:31:23.925425
+6	sdfsdfsdsd	sdfdsfsdf	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InNkZnNkZnNkc2QiLCJwaG9uZV9udW1iZXIiOiJzZGZkc2ZzZGYifQ.ZLkkZ3U5oNQ0Ld00Q3deJv_I6Y_iJFTOt6L_jsQDCuo	\N	2022-03-14 12:25:32.20573	2022-03-14 12:25:32.205931
+7	ttttttttttttttt	8888888888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InR0dHR0dHR0dHR0dHR0dCIsInBob25lX251bWJlciI6Ijg4ODg4ODg4ODgifQ.nrtAICs0UrnuJiRKqYAHTvZ5W-zGRlYjxmAnYKlyihE	\N	2022-03-14 13:15:58.049693	2022-03-14 13:15:58.049894
+8	Gayypow Halil	+99363636363	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM2MzYzNjMifQ.qYiyEgf4Yn4rmgNgPC9ML5pRzmJpMlptwuF3xjkGcVE	\N	2022-03-14 15:00:12.856133	2022-03-14 15:00:12.868436
+9	Jemal	+43556547	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkplbWFsIiwicGhvbmVfbnVtYmVyIjoiKzQzNTU2NTQ3In0.CQFuDUrzzDSSv8VRMtSovOvBFJIds5o0m80keTeFxOc	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
+10	qweeee	32432	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InF3ZWVlZSIsInBob25lX251bWJlciI6IjMyNDMyIn0.1UUaF9bUxlkVdHbGDijnPtLk851V9tVA5PLe7Dh4VDM	\N	2022-03-14 15:00:13.210638	2022-03-14 15:00:13.210864
+11	Shageldi Alyyew	+9935354353	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIEFseXlldyIsInBob25lX251bWJlciI6Iis5OTM1MzU0MzUzIn0.alLxh1-rIIUumnW1kskjgI1Y0Zr9AfPL2HmXBI4PQAI	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
+12	qwqwqwq	232323	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InF3cXdxd3EiLCJwaG9uZV9udW1iZXIiOiIyMzIzMjMifQ.E-9HDsAV8NmwaVaSgwJ0e9G4GeQFNu9L2YTZTxduTfg	\N	2022-03-14 15:00:13.134865	2022-03-14 15:00:13.135099
+13	Gayypow Halil	+856476	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrODU2NDc2In0.bb1tyxFw0uGnRtpjG8Y4CTVTRSMhhJE4qIgrSWXKH3M	\N	2022-03-14 15:00:13.221597	2022-03-14 15:00:13.221804
+14	Shagen	34534545	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbiIsInBob25lX251bWJlciI6IjM0NTM0NTQ1In0.WW21SZZgVeE3LejRVJeLVlSSidopOAC1rZ6FNtC_ZdU	\N	2022-03-14 15:00:13.210638	2022-03-14 15:00:13.210864
+15	Sssss	45432543253245323542	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNzc3NzIiwicGhvbmVfbnVtYmVyIjoiNDU0MzI1NDMyNTMyNDUzMjM1NDIifQ.AsXRYKYwGR7GLQLDGbIFy72gQBvuQEJYxHArvyXkxMM	\N	2022-03-16 14:54:23.868942	2022-03-16 14:54:23.869146
+16	string	string	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InN0cmluZyIsInBob25lX251bWJlciI6InN0cmluZyJ9.yxq9lMMJBZbueXJECscc1qYEN7Nsqy_4r8Aa062R0OA	\N	2022-03-17 11:44:08.353938	2022-03-17 11:44:08.353952
+17	Jemalaa	232322	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkplbWFsYWEiLCJwaG9uZV9udW1iZXIiOiIyMzIzMjIifQ.EJqytSnlGGzoPqLICeEnnYx5kcca-hq3RqxmDHz3YPg	\N	2022-03-18 12:27:37.371966	2022-03-18 12:27:37.371979
+18	Pena Muhhametberdiyew	+99365434343	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlBlbmEgTXVoaGFtZXRiZXJkaXlldyIsInBob25lX251bWJlciI6Iis5OTM2NTQzNDM0MyJ9.aTny8k4lomE775wuXPtWqJPXtAQARLT0X_e32Jfhioc	\N	2022-03-18 12:29:49.261034	2022-03-18 12:29:49.261046
+19	Full name	123214	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMzIxNCJ9.x4Ss7FAcFRX8fKK0GJUbv-XwIcRSSPpjQmBGPj9O4oo	\N	2022-03-21 11:53:00.01758	2022-03-21 11:53:00.017593
+20	Full name	1234	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMzQifQ.aKWw3pZTmhCTBkisJOa2MbbaGTE67xaRMedbt053wvE	\N	2022-03-21 11:53:19.797966	2022-03-21 11:53:19.79798
+21	Full name	21`343	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxYDM0MyJ9.NYZkBjEMUNU4l9wdkPVKXJl3b81yZ4VzUHLewrECJlQ	\N	2022-03-21 11:53:41.386786	2022-03-21 11:53:41.386797
+22	Full name	21345	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxMzQ1In0.QRds6iysX_fbs0FGdBQQaRP7bIpXIoNjVCEZo6bjV6U	\N	2022-03-21 11:54:42.6384	2022-03-21 11:54:42.638411
+23	Full name	1`2`12	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjFgMmAxMiJ9.gc7J6NOKLBVtiD9pVZ7kfpU_RXb1RhLjpsraj5TXpYA	\N	2022-03-21 11:55:21.600012	2022-03-21 11:55:21.600023
+24	Full name	12`w3	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyYHczIn0.iAmiCDdn1po1yeQVEPIe6i38K8T1DL5wIHl5MgdOvrU	\N	2022-03-21 11:55:40.971176	2022-03-21 11:55:40.971188
+25	Full name	123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjEyMyJ9.W2X4Q-bym-iAx_HS84GXlHQtVshpYSENM55Pu5Yh6S0	\N	2022-03-21 11:56:03.562798	2022-03-21 11:56:03.56281
+26	Full name	235435	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIzNTQzNSJ9.6tkZ3PHhNfQl0jPu8-1-_2wNWDHPRF8bAfw5iPkGgzo	\N	2022-03-21 11:56:23.131721	2022-03-21 11:56:23.131731
+27	Full name	2134	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIxMzQifQ.MqfhvxCf369gaoBw7i-iqnMFoEF_hPDBgYl4a7NFp9o	\N	2022-03-21 11:56:40.429394	2022-03-21 11:56:40.429405
+28	Full name	34r5	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjM0cjUifQ.9oo9ZpfAeMhyP-RGbZ6mqyLHx5sk0X7UkTV8Gz8KSKQ	\N	2022-03-21 11:56:58.673076	2022-03-21 11:56:58.673088
+29	Full name	5678	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjU2NzgifQ.pXwEyIeUMb7ldtZrzmbt7d-qDjcnmjw76KHcI9oZ1so	\N	2022-03-21 11:57:21.423971	2022-03-21 11:57:21.423988
+30	Full name	2342	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkZ1bGwgbmFtZSIsInBob25lX251bWJlciI6IjIzNDIifQ.1Sebq0V5SlJBnTlAQbEdEAS2YptO8IC8xTul6Bpq0SE	\N	2022-03-21 11:57:40.910267	2022-03-21 11:57:40.910278
+31	654654	645654654	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IjY1NDY1NCIsInBob25lX251bWJlciI6IjY0NTY1NDY1NCJ9.mBfNhfGvgn-qztZWK7CW8bf_T_RBXP1lnlF17MoYNdI	\N	2022-03-21 14:22:26.554197	2022-03-21 14:22:26.554224
+32	sadsadf	4356435	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6InNhZHNhZGYiLCJwaG9uZV9udW1iZXIiOiI0MzU2NDM1In0.67Jc237VEbuc6MFYZ8rEA07dydcci0djWEOX3TGo-ms	\N	2022-03-23 14:52:16.928187	2022-03-23 14:52:16.928204
+33	Gayypow Halil	+99363430338	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdheXlwb3cgSGFsaWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM0MzAzMzgifQ.qm0cPpUQi2HFvW0M2cLTwkqsKsAziIYbOdwl2fdnEx4	\N	2022-03-23 14:55:44.277181	2022-03-23 14:55:44.277201
+34	Alyýew Şageldi	6758856756	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFseVx1MDBmZGV3IFx1MDE1ZWFnZWxkaSIsInBob25lX251bWJlciI6IjY3NTg4NTY3NTYifQ.2_hwrWf94tpZvksxGr9pL0OI5fPeBFqS8KzknWqfWnA	\N	2022-03-23 14:56:30.243404	2022-03-23 14:56:30.243415
+35	dcs	2332	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRjcyIsInBob25lX251bWJlciI6IjIzMzIifQ.Dw_pKzmf7qkhEePU9J9Ac6P3uzNYKp_DUMuk9Kq_lUk	\N	2022-03-23 14:56:56.843502	2022-03-23 14:56:56.843519
+36	dfghdfsg	234324	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRmZ2hkZnNnIiwicGhvbmVfbnVtYmVyIjoiMjM0MzI0In0._nj_sIkXKdjoqXa1GzmjXyWCgvVh8klknGui-q7TlUo	\N	2022-03-23 15:00:08.914839	2022-03-23 15:00:08.914857
+37	dsfgdsfgds	5464654	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6ImRzZmdkc2ZnZHMiLCJwaG9uZV9udW1iZXIiOiI1NDY0NjU0In0.Nz7AX6HHXeGUcuPcW5BUKzLtQk3x4z47N3L6wye8vUQ	\N	2022-03-23 15:00:39.609279	2022-03-23 15:00:39.609291
+38	Shageldi Men	+99361298782	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYWdlbGRpIE1lbiIsInBob25lX251bWJlciI6Iis5OTM2MTI5ODc4MiJ9.Cf7uhjaB4y_JDIuIqA_ULgyouw6pr7xUk8bH0kc01a8	\N	2022-03-25 13:04:10.424143	2022-03-25 13:04:10.424156
+39	Kiyko Konstantin	+99362469333	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IktpeWtvIEtvbnN0YW50aW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI0NjkzMzMifQ.A3mOg2ENj8b2grqDMqeocInLFwGfbfcAaskGXkwG_hI	\N	2022-03-29 09:23:14.209269	2022-03-29 09:23:14.209289
+40	Batyrshina Yekaterina	+99365874838	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJhdHlyc2hpbmEgWWVrYXRlcmluYSIsInBob25lX251bWJlciI6Iis5OTM2NTg3NDgzOCJ9.M0w0ROmrTTXz2ozQz3IPJ99BfNCq0Lqit5cQL4O4K3Y	\N	2022-03-29 09:26:54.822726	2022-03-29 09:26:54.822737
+41	Alina Akopyan	+99363261221	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFsaW5hIEFrb3B5YW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMyNjEyMjEifQ.cz1AnPc58RiYX61Yxzt79M7uNJrEBxuSzT8jvJuFSI0	\N	2022-03-29 09:28:46.532127	2022-03-29 09:28:46.532141
+42	Mamedov Dmitriy	+99365555062	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik1hbWVkb3YgRG1pdHJpeSIsInBob25lX251bWJlciI6Iis5OTM2NTU1NTA2MiJ9.8204NJKwkgO_NAVHNl2_2fgeK4RKRBBo1ZuzgVErGRs	\N	2022-03-29 09:33:40.424439	2022-03-29 09:33:40.424453
+43	Ovezmuradova Olga	+99364636006 	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik92ZXptdXJhZG92YSBPbGdhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY0NjM2MDA2XHUwMGEwIn0.S-g-2HD0thad7pdLWDCyLrAU1y4db6o1FquIh07Uvrw	\N	2022-03-29 09:35:03.069322	2022-03-29 09:35:03.069333
+44	Tajiyeva Asya	+99362019888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRhaml5ZXZhIEFzeWEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjIwMTk4ODgifQ.CYXG0hbvgxyRPqlX5xPA0-2i0x4c_93PFbVkNcvXLFM	\N	2022-03-29 09:36:18.509181	2022-03-29 09:36:18.509193
+45	Akbotayeva Jahan	+99362578899	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFrYm90YXlldmEgSmFoYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI1Nzg4OTkifQ.O_hHj8y0JHUgr6AjjPxfzSMOuCMZUpteNaVDVCuBIj8	\N	2022-03-29 09:37:53.665063	2022-03-29 09:37:53.665074
+46	Nurmuhammedova Aygul	+99364011254	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ik51cm11aGFtbWVkb3ZhIEF5Z3VsIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY0MDExMjU0In0.qn2-mj_OvRlnGjrbXX37JlyMZ7ODbIVumMF_V9GMQpU	\N	2022-03-29 09:39:01.832158	2022-03-29 09:39:01.83217
+47	Ayrapetova Varvara	+99365644429	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkF5cmFwZXRvdmEgVmFydmFyYSIsInBob25lX251bWJlciI6Iis5OTM2NTY0NDQyOSJ9.gNjRMBQMhqjtkvum2e3viEKNz0oLR0GmE_2OCcrB0Oo	\N	2022-03-29 09:41:03.360394	2022-03-29 09:41:03.360409
+48	Ashirov  Saher	+99361527205   +99364078946	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFzaGlyb3YgIFNhaGVyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxNTI3MjA1ICAgKzk5MzY0MDc4OTQ2In0.eYe0c8uJTM5ETlPW6HEl5AgHTDAngTEbPFfjsQ4d--s	\N	2022-03-29 09:41:57.679753	2022-03-29 09:41:57.679765
+49	Sudakov Viktor	+99362598918	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1ZGFrb3YgVmlrdG9yIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYyNTk4OTE4In0.ttDn-LVLW789w4_0WKJPl8FomzXwtw2EFlff3ZVLbbA	\N	2022-03-29 09:43:25.678078	2022-03-29 09:43:25.678092
+50	Sudakova Anna 	+99365829171	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1ZGFrb3ZhIEFubmEgIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODI5MTcxIn0.iau2Kx0_OEsioSsfvu4rboxZKM_vbhDbqAszmYGdmFo	\N	2022-03-29 09:44:32.940641	2022-03-29 09:44:32.940658
+51	Chapau Dana	99364608687	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkNoYXBhdSBEYW5hIiwicGhvbmVfbnVtYmVyIjoiOTkzNjQ2MDg2ODcifQ.j1lwmaB0FvtZBBrlTPCiPmvjDv3ZeZgK1TjxKDg4fTU	\N	2022-03-29 09:45:54.383645	2022-03-29 09:45:54.383658
+52	Amanmuradov Bayrammurad	+99365806296	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFtYW5tdXJhZG92IEJheXJhbW11cmFkIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODA2Mjk2In0.9TM3fdJKBKHThyFD0d9ABRxNYycGhntxF-Dusn_Girw	\N	2022-03-29 09:54:09.331831	2022-03-29 09:54:09.331844
+53	Babakulyyeva Tamara	+99365693669	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJhYmFrdWx5eWV2YSBUYW1hcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU2OTM2NjkifQ.PStIFPJDUiMIS2c7IidldhDoBrN9g66WrNVvmLL4OMY	\N	2022-03-29 09:55:37.565554	2022-03-29 09:55:37.565568
+54	Bulatov Viktor	+99365025867	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJ1bGF0b3YgVmlrdG9yIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1MDI1ODY3In0.xWL2tayHerG4h2IdkcBTUPgK9_ao7_Fj4SO33CnUues	\N	2022-03-29 09:56:59.546488	2022-03-29 09:56:59.546501
+55	Bulatova Irina 	+99362999412	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJ1bGF0b3ZhIElyaW5hICIsInBob25lX251bWJlciI6Iis5OTM2Mjk5OTQxMiJ9.otmG3rxHvcNiWCcx9IH1PFNsAEHv0BY1LieFRsBcKbk	\N	2022-03-29 09:58:08.954844	2022-03-29 09:58:08.954859
+56	Erkayeva Aleksandra	+99365829610	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkVya2F5ZXZhIEFsZWtzYW5kcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4Mjk2MTAifQ.iUZHmN3a_2YhQgH09EztZq3Bn8GUK1BYLP1nwoTgONc	\N	2022-03-29 10:00:04.278779	2022-03-29 10:00:04.278792
+57	Almazova Jeren 	+993 61 181016	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFsbWF6b3ZhIEplcmVuICIsInBob25lX251bWJlciI6Iis5OTMgNjEgMTgxMDE2In0.u7akWxp1NeeKNwjBt5Dd3PmjB5iAf_QcKuCs7UG098o	\N	2022-03-29 10:01:28.184904	2022-03-29 10:01:28.184917
+58	Cherkezov Murad 	+99364967919	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkNoZXJrZXpvdiBNdXJhZCAiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQ5Njc5MTkifQ.v-92kD_6ly1dJrUHh2PpPiycOOJcEsrKLn8ssnwsiV0	\N	2022-03-29 10:02:57.409154	2022-03-29 10:02:57.409165
+59	Astankulov Maksat	+99365817287	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFzdGFua3Vsb3YgTWFrc2F0IiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODE3Mjg3In0.Tu32oFR8pj3w-uPVzlem52c07Oczy-Z9nzcxgKooyJM	\N	2022-03-29 10:04:07.514171	2022-03-29 10:04:07.514185
+60	Hudaygulyyeva Jemala	+99365092036	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikh1ZGF5Z3VseXlldmEgSmVtYWxhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1MDkyMDM2In0.XgmbsH4EkdCwwzuBO8-5mnO7mn8qXLK8vjiiXyJqrJw	\N	2022-03-29 10:05:28.648579	2022-03-29 10:05:28.648592
+61	Halaburdina Alisa	+99365816048	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkhhbGFidXJkaW5hIEFsaXNhIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1ODE2MDQ4In0.JbpLGp4VTnZMIm5UvsZSbsuk28YW2xoO2FlDPtGKZ_o	\N	2022-03-29 10:06:27.930356	2022-03-29 10:06:27.930369
+62	Vavilov Nikolay	+99364006048	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlZhdmlsb3YgTmlrb2xheSIsInBob25lX251bWJlciI6Iis5OTM2NDAwNjA0OCJ9.1sKFe0-QoZVgwJ6BqTKgctY2STLaI6UgzyGdeA8REJM	\N	2022-03-29 10:07:41.224733	2022-03-29 10:07:41.224745
+63	Solovyov Semyon	+99364415433	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNvbG92eW92IFNlbXlvbiIsInBob25lX251bWJlciI6Iis5OTM2NDQxNTQzMyJ9.gwMYCMlltVLchMYYYrxmWvJGeLnV78o7CVjBMLe40_k	\N	2022-03-29 10:08:30.180476	2022-03-29 10:08:30.180489
+64	Povarova Yekaterina	+99364933888	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlBvdmFyb3ZhIFlla2F0ZXJpbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQ5MzM4ODgifQ.2JgYksfH5VeJj-x7U3HkrYKlTrhubPrd8oUnoyFWCcQ	\N	2022-03-29 10:09:27.138495	2022-03-29 10:09:27.138512
+65	Japarova Ayjahan	+993 65 687070	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkphcGFyb3ZhIEF5amFoYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzIDY1IDY4NzA3MCJ9.RXPbZ9aK8a2thFxbE3ifB1KhX1qhgkvnqqM7O0gBKgY	\N	2022-03-29 10:10:47.572597	2022-03-29 10:10:47.572609
+66	Kekilliyewa Aylar	+99361333737	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Iktla2lsbGl5ZXdhIEF5bGFyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMzMzNzM3In0.LlXio36PzsKj1cj1V3VOVohRA89zoad5XWnGHMKOchY	\N	2022-03-29 10:12:07.535148	2022-03-29 10:12:07.535166
+67	Andronova Marina	+99365814977	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFuZHJvbm92YSBNYXJpbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4MTQ5NzcifQ.NR79uQZ9ZV6Q3dvhQ13s34C6QqmdlVlly-q0vSSXJI0	\N	2022-03-29 10:13:57.393809	2022-03-29 10:13:57.393823
+68	Lollekov Maksat	+993 65 687741	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkxvbGxla292IE1ha3NhdCIsInBob25lX251bWJlciI6Iis5OTMgNjUgNjg3NzQxIn0.VLu1WuUIAbZKUOGE4VO9LOH5Gj60LOp4QuWAC0Qbyp4	\N	2022-03-29 10:15:15.143537	2022-03-29 10:15:15.143549
+69	Saparlyyeva Aynabat	+99365860440	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNhcGFybHl5ZXZhIEF5bmFiYXQiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjU4NjA0NDAifQ.uUTKO71dSDDz2QgZy0L2EXMgwd9RveWqLdmGEkG6O70	\N	2022-03-29 10:16:49.619122	2022-03-29 10:16:49.619135
+70	Suhanova Gulzada	+99361525274	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlN1aGFub3ZhIEd1bHphZGEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjE1MjUyNzQifQ.Qsxu2gdA0i_Ecl_z-0KNdxAQ-TJxA-naGiL8i11Drik	\N	2022-03-29 10:17:52.103329	2022-03-29 10:17:52.103345
+71	Klycheva Bibijan	+99362142131	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IktseWNoZXZhIEJpYmlqYW4iLCJwaG9uZV9udW1iZXIiOiIrOTkzNjIxNDIxMzEifQ.a2oMJIC1qiy_0jjQGlAQRwi7tn7eDAip2h8_MlLldzI	\N	2022-03-29 10:20:48.099782	2022-03-29 10:20:48.0998
+72	Abdullayev Tahir	+99363183640	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFiZHVsbGF5ZXYgVGFoaXIiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMxODM2NDAifQ.emKpnmUlAhPQreXo4ggAkp-crwVwd_Jng3IIfp2D-Xw	\N	2022-03-29 10:21:51.220046	2022-03-29 10:21:51.220058
+73	Saparova Liliana	+99364079841	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNhcGFyb3ZhIExpbGlhbmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjQwNzk4NDEifQ.Uh4Bj4e9nU04G7RgKzrb6KIC7bP6XLyyvUsAxPJJEOU	\N	2022-03-29 10:23:15.510131	2022-03-29 10:23:15.510143
+82	Gukasov David	+99365057086	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikd1a2Fzb3YgRGF2aWQiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjUwNTcwODYifQ.ms1HluujwwaJYxPt4HpXlzTTOCKzIa4YJs_Aqj1zDxU	\N	2022-03-29 10:47:47.86795	2022-03-29 10:47:47.867962
+74	Dadekova Guljemile	+99361920827	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkRhZGVrb3ZhIEd1bGplbWlsZSIsInBob25lX251bWJlciI6Iis5OTM2MTkyMDgyNyJ9.TvmTeLDoS9rb8b7WbmVQi4X4M3HW_nUS-CS4WLhakws	\N	2022-03-29 10:24:20.120643	2022-03-29 10:24:20.120659
+77	Annageldiyeva Gowher	+99365724349	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFubmFnZWxkaXlldmEgR293aGVyIiwicGhvbmVfbnVtYmVyIjoiKzk5MzY1NzI0MzQ5In0.L0IddOerE9EXpLaOrJH-EBaCaWnvK71qUZSrofmV_e0	\N	2022-03-29 10:39:39.528855	2022-03-29 10:39:39.528871
+75	Jumayeva Jeren	+99361913826	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikp1bWF5ZXZhIEplcmVuIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxOTEzODI2In0.DlhwN1PIrnsqRsf0sHgplq4jzwISEXYLwlqujniH5Yk	\N	2022-03-29 10:31:59.21985	2022-03-29 10:31:59.219865
+76	Durdyyev Atageldi	+99362812882	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkR1cmR5eWV2IEF0YWdlbGRpIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYyODEyODgyIn0.FDIiOfDYWhkfNqO3djzVejuZMcD-YPy42n1gItl5l3A	\N	2022-03-29 10:38:12.791541	2022-03-29 10:38:12.791559
+78	Gokova Medina 	+99361399186	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikdva292YSBNZWRpbmEgIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMzk5MTg2In0.kPchv3aArp0AJHDjS_AQA5PXfZHbldcgRMTx3woWW_I	\N	2022-03-29 10:41:28.75387	2022-03-29 10:41:28.753887
+85	Kerimova Merjen	+99365861950	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Iktlcmltb3ZhIE1lcmplbiIsInBob25lX251bWJlciI6Iis5OTM2NTg2MTk1MCJ9.2Mh5O4b6-RaJ2mmkaSjQYADQ5D0iMXoR6UXYLbNMdkI	\N	2022-03-29 10:50:52.874574	2022-03-29 10:50:52.874586
+79	Garamuradova Jeren	+99365681807	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkdhcmFtdXJhZG92YSBKZXJlbiIsInBob25lX251bWJlciI6Iis5OTM2NTY4MTgwNyJ9.cW-CQFbUOVo2nyAYzvUNFDU2fIvoOb30vV8OtL3wev4	\N	2022-03-29 10:44:19.77789	2022-03-29 10:44:19.777902
+80	Rustamova Elmira	+99363125558	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlJ1c3RhbW92YSBFbG1pcmEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjMxMjU1NTgifQ.qYxGlfx0-B0LNt6oV4hSDamYGhORcy6HMEHlK7Y4lnI	\N	2022-03-29 10:45:41.327434	2022-03-29 10:45:41.327445
+81	Tokaryeva Veronika 	+993 63 998837	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRva2FyeWV2YSBWZXJvbmlrYSAiLCJwaG9uZV9udW1iZXIiOiIrOTkzIDYzIDk5ODgzNyJ9.bPoI4l48GDyL10iguqYOgiUHzj_51iRtqlZE0OFcQpI	\N	2022-03-29 10:46:56.068855	2022-03-29 10:46:56.068867
+83	Gurbanova Guncha	+99362669824	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ikd1cmJhbm92YSBHdW5jaGEiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjI2Njk4MjQifQ.SdX51IpQieYgYXVJRluiNv15bzvELISTs3wErqBlMOA	\N	2022-03-29 10:48:45.710648	2022-03-29 10:48:45.710665
+84	Shamayev Aleksandr	+99364025488	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlNoYW1heWV2IEFsZWtzYW5kciIsInBob25lX251bWJlciI6Iis5OTM2NDAyNTQ4OCJ9.mbn4AyI_1zlMYbvcPwWBII7-TycjS1JNXhEvg4aS-WY	\N	2022-03-29 10:49:47.121621	2022-03-29 10:49:47.121632
+86	Durdyyeva Bahar	+993 64 315736	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkR1cmR5eWV2YSBCYWhhciIsInBob25lX251bWJlciI6Iis5OTMgNjQgMzE1NzM2In0.a5xDc7r9LzFJFM_6LN6kg3hQ0TzuCo9X10KoHBdoOWI	\N	2022-03-29 10:52:23.709046	2022-03-29 10:52:23.70906
+87	Akjayev Dovran	+99361115511	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkFramF5ZXYgRG92cmFuIiwicGhvbmVfbnVtYmVyIjoiKzk5MzYxMTE1NTExIn0.wYC1uFkvupDkTYnOxjWq6CTcx1BHQ-7mrjiQQrlZ_uk	\N	2022-03-29 10:53:18.053994	2022-03-29 10:53:18.054005
+88	Ermolayev Vladimir	+99365023581	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkVybW9sYXlldiBWbGFkaW1pciIsInBob25lX251bWJlciI6Iis5OTM2NTAyMzU4MSJ9.w2nnd44flG0AsHR6BgIdfSAe18d38zO1Kh1oR5AboWA	\N	2022-03-29 10:54:19.456815	2022-03-29 10:54:19.456826
+89	Tekayeva Ayjemal	+993 61 788315	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IlRla2F5ZXZhIEF5amVtYWwiLCJwaG9uZV9udW1iZXIiOiIrOTkzIDYxIDc4ODMxNSJ9.qrDuOETtyBImG6gxAXkwPH_dY3uzykGlIstkQmno9ts	\N	2022-03-29 10:55:45.171968	2022-03-29 10:55:45.171979
+90	Арслан Расулов	+99363971731	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6Ilx1MDQxMFx1MDQ0MFx1MDQ0MVx1MDQzYlx1MDQzMFx1MDQzZCBcdTA0MjBcdTA0MzBcdTA0NDFcdTA0NDNcdTA0M2JcdTA0M2VcdTA0MzIiLCJwaG9uZV9udW1iZXIiOiIrOTkzNjM5NzE3MzEifQ.lVonpUvBEIMna9O60-5tAXlsN3baVgs37uZ5D0BZb-w	\N	2022-03-31 13:00:09.56195	2022-03-31 13:00:09.56196
+91	Bayram	+99365698450	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsbmFtZSI6IkJheXJhbSIsInBob25lX251bWJlciI6Iis5OTM2NTY5ODQ1MCJ9.1AkYs7AvOA9gXm65dAVk2YhMLb15YwCBx57y3DYaITg	\N	2022-03-31 13:17:19.928514	2022-03-31 13:17:19.928526
+\.
+
+
+--
 -- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -14035,7 +15545,7 @@ SELECT pg_catalog.setval('public.answers_id_seq', 1, false);
 -- Name: app_visitors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.app_visitors_id_seq', 7801, true);
+SELECT pg_catalog.setval('public.app_visitors_id_seq', 7808, true);
 
 
 --
@@ -14204,6 +15714,702 @@ SELECT pg_catalog.setval('public.user_interests_id_seq', 354, true);
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 91, true);
+
+
+--
+-- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin
+    ADD CONSTRAINT admin_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_type admin_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin_type
+    ADD CONSTRAINT admin_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ads2profile_count ads2profile_count_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads2profile_count
+    ADD CONSTRAINT ads2profile_count_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ads ads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads
+    ADD CONSTRAINT ads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ads_view ads_view_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads_view
+    ADD CONSTRAINT ads_view_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answered_messages answered_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answered_messages
+    ADD CONSTRAINT answered_messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answers answers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answers
+    ADD CONSTRAINT answers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: app_visitors app_visitors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.app_visitors
+    ADD CONSTRAINT app_visitors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: banners banners_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.banners
+    ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: card_users card_users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.card_users
+    ADD CONSTRAINT card_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: certificates certificates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.certificates
+    ADD CONSTRAINT certificates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: constants constants_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.constants
+    ADD CONSTRAINT constants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: galleries galleries_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.galleries
+    ADD CONSTRAINT galleries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: images images_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.images
+    ADD CONSTRAINT images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: inbox inbox_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.inbox
+    ADD CONSTRAINT inbox_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: interest_items interest_items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.interest_items
+    ADD CONSTRAINT interest_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: interests interests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.interests
+    ADD CONSTRAINT interests_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: join_category_ads join_category_ads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.join_category_ads
+    ADD CONSTRAINT join_category_ads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: number_socket number_socket_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.number_socket
+    ADD CONSTRAINT number_socket_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: phone_numbers phone_numbers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.phone_numbers
+    ADD CONSTRAINT phone_numbers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pop_up pop_up_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pop_up
+    ADD CONSTRAINT pop_up_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: profile_view profile_view_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile_view
+    ADD CONSTRAINT profile_view_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: promo_codes promo_codes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promo_codes
+    ADD CONSTRAINT promo_codes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: search_history search_history_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.search_history
+    ADD CONSTRAINT search_history_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: send_user send_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.send_user
+    ADD CONSTRAINT send_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ticket_bron ticket_bron_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_bron
+    ADD CONSTRAINT ticket_bron_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_interests user_interests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_interests
+    ADD CONSTRAINT user_interests_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ix_admin_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_admin_id ON public.admin USING btree (id);
+
+
+--
+-- Name: ix_admin_type_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_admin_type_id ON public.admin_type USING btree (id);
+
+
+--
+-- Name: ix_ads2profile_count_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_ads2profile_count_id ON public.ads2profile_count USING btree (id);
+
+
+--
+-- Name: ix_ads_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_ads_id ON public.ads USING btree (id);
+
+
+--
+-- Name: ix_ads_view_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_ads_view_id ON public.ads_view USING btree (id);
+
+
+--
+-- Name: ix_answered_messages_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_answered_messages_id ON public.answered_messages USING btree (id);
+
+
+--
+-- Name: ix_answers_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_answers_id ON public.answers USING btree (id);
+
+
+--
+-- Name: ix_app_visitors_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_app_visitors_id ON public.app_visitors USING btree (id);
+
+
+--
+-- Name: ix_banners_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_banners_id ON public.banners USING btree (id);
+
+
+--
+-- Name: ix_card_users_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_card_users_id ON public.card_users USING btree (id);
+
+
+--
+-- Name: ix_categories_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_categories_id ON public.categories USING btree (id);
+
+
+--
+-- Name: ix_certificates_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_certificates_id ON public.certificates USING btree (id);
+
+
+--
+-- Name: ix_constants_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_constants_id ON public.constants USING btree (id);
+
+
+--
+-- Name: ix_galleries_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_galleries_id ON public.galleries USING btree (id);
+
+
+--
+-- Name: ix_images_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_images_id ON public.images USING btree (id);
+
+
+--
+-- Name: ix_inbox_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_inbox_id ON public.inbox USING btree (id);
+
+
+--
+-- Name: ix_interest_items_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_interest_items_id ON public.interest_items USING btree (id);
+
+
+--
+-- Name: ix_interests_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_interests_id ON public.interests USING btree (id);
+
+
+--
+-- Name: ix_join_category_ads_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_join_category_ads_id ON public.join_category_ads USING btree (id);
+
+
+--
+-- Name: ix_number_socket_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_number_socket_id ON public.number_socket USING btree (id);
+
+
+--
+-- Name: ix_phone_numbers_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_phone_numbers_id ON public.phone_numbers USING btree (id);
+
+
+--
+-- Name: ix_pop_up_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_pop_up_id ON public.pop_up USING btree (id);
+
+
+--
+-- Name: ix_posts_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_posts_id ON public.posts USING btree (id);
+
+
+--
+-- Name: ix_profile_view_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_profile_view_id ON public.profile_view USING btree (id);
+
+
+--
+-- Name: ix_profiles_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_profiles_id ON public.profiles USING btree (id);
+
+
+--
+-- Name: ix_promo_codes_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_promo_codes_id ON public.promo_codes USING btree (id);
+
+
+--
+-- Name: ix_search_history_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_search_history_id ON public.search_history USING btree (id);
+
+
+--
+-- Name: ix_send_user_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_send_user_id ON public.send_user USING btree (id);
+
+
+--
+-- Name: ix_tags_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_tags_id ON public.tags USING btree (id);
+
+
+--
+-- Name: ix_ticket_bron_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_ticket_bron_id ON public.ticket_bron USING btree (id);
+
+
+--
+-- Name: ix_user_interests_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_user_interests_id ON public.user_interests USING btree (id);
+
+
+--
+-- Name: ix_users_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ix_users_id ON public.users USING btree (id);
+
+
+--
+-- Name: admin admin_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.admin
+    ADD CONSTRAINT admin_type_fkey FOREIGN KEY (type) REFERENCES public.admin_type(id);
+
+
+--
+-- Name: ads ads_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ads
+    ADD CONSTRAINT ads_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: answers answers_answered_msg_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answers
+    ADD CONSTRAINT answers_answered_msg_id_fkey FOREIGN KEY (answered_msg_id) REFERENCES public.answered_messages(id);
+
+
+--
+-- Name: answers answers_inbox_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answers
+    ADD CONSTRAINT answers_inbox_id_fkey FOREIGN KEY (inbox_id) REFERENCES public.inbox(id);
+
+
+--
+-- Name: banners banners_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.banners
+    ADD CONSTRAINT banners_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: card_users card_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.card_users
+    ADD CONSTRAINT card_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: certificates certificates_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.certificates
+    ADD CONSTRAINT certificates_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: certificates certificates_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.certificates
+    ADD CONSTRAINT certificates_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: galleries galleries_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.galleries
+    ADD CONSTRAINT galleries_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: images images_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.images
+    ADD CONSTRAINT images_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: interest_items interest_items_interest_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.interest_items
+    ADD CONSTRAINT interest_items_interest_id_fkey FOREIGN KEY (interest_id) REFERENCES public.interests(id);
+
+
+--
+-- Name: join_category_ads join_category_ads_ads_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.join_category_ads
+    ADD CONSTRAINT join_category_ads_ads_id_fkey FOREIGN KEY (ads_id) REFERENCES public.ads(id);
+
+
+--
+-- Name: join_category_ads join_category_ads_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.join_category_ads
+    ADD CONSTRAINT join_category_ads_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categories(id);
+
+
+--
+-- Name: phone_numbers phone_numbers_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.phone_numbers
+    ADD CONSTRAINT phone_numbers_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: pop_up pop_up_posts_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pop_up
+    ADD CONSTRAINT pop_up_posts_id_fkey FOREIGN KEY (posts_id) REFERENCES public.posts(id);
+
+
+--
+-- Name: pop_up pop_up_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pop_up
+    ADD CONSTRAINT pop_up_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: posts posts_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: profiles profiles_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT profiles_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categories(id);
+
+
+--
+-- Name: promo_codes promo_codes_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promo_codes
+    ADD CONSTRAINT promo_codes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: promo_codes promo_codes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.promo_codes
+    ADD CONSTRAINT promo_codes_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: send_user send_user_inbox_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.send_user
+    ADD CONSTRAINT send_user_inbox_id_fkey FOREIGN KEY (inbox_id) REFERENCES public.inbox(id);
+
+
+--
+-- Name: send_user send_user_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.send_user
+    ADD CONSTRAINT send_user_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: tags tags_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categories(id);
+
+
+--
+-- Name: tags tags_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: ticket_bron ticket_bron_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_bron
+    ADD CONSTRAINT ticket_bron_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id);
+
+
+--
+-- Name: ticket_bron ticket_bron_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_bron
+    ADD CONSTRAINT ticket_bron_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: user_interests user_interests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_interests
+    ADD CONSTRAINT user_interests_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
